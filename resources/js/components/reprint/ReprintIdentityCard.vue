@@ -150,7 +150,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-3">
-                    <button @click="submitReprint" type="button" class="btn btn-sm btn-success mx-1">Ajukan Cetak Ulang</button>
+                    <button :disabled="reprint" @click="submitReprint" type="button" class="btn btn-sm btn-success mx-1">Ajukan Cetak Ulang</button>
                     <button @click="cancel" type="button" class="btn btn-sm btn-secondary mx-1">Batal</button>
                 </div>
             </div>
@@ -169,7 +169,9 @@ export default {
             errors : null,
             identity_card_number : null,
             birthdate : new Date('1990-01-01'),
-            data : null
+            data : null,
+            reprinted : false,
+
         }
     },
     computed :{
@@ -192,20 +194,20 @@ export default {
             axios.post(this.submit_url, this.formData)
                 .then(response =>{
                     this.data = response;
+                    this.errors = null;
                 })
                 .catch(e => {
+                    let message = e.response.data.message;
+                    this.data = null;
                     switch(e.response.status){
-                        case 400 :
+                        case 404 :
                             swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
-                            this.data = null;
                             break;
                         case 422 : 
                             this.errors = e.response.data;
-                            this.data = null;
                             break;
                         case 500 :
                             swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
-                            this.data = null;
                             break;
                     }
                 });
@@ -216,10 +218,23 @@ export default {
         submitReprint(){
             axios.post(this.reprint_url, this.reprintData)
                 .then(response => {
-                    console.log(response.data);
+                    this.reprint = true;
+                    swal("Permintaan Berhasil Disimpan!", "", "success").then(value => { window.location.replace(this.redirect_url) });
                 })
                 .catch(e => {
-                    console.log(e);
+                    let message = e.response.data.message;
+                    this.data = null;
+                    switch(e.response.status){
+                        case 404 :
+                            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+                            break;
+                        case 400 : 
+                            swal("Permintaan Ditolak", message, "error");
+                            break;
+                        case 500 :
+                            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+                            break;
+                    }
                 });
         }
     }

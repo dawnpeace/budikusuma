@@ -12,7 +12,7 @@ $factory->define(IdentityCard::class, function (Faker $faker) {
         "gender" => $faker->randomElement(["laki-laki", "perempuan"]), 
         "address" => $faker->address,
         "birthplace" => $faker->city, 
-        "birthdate" => $faker->date(), 
+        "birthdate" => '1990-01-01', 
         "rt" => "01", 
         "rw" => "02", 
         "kelurahan" => $faker->citySuffix,

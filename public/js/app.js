@@ -3541,7 +3541,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.data = response;
       })["catch"](function (e) {
         switch (e.response.status) {
-          case 400:
+          case 404:
             swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
             _this.data = null;
             break;
@@ -3754,7 +3754,8 @@ __webpack_require__.r(__webpack_exports__);
       errors: null,
       identity_card_number: null,
       birthdate: new Date('1990-01-01'),
-      data: null
+      data: null,
+      reprinted: false
     };
   },
   computed: {
@@ -3778,21 +3779,22 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(this.submit_url, this.formData).then(function (response) {
         _this.data = response;
+        _this.errors = null;
       })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this.data = null;
+
         switch (e.response.status) {
-          case 400:
+          case 404:
             swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
-            _this.data = null;
             break;
 
           case 422:
             _this.errors = e.response.data;
-            _this.data = null;
             break;
 
           case 500:
             swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
-            _this.data = null;
             break;
         }
       });
@@ -3801,10 +3803,30 @@ __webpack_require__.r(__webpack_exports__);
       this.data = null;
     },
     submitReprint: function submitReprint() {
+      var _this2 = this;
+
       axios.post(this.reprint_url, this.reprintData).then(function (response) {
-        console.log(response.data);
+        _this2.reprint = true;
+        swal("Permintaan Berhasil Disimpan!", "", "success").then(function (value) {
+          window.location.replace(_this2.redirect_url);
+        });
       })["catch"](function (e) {
-        console.log(e);
+        var message = e.response.data.message;
+        _this2.data = null;
+
+        switch (e.response.status) {
+          case 404:
+            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+            break;
+
+          case 400:
+            swal("Permintaan Ditolak", message, "error");
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
       });
     }
   }
@@ -66086,7 +66108,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-sm btn-success mx-1",
-              attrs: { type: "button" },
+              attrs: { disabled: _vm.reprint, type: "button" },
               on: { click: _vm.submitReprint }
             },
             [_vm._v("Ajukan Cetak Ulang")]

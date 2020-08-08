@@ -9,8 +9,6 @@ use Illuminate\Support\Carbon;
 
 class IdentityCardController extends Controller
 {
- 
-    private $MIN_MONTH_PAST = -4;  //including the current month
     
     public function index()
     {
@@ -24,14 +22,9 @@ class IdentityCardController extends Controller
             "birthdate" => "required|date_format:d-m-Y"
         ]);
         
-        $idCard = IdentityCard::where("identity_card_number", $request->identity_card_number)
-            ->whereDate("birthdate", Carbon::createFromFormat('d-m-Y', $request->birthdate))
-            ->first();
-        
-        if($idCard){
-            return response()->json($idCard);
-        }
-        return response()->json([], 400);
+        $idCard = $this->getIdentityCard($request->identity_card_number, $request->birthdate);
+
+        return !is_null($idCard) ? response()->json($idCard) : response()->json([], 404);
     }
 
     public function addToReprint(Request $request)
@@ -41,34 +34,23 @@ class IdentityCardController extends Controller
             "birthdate" => "required|date_format:d-m-Y"
         ]);
 
-        $idCard = IdentityCard::where("identity_card_number", $request->identity_card_number)
-            ->whereDate("birthdate", Carbon::createFromFormat('d-m-Y', $request->birthdate))
-            ->first();
-        
-        if($idCard){
-            $canReprint = $idCard->reprintable()->whereNull('printed_at')->count();
-            if($canReprint){
-                return response()->json([
-                    "status" => "400",
-                    "message" => "Anda masih memiliki permintaan yang sedang diproses !"
-                ],400);
-            } else {
-                $dbLastPrint =  $idCard->reprintable()->orderBy('printed_at', 'DESC')->first();
-                $lastPrintDate = Carbon::createFromFormat("Y-m-d H:i:s", $dbLastPrint->printed_at);
-                $hasQueuedCard = Carbon::now()->diffInMonths($lastPrintDate, false);
-                if($hasQueuedCard < $this->MIN_MONTH_PAST){
-                    return response()->json([
-                        "status" => "400",
-                        "message" => "Anda masih memiliki permintaan yang sedang diproses !"
-                    ], 400);
-                }
-            }
-        }
+        $idCard = $this->getIdentityCard($request->identity_card_number, $request->birthdate);
 
-        $idCard->reprintable()->create([
-            'id_number' => $idCard->identity_card_number
-        ]);
-        
-        return response()->json([], 201);
+        if(!$idCard) return response()->json([], 404);
+
+        try {
+            $result = $idCard->submitReprint();
+            return response()->json($result, 201);
+        } catch(\Exception $e){
+            return response(["message" => $e->getMessage()], 400);
+        }
+    }
+
+
+    private function getIdentityCard($idNumber, $birthdate)
+    {
+        return IdentityCard::where("identity_card_number", $idNumber)
+            ->whereDate("birthdate", Carbon::createFromFormat('d-m-Y', $birthdate))
+            ->first();
     }
 }

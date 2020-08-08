@@ -176,7 +176,7 @@ export default {
                 })
                 .catch(e => {
                     switch(e.response.status){
-                        case 400 :
+                        case 404 :
                             swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
                             this.data = null;
                             break;
