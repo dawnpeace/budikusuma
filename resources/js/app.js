@@ -46,6 +46,10 @@ Vue.component('apply-id-card', require('./components/appliance/ApplyIdentityCard
 
 Vue.component('reprint-id-card', require('./components/reprint/ReprintIdentityCard.vue').default);
 Vue.component('reprint-family-card', require('./components/reprint/ReprintFamilyCard.vue').default);
+Vue.component('reprint-birth-certificate', require('./components/reprint/ReprintBirthCertificate.vue').default);
+Vue.component('reprint-child-id-card', require('./components/reprint/ReprintChildIdentityCard.vue').default);
+
+Vue.component('reprint-check', require('./components/reprint/CheckReprint.vue').default);
 
 Vue.component('datepicker', Datepicker);
 

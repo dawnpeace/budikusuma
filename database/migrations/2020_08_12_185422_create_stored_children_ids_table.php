@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\DocumentStatus;
 
-class CreateChildIdSubmission extends Migration
+class CreateStoredChildrenIdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,22 +13,21 @@ class CreateChildIdSubmission extends Migration
      */
     public function up()
     {
-        Schema::create('child_id_submission', function (Blueprint $table) {
+        Schema::create('stored_children_ids', function (Blueprint $table) {
             $table->id();
             $table->string('card_number')->unique();
             $table->string("name");
             $table->string("gender");
             $table->string("family_card_number");
             $table->date("birthdate");
-            $table->string("address");
             $table->string("householder_name");
+            $table->string("address");
             $table->string("religion");
             $table->string('rt');
             $table->string('rw');
             $table->string('kelurahan');
             $table->string('kecamatan');
             $table->string('citizenship');
-            $table->string("status")->default(DocumentStatus::HOLD);
             $table->timestamps();
         });
     }
@@ -41,6 +39,6 @@ class CreateChildIdSubmission extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('child_id_submission');
+        Schema::dropIfExists('stored_children_ids');
     }
 }

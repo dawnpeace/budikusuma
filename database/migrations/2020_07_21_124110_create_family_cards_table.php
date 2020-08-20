@@ -18,12 +18,15 @@ class CreateFamilyCardsTable extends Migration
             $table->string("id_card")->unique();
             $table->string("householder");
             $table->string("householder_id_card")->unique();
+            $table->string("address");
             $table->string("rt");
             $table->string("rw");
             $table->string("zip_code");
             $table->string("kelurahan");
+            $table->string("kecamatan");
             $table->string("kabupaten");
             $table->string("provinsi");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

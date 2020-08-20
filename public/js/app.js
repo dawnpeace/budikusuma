@@ -3355,6 +3355,687 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/CheckReprint.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/CheckReprint.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["redirect_url", "submit_url", "reprint_url"],
+  data: function data() {
+    return {
+      errors: null,
+      card_number: null,
+      document_type: 'ktp',
+      data: null,
+      reprinted: false
+    };
+  },
+  computed: {
+    formData: function formData() {
+      return {
+        document_type: this.document_type,
+        card_number: this.card_number
+      };
+    },
+    documentType: function documentType() {
+      var type = '';
+
+      if (this.data !== null) {
+        switch (this.data.reprintable_type) {
+          case 'App\\IdentityCard':
+            type = 'Kartu Tanda Pengenal';
+            break;
+
+          case 'App\\BirthCertificate':
+            type = 'Akta Kelahiran';
+            break;
+
+          case 'App\\FamilyCard':
+            type = 'Kartu Keluarga';
+            break;
+
+          case 'App\\ChildIdentityCard':
+            type = 'Kartu Identitas Anak';
+            break;
+        }
+      }
+
+      return type;
+    },
+    requestedAt: function requestedAt() {
+      if (this.data !== null) {
+        return this.data.created_at ? moment__WEBPACK_IMPORTED_MODULE_1___default()(new Date(this.data.created_at)).format('DD-MM-YYYY') : '';
+      }
+
+      return '';
+    },
+    printed: function printed() {
+      if (this.data !== null) {
+        return this.data.printed_at ? 'Dokumen Telah Tercetak' : 'Dokumen Dalam Proses';
+      }
+    }
+  },
+  methods: {
+    get: lodash__WEBPACK_IMPORTED_MODULE_0__["get"],
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post(this.submit_url, this.formData).then(function (response) {
+        _this.data = response.data;
+        _this.errors = null;
+      })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this.data = null;
+
+        switch (e.response.status) {
+          case 400:
+            swal("Data tidak ditemukan", "", "error");
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
+      });
+    },
+    cancel: function cancel() {
+      this.data = null;
+      this.document_type = 'ktp';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["redirect_url", "submit_url", "reprint_url"],
+  data: function data() {
+    return {
+      errors: null,
+      mother_identity_card_number: null,
+      birthdate: new Date('1990-01-01'),
+      data: null,
+      isLoading: false
+    };
+  },
+  computed: {
+    formData: function formData() {
+      return {
+        mother_identity_card_number: this.mother_identity_card_number,
+        birthdate: moment__WEBPACK_IMPORTED_MODULE_1___default()(this.birthdate).format('DD-MM-YYYY')
+      };
+    }
+  },
+  methods: {
+    get: lodash__WEBPACK_IMPORTED_MODULE_0__["get"],
+    confirmationForm: function confirmationForm(id) {
+      var _this = this;
+
+      swal({
+        title: "Apakah anda yakin ingin melanjutkan ?",
+        icon: "info",
+        buttons: ["Batal", "Ok"]
+      }).then(function (value) {
+        if (value) _this.submitReprint(id);
+      });
+    },
+    submitForm: function submitForm() {
+      var _this2 = this;
+
+      this.isLoading = true;
+      axios.post(this.submit_url, this.formData).then(function (response) {
+        _this2.data = response.data;
+        _this2.errors = null;
+        _this2.isLoading = false;
+      })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this2.isLoading = false;
+        _this2.data = null;
+
+        switch (e.response.status) {
+          case 404:
+            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+            break;
+
+          case 422:
+            _this2.errors = e.response.data;
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
+      });
+    },
+    cancel: function cancel() {
+      this.data = null;
+    },
+    submitReprint: function submitReprint(id) {
+      var _this3 = this;
+
+      var data = {
+        id: id,
+        birthdate: moment__WEBPACK_IMPORTED_MODULE_1___default()(new Date(this.birthdate)).format('DD-MM-YYYY'),
+        mother_identity_card_number: this.mother_identity_card_number
+      };
+      console.log(data.mother_identity_card_number);
+      axios.post(this.reprint_url, data).then(function (response) {
+        _this3.reprint = true;
+        swal("Permintaan Berhasil Disimpan!", "", "success").then(function (value) {
+          window.location.replace(_this3.redirect_url);
+        });
+      })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this3.data = null;
+
+        switch (e.response.status) {
+          case 404:
+            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+            break;
+
+          case 400:
+            swal("Permintaan Ditolak", message, "error");
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
+      });
+    },
+    formatDate: function formatDate(birthdate) {
+      return birthdate ? moment__WEBPACK_IMPORTED_MODULE_1___default()(new Date(birthdate)).format('DD-MM-YYYY') : '';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["redirect_url", "submit_url", "reprint_url"],
+  data: function data() {
+    return {
+      errors: null,
+      card_number: null,
+      family_card_number: null,
+      data: null,
+      reprinted: false
+    };
+  },
+  computed: {
+    formData: function formData() {
+      return {
+        family_card_number: this.family_card_number,
+        card_number: this.card_number
+      };
+    }
+  },
+  methods: {
+    get: lodash__WEBPACK_IMPORTED_MODULE_0__["get"],
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post(this.submit_url, this.formData).then(function (response) {
+        _this.data = response;
+        _this.errors = null;
+      })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this.data = null;
+
+        switch (e.response.status) {
+          case 404:
+            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+            break;
+
+          case 422:
+            _this.errors = e.response.data;
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
+      });
+    },
+    cancel: function cancel() {
+      this.data = null;
+    },
+    submitReprint: function submitReprint() {
+      var _this2 = this;
+
+      axios.post(this.reprint_url, this.formData).then(function (response) {
+        _this2.reprint = true;
+        swal("Permintaan Berhasil Disimpan!", "", "success").then(function (value) {
+          window.location.replace(_this2.redirect_url);
+        });
+      })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this2.data = null;
+
+        switch (e.response.status) {
+          case 404:
+            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+            break;
+
+          case 400:
+            swal("Permintaan Ditolak", message, "error");
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintFamilyCard.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/ReprintFamilyCard.vue?vue&type=script&lang=js& ***!
@@ -3511,8 +4192,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["redirect_url", "submit_url", "reprint_url"],
@@ -3521,7 +4200,8 @@ __webpack_require__.r(__webpack_exports__);
       errors: null,
       id_card: null,
       householder_id_card: null,
-      data: null
+      data: null,
+      reprinted: false
     };
   },
   computed: {
@@ -3539,21 +4219,22 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(this.submit_url, this.formData).then(function (response) {
         _this.data = response;
+        _this.errors = null;
       })["catch"](function (e) {
+        var message = e.response.data.message;
+        _this.data = null;
+
         switch (e.response.status) {
           case 404:
             swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
-            _this.data = null;
             break;
 
           case 422:
             _this.errors = e.response.data;
-            _this.data = null;
             break;
 
           case 500:
             swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
-            _this.data = null;
             break;
         }
       });
@@ -3562,10 +4243,30 @@ __webpack_require__.r(__webpack_exports__);
       this.data = null;
     },
     submitReprint: function submitReprint() {
+      var _this2 = this;
+
       axios.post(this.reprint_url, this.formData).then(function (response) {
-        console.log(response.data);
+        _this2.reprint = true;
+        swal("Permintaan Berhasil Disimpan!", "", "success").then(function (value) {
+          window.location.replace(_this2.redirect_url);
+        });
       })["catch"](function (e) {
-        console.log(e);
+        var message = e.response.data.message;
+        _this2.data = null;
+
+        switch (e.response.status) {
+          case 404:
+            swal("Data tidak ditemukan", "Pastikan data benar dan telah terdaftar di Sanatab!", "error");
+            break;
+
+          case 400:
+            swal("Permintaan Ditolak", message, "error");
+            break;
+
+          case 500:
+            swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
+            break;
+        }
       });
     }
   }
@@ -65473,6 +66174,1017 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/CheckReprint.vue?vue&type=template&id=1d09399c&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/CheckReprint.vue?vue&type=template&id=1d09399c& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "w-inherit" }, [
+    _c(
+      "form",
+      {
+        staticClass: "w-inherit mb-3",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submitForm($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-9 col-sm-12 mb-3" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.document_type,
+                    expression: "document_type"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "document_type" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.document_type = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "ktp" } }, [
+                  _vm._v("Kartu Tanda Pengenal")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "kia" } }, [
+                  _vm._v("Kartu Identitas Anak")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "kk" } }, [
+                  _vm._v("Kartu Keluarga")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "aktea-lahir" } }, [
+                  _vm._v("Akta Kelahiran")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(_vm.errors, "errors.document_type[0]")))
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.card_number,
+                    expression: "card_number"
+                  }
+                ],
+                staticClass: "form-control",
+                class: {
+                  "is-invalid": _vm.get(_vm.errors, "errors.card_number[0]")
+                },
+                attrs: {
+                  name: "card_number",
+                  placeholder: "Nomor Kartu",
+                  type: "text"
+                },
+                domProps: { value: _vm.card_number },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.card_number = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.get(_vm.errors, "errors.card_number[0]")))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-primary",
+                attrs: { disabled: _vm.data, type: "submit" }
+              },
+              [_vm._v("Submit")]
+            )
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.data !== null,
+            expression: "data !== null"
+          }
+        ],
+        staticClass: "w-100"
+      },
+      [
+        _c("hr"),
+        _vm._v(" "),
+        _c("h5", { staticClass: "text-center" }, [_vm._v("Data Permintaan")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-inherit d-none d-md-block d-sm-none d-xs-none px-5 mb-3"
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-3 text-right" }, [
+                _vm._v(
+                  "\n                    Tanggal Pengajuan :\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-9" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.requestedAt) +
+                    "\n                "
+                )
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-sm-block d-xs-block d-md-none d-lg-none" },
+          [
+            _c("small", [_vm._v("Tanggal Pengajuan")]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.requestedAt))])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-inherit d-none d-md-block d-sm-none d-xs-none px-5 mb-3"
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-3 text-right" }, [
+                _vm._v(
+                  "\n                    Jenis Dokumen :\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-9" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.documentType) +
+                    "\n                "
+                )
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-sm-block d-xs-block d-md-none d-lg-none" },
+          [
+            _c("small", [_vm._v("Jenis Dokumen")]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(_vm.documentType))])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-inherit d-none d-md-block d-sm-none d-xs-none px-5 mb-3"
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-3 text-right" }, [
+                _vm._v(
+                  "\n                    Status Dokumen :\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "strong",
+                {
+                  staticClass: "col-9",
+                  class: _vm.get(_vm.data, "data.printed_at", false)
+                    ? "text-success"
+                    : "text-danger"
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.printed) +
+                      "\n                "
+                  )
+                ]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-sm-block d-xs-block d-md-none d-lg-none" },
+          [
+            _c("small", [_vm._v("Status Dokumen")]),
+            _vm._v(" "),
+            _c(
+              "strong",
+              {
+                staticClass: "d-block",
+                class: _vm.get(_vm.data, "data.printed_at", false)
+                  ? "text-success"
+                  : "text-secondary"
+              },
+              [_vm._v(_vm._s(_vm.printed))]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3 row" }, [
+          _c("div", { staticClass: "col-12 text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-secondary px-1",
+                on: {
+                  click: function($event) {
+                    return _vm.cancel()
+                  }
+                }
+              },
+              [_vm._v("Batal")]
+            )
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block"
+        },
+        [_vm._v("Jenis Dokumen")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none"
+        },
+        [_vm._v("Jenis Dokumen")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block"
+        },
+        [_vm._v("Nomor Kartu")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none"
+        },
+        [_vm._v("Nomor Kartu")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=template&id=6040e902&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=template&id=6040e902& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "w-inherit" }, [
+    _c(
+      "form",
+      {
+        staticClass: "w-inherit",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submitForm($event)
+          }
+        }
+      },
+      [
+        _c("side-label", {
+          attrs: {
+            error: _vm.get(
+              _vm.errors,
+              "errors.mother_identity_card_number[0]",
+              ""
+            ),
+            name: "mother_identity_card_number",
+            title: "NIK Ibu",
+            placeholder: "NIK Ibu"
+          },
+          model: {
+            value: _vm.mother_identity_card_number,
+            callback: function($$v) {
+              _vm.mother_identity_card_number = $$v
+            },
+            expression: "mother_identity_card_number"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("datepicker", {
+                  class: {
+                    "is-invalid": _vm.get(
+                      this.errors,
+                      "errors.birthdate[0]",
+                      false
+                    )
+                  },
+                  attrs: {
+                    "input-class": "form-control",
+                    id: "birthdate",
+                    format: "dd-MM-yyyy",
+                    placeholder: "Tanggal Lahir"
+                  },
+                  model: {
+                    value: _vm.birthdate,
+                    callback: function($$v) {
+                      _vm.birthdate = $$v
+                    },
+                    expression: "birthdate"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(
+                    _vm._s(_vm.get(this.errors, "errors.birthdate[0]", ""))
+                  )
+                ])
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 text-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-primary",
+              attrs: { disabled: _vm.data || _vm.isLoading, type: "submit" }
+            },
+            [_vm._v("Submit")]
+          )
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.data !== null,
+            expression: "data !== null"
+          }
+        ],
+        staticClass: "mt-3"
+      },
+      [
+        _c("hr"),
+        _vm._v(" "),
+        _c("h5", { staticClass: "my-1 text-center mb-4" }, [
+          _vm._v("Data Kartu Keluarga")
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.data, function(child, idx) {
+          return _c(
+            "div",
+            { key: idx, staticClass: "border w-100 py-2 rounded mb-3" },
+            [
+              _c("div", { staticClass: "d-none d-sm-none d-md-block" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _vm._v(
+                      "\n                        NIK Ibu :\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(child.mother_identity_card_number) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _vm._v(
+                      "\n                        Nama Anak :\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(child.name) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _vm._v(
+                      "\n                        Jenis Kelamin :\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8 text-capitalize" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(child.gender) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _vm._v(
+                      "\n                        Tanggal Lahir :\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8 mb-2" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.formatDate(child.birthdate)) +
+                        "\n                    "
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "d-sm-block d-md-none d-lg-none px-4 pt-4" },
+                [
+                  _c("small", [_vm._v("NIK Ibu :")]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(child.mother_identity_card_number) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("Nama Anak")]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(child.name) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("small", [
+                    _vm._v(
+                      "\n                    Jenis Kelamin :\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-capitalize" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(child.gender) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("small", [
+                    _vm._v(
+                      "\n                    Tanggal Lahir :\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.formatDate(child.birthdate)) +
+                        "                    \n                "
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex justify-content-center my-3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-success mx-1",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.confirmationForm(child.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Ajukan Cetak Ulang")]
+                )
+              ])
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "d-flex justify-content-center my-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-secondary mx-1",
+              attrs: { type: "button" },
+              on: { click: _vm.cancel }
+            },
+            [_vm._v("Batal")]
+          )
+        ])
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tanggal Lahir")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tanggal Lahir")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "w-inherit" }, [
+    _c(
+      "form",
+      {
+        staticClass: "w-inherit",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submitForm($event)
+          }
+        }
+      },
+      [
+        _c("side-label", {
+          attrs: {
+            error: _vm.get(_vm.errors, "errors.card_number[0]", ""),
+            name: "card_number",
+            title: "No KIA",
+            placeholder: "Nomor KIA"
+          },
+          model: {
+            value: _vm.card_number,
+            callback: function($$v) {
+              _vm.card_number = $$v
+            },
+            expression: "card_number"
+          }
+        }),
+        _vm._v(" "),
+        _c("side-label", {
+          attrs: {
+            error: _vm.get(_vm.errors, "errors.family_card_number[0]", ""),
+            name: "family_card_number",
+            title: "No KK",
+            placeholder: "Nomor KK"
+          },
+          model: {
+            value: _vm.family_card_number,
+            callback: function($$v) {
+              _vm.family_card_number = $$v
+            },
+            expression: "family_card_number"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 text-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-primary",
+              attrs: { disabled: _vm.data, type: "submit" }
+            },
+            [_vm._v("Submit")]
+          )
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.data !== null,
+            expression: "data !== null"
+          }
+        ],
+        staticClass: "mt-3"
+      },
+      [
+        _c("hr"),
+        _vm._v(" "),
+        _c("h5", { staticClass: "my-1 text-center mb-4" }, [
+          _vm._v("Data KTP")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "d-none d-sm-none d-md-block" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Nama Anak :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.name", "")) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v(
+                "\n                    Nama Kepala Keluarga :\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.householder_name", "")) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Nomor Kartu :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.card_number", "")) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Jenis Kelamin :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9  mb-2 text-capitalize" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.gender", "")) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Alamat :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.address", "")) +
+                  "                    \n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    RT/RW :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    _vm.get(_vm.data, "data.rt", "") +
+                      "/" +
+                      _vm.get(_vm.data, "data.rw", "")
+                  ) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Kecamatan :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.kecamatan", "")) +
+                  "                    \n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Kelurahan :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.kelurahan", "")) +
+                  "                    \n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3 text-right" }, [
+              _vm._v("\n                    Agama :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9 mb-2 text-capitalize" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.religion", "")) +
+                  "                    \n                "
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "d-sm-block d-md-none d-lg-none" }, [
+          _c("small", [_vm._v("Nama Anak")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.name", "")) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("Nama Kepala Keluarga")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.householder_name", "")) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [
+            _vm._v("\n                Nomor Kartu :\n            ")
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.card_number", "")) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [
+            _vm._v("\n                Jenis Kelamin :\n            ")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: " text-capitalize" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.gender", "")) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("\n                Alamat :\n            ")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.address", "")) +
+                "                    \n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("\n                RT/RW :\n            ")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(
+                  _vm.get(_vm.data, "data.rt", "") +
+                    "/" +
+                    _vm.get(_vm.data, "data.rw", "")
+                ) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("\n                Kecamatan :\n            ")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.kecamatan", "")) +
+                "                    \n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("\n                Kelurahan :\n            ")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.kelurahan", "")) +
+                "                    \n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("\n                Agama :\n            ")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-capitalize" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.religion", "")) +
+                "                    \n            "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "d-flex justify-content-center mt-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-success mx-1",
+              attrs: { disabled: _vm.reprint, type: "button" },
+              on: { click: _vm.submitReprint }
+            },
+            [_vm._v("Ajukan Cetak Ulang")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-secondary mx-1",
+              attrs: { type: "button" },
+              on: { click: _vm.cancel }
+            },
+            [_vm._v("Batal")]
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintFamilyCard.vue?vue&type=template&id=1ecfc1be&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reprint/ReprintFamilyCard.vue?vue&type=template&id=1ecfc1be& ***!
@@ -65564,52 +67276,68 @@ var render = function() {
         _c("hr"),
         _vm._v(" "),
         _c("h5", { staticClass: "my-1 text-center mb-4" }, [
-          _vm._v("Data KTP")
+          _vm._v("Data Kartu Keluarga")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "d-none d-sm-none d-md-block" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-3 text-right" }, [
-              _vm._v("\n                    Nama :\n                ")
+            _c("div", { staticClass: "col-4 text-right" }, [
+              _vm._v("\n                    Nomor KK :\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9 mb-2" }, [
+            _c("div", { staticClass: "col-8 mb-2" }, [
               _vm._v(
                 "\n                    " +
-                  _vm._s(_vm.get(_vm.data, "data.name", "")) +
+                  _vm._s(_vm.get(_vm.data, "data.id_card", "")) +
                   "\n                "
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
-              _vm._v("\n                    NIK :\n                ")
+            _c("div", { staticClass: "col-4 text-right" }, [
+              _vm._v(
+                "\n                    Nama Kepala Keluarga :\n                "
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9" }, [
+            _c("div", { staticClass: "col-8 mb-2" }, [
               _vm._v(
                 "\n                    " +
-                  _vm._s(_vm.get(_vm.data, "data.identity_card_number", "")) +
+                  _vm._s(_vm.get(_vm.data, "data.householder", "")) +
                   "\n                "
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
-              _vm._v("\n                    Jenis Kelamin :\n                ")
+            _c("div", { staticClass: "col-4 text-right" }, [
+              _vm._v(
+                "\n                    NIK Kepala Keluarga :\n                "
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9  mb-2 text-capitalize" }, [
+            _c("div", { staticClass: "col-8" }, [
               _vm._v(
                 "\n                    " +
-                  _vm._s(_vm.get(_vm.data, "data.gender", "")) +
+                  _vm._s(_vm.get(_vm.data, "data.householder_id_card", "")) +
                   "\n                "
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
+            _c("div", { staticClass: "col-4 text-right" }, [
+              _vm._v("\n                    Kode Pos :\n                ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-8" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.get(_vm.data, "data.zip_code", "")) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4 text-right" }, [
               _vm._v("\n                    Alamat :\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9 mb-2" }, [
+            _c("div", { staticClass: "col-8 mb-2" }, [
               _vm._v(
                 "\n                    " +
                   _vm._s(_vm.get(_vm.data, "data.address", "")) +
@@ -65617,11 +67345,11 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
+            _c("div", { staticClass: "col-4 text-right" }, [
               _vm._v("\n                    RT/RW :\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9 mb-2" }, [
+            _c("div", { staticClass: "col-8 mb-2" }, [
               _vm._v(
                 "\n                    " +
                   _vm._s(
@@ -65633,11 +67361,11 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
+            _c("div", { staticClass: "col-4 text-right" }, [
               _vm._v("\n                    Kecamatan :\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9 mb-2" }, [
+            _c("div", { staticClass: "col-8 mb-2" }, [
               _vm._v(
                 "\n                    " +
                   _vm._s(_vm.get(_vm.data, "data.kecamatan", "")) +
@@ -65645,26 +67373,14 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
+            _c("div", { staticClass: "col-4 text-right" }, [
               _vm._v("\n                    Kelurahan :\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-9 mb-2" }, [
+            _c("div", { staticClass: "col-8 mb-2" }, [
               _vm._v(
                 "\n                    " +
                   _vm._s(_vm.get(_vm.data, "data.kelurahan", "")) +
-                  "                    \n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 text-right" }, [
-              _vm._v("\n                    Agama :\n                ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-9 mb-2 text-capitalize" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.get(_vm.data, "data.religion", "")) +
                   "                    \n                "
               )
             ])
@@ -65672,35 +67388,45 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "d-sm-block d-md-none d-lg-none" }, [
-          _c("small", [_vm._v("Nama")]),
+          _c("small", [_vm._v("Nomor KK")]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
               "\n                " +
-                _vm._s(_vm.get(_vm.data, "data.name", "")) +
+                _vm._s(_vm.get(_vm.data, "data.id_card", "")) +
                 "\n            "
             )
           ]),
           _vm._v(" "),
-          _c("small", [_vm._v("\n                NIK :\n            ")]),
+          _c("small", [_vm._v("Nama Kepala Keluarga")]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
               "\n                " +
-                _vm._s(_vm.get(_vm.data, "data.identity_card_number", "")) +
+                _vm._s(_vm.get(_vm.data, "data.householder", "")) +
                 "\n            "
             )
           ]),
           _vm._v(" "),
           _c("small", [
-            _vm._v("\n                Jenis Kelamin :\n            ")
+            _vm._v("\n                NIK Kepala Keluarga\n            ")
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: " text-capitalize" }, [
+          _c("p", [
             _vm._v(
               "\n                " +
-                _vm._s(_vm.get(_vm.data, "data.gender", "")) +
+                _vm._s(_vm.get(_vm.data, "data.householder_id_card", "")) +
                 "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("small", [_vm._v("\n                Kode Pos\n            ")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.get(_vm.data, "data.zip_code", "")) +
+                "                    \n            "
             )
           ]),
           _vm._v(" "),
@@ -65744,16 +67470,6 @@ var render = function() {
             _vm._v(
               "\n                " +
                 _vm._s(_vm.get(_vm.data, "data.kelurahan", "")) +
-                "                    \n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("small", [_vm._v("\n                Agama :\n            ")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-capitalize" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.get(_vm.data, "data.religion", "")) +
                 "                    \n            "
             )
           ])
@@ -80840,6 +82556,9 @@ Vue.component('apply-family-card', __webpack_require__(/*! ./components/applianc
 Vue.component('apply-id-card', __webpack_require__(/*! ./components/appliance/ApplyIdentityCard.vue */ "./resources/js/components/appliance/ApplyIdentityCard.vue")["default"]);
 Vue.component('reprint-id-card', __webpack_require__(/*! ./components/reprint/ReprintIdentityCard.vue */ "./resources/js/components/reprint/ReprintIdentityCard.vue")["default"]);
 Vue.component('reprint-family-card', __webpack_require__(/*! ./components/reprint/ReprintFamilyCard.vue */ "./resources/js/components/reprint/ReprintFamilyCard.vue")["default"]);
+Vue.component('reprint-birth-certificate', __webpack_require__(/*! ./components/reprint/ReprintBirthCertificate.vue */ "./resources/js/components/reprint/ReprintBirthCertificate.vue")["default"]);
+Vue.component('reprint-child-id-card', __webpack_require__(/*! ./components/reprint/ReprintChildIdentityCard.vue */ "./resources/js/components/reprint/ReprintChildIdentityCard.vue")["default"]);
+Vue.component('reprint-check', __webpack_require__(/*! ./components/reprint/CheckReprint.vue */ "./resources/js/components/reprint/CheckReprint.vue")["default"]);
 Vue.component('datepicker', vuejs_datepicker__WEBPACK_IMPORTED_MODULE_7__["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -81653,6 +83372,213 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IdentityCardRequirements_vue_vue_type_template_id_5f3467df___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IdentityCardRequirements_vue_vue_type_template_id_5f3467df___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/CheckReprint.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/reprint/CheckReprint.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CheckReprint_vue_vue_type_template_id_1d09399c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckReprint.vue?vue&type=template&id=1d09399c& */ "./resources/js/components/reprint/CheckReprint.vue?vue&type=template&id=1d09399c&");
+/* harmony import */ var _CheckReprint_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckReprint.vue?vue&type=script&lang=js& */ "./resources/js/components/reprint/CheckReprint.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CheckReprint_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CheckReprint_vue_vue_type_template_id_1d09399c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CheckReprint_vue_vue_type_template_id_1d09399c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reprint/CheckReprint.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/CheckReprint.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/reprint/CheckReprint.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckReprint_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CheckReprint.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/CheckReprint.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckReprint_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/CheckReprint.vue?vue&type=template&id=1d09399c&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/reprint/CheckReprint.vue?vue&type=template&id=1d09399c& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckReprint_vue_vue_type_template_id_1d09399c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CheckReprint.vue?vue&type=template&id=1d09399c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/CheckReprint.vue?vue&type=template&id=1d09399c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckReprint_vue_vue_type_template_id_1d09399c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CheckReprint_vue_vue_type_template_id_1d09399c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/ReprintBirthCertificate.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/reprint/ReprintBirthCertificate.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReprintBirthCertificate_vue_vue_type_template_id_6040e902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReprintBirthCertificate.vue?vue&type=template&id=6040e902& */ "./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=template&id=6040e902&");
+/* harmony import */ var _ReprintBirthCertificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReprintBirthCertificate.vue?vue&type=script&lang=js& */ "./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ReprintBirthCertificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReprintBirthCertificate_vue_vue_type_template_id_6040e902___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReprintBirthCertificate_vue_vue_type_template_id_6040e902___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reprint/ReprintBirthCertificate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintBirthCertificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReprintBirthCertificate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintBirthCertificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=template&id=6040e902&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=template&id=6040e902& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintBirthCertificate_vue_vue_type_template_id_6040e902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReprintBirthCertificate.vue?vue&type=template&id=6040e902& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintBirthCertificate.vue?vue&type=template&id=6040e902&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintBirthCertificate_vue_vue_type_template_id_6040e902___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintBirthCertificate_vue_vue_type_template_id_6040e902___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/ReprintChildIdentityCard.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/reprint/ReprintChildIdentityCard.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReprintChildIdentityCard_vue_vue_type_template_id_5ac0f4f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0& */ "./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0&");
+/* harmony import */ var _ReprintChildIdentityCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReprintChildIdentityCard.vue?vue&type=script&lang=js& */ "./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ReprintChildIdentityCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReprintChildIdentityCard_vue_vue_type_template_id_5ac0f4f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReprintChildIdentityCard_vue_vue_type_template_id_5ac0f4f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reprint/ReprintChildIdentityCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintChildIdentityCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReprintChildIdentityCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintChildIdentityCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintChildIdentityCard_vue_vue_type_template_id_5ac0f4f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reprint/ReprintChildIdentityCard.vue?vue&type=template&id=5ac0f4f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintChildIdentityCard_vue_vue_type_template_id_5ac0f4f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReprintChildIdentityCard_vue_vue_type_template_id_5ac0f4f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -6,14 +6,14 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Utama<a href="#"></a></li>
                 <li class="breadcrumb-item">Cetak Ulang<a href="#"></a></li>
-                <li class="breadcrumb-item active" aria-current="page">Kartu Tanda Penduduk</li>
+                <li class="breadcrumb-item active" aria-current="page">Akta Kelahiran</li>
             </ol>
         </nav>
         <div class="card card-boy">
             <div class="p-4">
-                <h5 class="text-center">Cetak Ulang KTP</h5>
+                <h5 class="text-center">Cetak Ulang Akta Lahir</h5>
                 <hr>
-                <reprint-id-card reprint_url="{{route('reprint.ktp.store')}}" submit_url="{{route('reprint.ktp.submit')}}" redirect_url="{{url('/')}}" />
+                <reprint-birth-certificate reprint_url="{{route('reprint.al.store')}}" submit_url="{{route('reprint.al.submit')}}" redirect_url="{{url('/')}}" />
             </div>
         </div>
     </div>

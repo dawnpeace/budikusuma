@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(IdentityCard::class, function (Faker $faker) {
     return [
-        "identity_card_number" => $faker->numberBetween(1000, 5000), 
+        "identity_card_number" => $faker->unique()->randomNumber(8), 
         "name" => $faker->name(), 
         "gender" => $faker->randomElement(["laki-laki", "perempuan"]), 
         "address" => $faker->address,

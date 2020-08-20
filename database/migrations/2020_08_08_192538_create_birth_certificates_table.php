@@ -1,11 +1,10 @@
 <?php
 
-use App\Enums\DocumentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBirthCertificateSubmissionTable extends Migration
+class CreateBirthCertificatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +13,7 @@ class CreateBirthCertificateSubmissionTable extends Migration
      */
     public function up()
     {
-        Schema::create('birth_certificate_submission', function (Blueprint $table) {
+        Schema::create('birth_certificates', function (Blueprint $table) {
             $table->id();
             $table->string("id_card")->unique();
             $table->string("name");
@@ -25,7 +24,7 @@ class CreateBirthCertificateSubmissionTable extends Migration
             $table->string("father_name");
             $table->date("birthdate");
             $table->string("birthplace");
-            $table->string("status")->default(DocumentStatus::HOLD);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -37,6 +36,6 @@ class CreateBirthCertificateSubmissionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('birth_certificate_submission');
+        Schema::dropIfExists('birth_certificates');
     }
 }

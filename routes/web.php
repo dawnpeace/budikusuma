@@ -58,7 +58,18 @@ Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Rep
 
     Route::get('kk', 'FamilyCardController@index')->name('kk.index');
     Route::post('kk/submit', 'FamilyCardController@submit')->name('kk.submit');
-    Route::post('kk', 'Reprint\FamilyCardController@addToReprint')->name('kk.store');
+    Route::post('kk', 'FamilyCardController@addToReprint')->name('kk.store');
+
+    Route::get('akta-lahir', 'BirthCertificateController@index')->name('al.index');
+    Route::post('akta-lahir/submit', 'BirthCertificateController@submit')->name('al.submit');
+    Route::post('akta-lahir', 'BirthCertificateController@addToReprint')->name('al.store');
+
+    Route::get('kia', 'ChildIdentityCardController@index')->name('kia.index');
+    Route::post('kia/submit', 'ChildIdentityCardController@submit')->name('kia.submit');
+    Route::post('kia', 'ChildIdentityCardController@addToReprint')->name('kia.store');
+
+    Route::get('permintaan', 'ReprintRequestController@create')->name('check');
+    Route::post('permintaan', 'ReprintRequestController@submit')->name('check.submit');
 });
 
 
@@ -67,9 +78,5 @@ Route::group(['prefix' => 'api'], function(){
 });
 
 
-Route::get('asun',function(){
-    $now = Carbon\Carbon::now();
-    $before = Carbon\Carbon::now()->subMonths();
-    return $now->diffInMonths($before, false);
-});
+Route::get('asun','Reprint\FamilyCardController@something');
 

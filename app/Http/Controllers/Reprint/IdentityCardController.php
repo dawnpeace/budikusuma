@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\IdentityCard;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class IdentityCardController extends Controller
 {
@@ -33,24 +34,26 @@ class IdentityCardController extends Controller
             "identity_card_number" => "required|numeric",
             "birthdate" => "required|date_format:d-m-Y"
         ]);
+        DB::transaction(function() use ($request){
+            $idCard = $this->getIdentityCard($request->identity_card_number, $request->birthdate);
 
-        $idCard = $this->getIdentityCard($request->identity_card_number, $request->birthdate);
+            if (!$idCard) return response()->json([], 404);
 
-        if(!$idCard) return response()->json([], 404);
-
-        try {
-            $result = $idCard->submitReprint();
-            return response()->json($result, 201);
-        } catch(\Exception $e){
-            return response(["message" => $e->getMessage()], 400);
-        }
+            try {
+                $result = $idCard->submitReprint();
+                return response()->json($result, 201);
+            } catch (\Exception $e) {
+                return response()->json(["message" => $e->getMessage()], 400);
+            }
+        });
+        
     }
 
 
     private function getIdentityCard($idNumber, $birthdate)
     {
         return IdentityCard::where("identity_card_number", $idNumber)
-            ->whereDate("birthdate", Carbon::createFromFormat('d-m-Y', $birthdate))
+            ->whereDate("birthdate", Carbon::createFromFormat('d-m-Y', $birthdate)->format('Y-m-d'))
             ->first();
     }
 }

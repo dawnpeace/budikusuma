@@ -2,108 +2,115 @@
         <div class="w-inherit">
             <form class="w-inherit" @submit.prevent="submitForm">
                 <side-label
-                    :error="get(errors, 'errors.id_card[0]', '')" 
-                    name="id_card" 
-                    title="No KK" 
-                    v-model="id_card"
-                    placeholder="Nomor KK"/>
+                    :error="get(errors, 'errors.card_number[0]', '')" 
+                    name="card_number" 
+                    title="No KIA" 
+                    v-model="card_number"
+                    placeholder="Nomor KIA"/>
 
                 <side-label
-                    :error="get(errors, 'errors.householder_id_card[0]', '')"
-                    name="householder_id_card"
-                    title="NIK Kepala Keluarga"
-                    v-model="householder_id_card"
-                    placeholder="NIK Kepala Keluarga"/>
+                    :error="get(errors, 'errors.family_card_number[0]', '')" 
+                    name="family_card_number" 
+                    title="No KK" 
+                    v-model="family_card_number"
+                    placeholder="Nomor KK"/>
                 <div class="col-12 text-center">
                     <button :disabled="data" class="btn btn-sm btn-primary" type="submit">Submit</button>
                 </div>
             </form>
             <div v-show="data !== null" class="mt-3">
                 <hr>
-                <h5 class="my-1 text-center mb-4">Data Kartu Keluarga</h5>
+                <h5 class="my-1 text-center mb-4">Data KTP</h5>
                 <div class="d-none d-sm-none d-md-block">
                     <div class="row">
-                        <div class="col-4 text-right">
-                            Nomor KK :
+                        <div class="col-3 text-right">
+                            Nama Anak :
                         </div>
-                        <div class="col-8 mb-2">
-                            {{get(data,'data.id_card','')}}
+                        <div class="col-9 mb-2">
+                            {{get(data,'data.name','')}}
                         </div>
-                        <div class="col-4 text-right">
+
+                        <div class="col-3 text-right">
                             Nama Kepala Keluarga :
                         </div>
-                        <div class="col-8 mb-2">
-                            {{get(data,'data.householder','')}}
+                        <div class="col-9 mb-2">
+                            {{get(data,'data.householder_name','')}}
                         </div>
 
-                        <div class="col-4 text-right">
-                            NIK Kepala Keluarga :
+                        <div class="col-3 text-right">
+                            Nomor Kartu :
                         </div>
-                        <div class="col-8">
-                            {{get(data,'data.householder_id_card','')}}
-                        </div>
-
-                        <div class="col-4 text-right">
-                            Kode Pos :
-                        </div>
-                        <div class="col-8">
-                            {{get(data,'data.zip_code','')}}
+                        <div class="col-9">
+                            {{get(data,'data.card_number','')}}
                         </div>
 
-                        <div class="col-4 text-right">
+                        <div class="col-3 text-right">
+                            Jenis Kelamin :
+                        </div>
+                        <div class="col-9  mb-2 text-capitalize">
+                            {{get(data,'data.gender','')}}
+                        </div>
+
+                        <div class="col-3 text-right">
                             Alamat :
                         </div>
-                        <div class="col-8 mb-2">
+                        <div class="col-9 mb-2">
                             {{get(data,'data.address','')}}                    
                         </div>
-
-                        <div class="col-4 text-right">
+                        
+                        <div class="col-3 text-right">
                             RT/RW :
                         </div>
-                        <div class="col-8 mb-2">
+                        <div class="col-9 mb-2">
                             {{get(data,'data.rt','') + "/" + get(data,'data.rw','')}}
                         </div>
 
-                        <div class="col-4 text-right">
+                        <div class="col-3 text-right">
                             Kecamatan :
                         </div>
-                        <div class="col-8 mb-2">
+                        <div class="col-9 mb-2">
                             {{get(data,'data.kecamatan','')}}                    
                         </div>
 
-                        <div class="col-4 text-right">
+                        <div class="col-3 text-right">
                             Kelurahan :
                         </div>
-                        <div class="col-8 mb-2">
+                        <div class="col-9 mb-2">
                             {{get(data,'data.kelurahan','')}}                    
                         </div>
 
+                        <div class="col-3 text-right">
+                            Agama :
+                        </div>
+                        <div class="col-9 mb-2 text-capitalize">
+                            {{get(data,'data.religion','')}}                    
+                        </div>
                     </div>
                 </div>
 
                 <div class="d-sm-block d-md-none d-lg-none">
-                    <small>Nomor KK</small>
+                    <small>Nama Anak</small>
                     <p>
-                        {{get(data,'data.id_card','')}}
+                        {{get(data,'data.name','')}}
                     </p>
 
                     <small>Nama Kepala Keluarga</small>
                     <p>
-                        {{get(data,'data.householder','')}}
+                        {{get(data,'data.householder_name','')}}
                     </p>
 
                     <small>
-                        NIK Kepala Keluarga
+                        Nomor Kartu :
                     </small>
                     <p>
-                        {{get(data,'data.householder_id_card','')}}
+                        {{get(data,'data.card_number','')}}
                     </p>
 
                     <small>
-                        Kode Pos
+                        Jenis Kelamin :
                     </small>
-                    <p>
-                        {{get(data,'data.zip_code','')}}                    
+                    <p class=" text-capitalize">
+                        {{get(data,'data.gender','')}}
                     </p>
 
                     <small>
@@ -133,10 +140,17 @@
                     <p>
                         {{get(data,'data.kelurahan','')}}                    
                     </p>
+
+                    <small>
+                        Agama :
+                    </small>
+                    <p class="text-capitalize">
+                        {{get(data,'data.religion','')}}                    
+                    </p>
                 </div>
 
                 <div class="d-flex justify-content-center mt-3">
-                    <button @click="submitReprint" type="button" class="btn btn-sm btn-success mx-1">Ajukan Cetak Ulang</button>
+                    <button :disabled="reprint" @click="submitReprint" type="button" class="btn btn-sm btn-success mx-1">Ajukan Cetak Ulang</button>
                     <button @click="cancel" type="button" class="btn btn-sm btn-secondary mx-1">Batal</button>
                 </div>
             </div>
@@ -145,6 +159,7 @@
 
 <script>
 import {get} from 'lodash'
+import moment from 'moment'
 export default {
     props : [
         "redirect_url", "submit_url", "reprint_url"
@@ -152,17 +167,18 @@ export default {
     data(){
         return {
             errors : null,
-            id_card : null,
-            householder_id_card : null,
+            card_number : null,
+            family_card_number : null,
             data : null,
             reprinted : false,
+
         }
     },
     computed :{
         formData(){
             return {
-                id_card : this.id_card,
-                householder_id_card : this.householder_id_card
+                family_card_number : this.family_card_number,
+                card_number : this.card_number,
             }
         }
     },

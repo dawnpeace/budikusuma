@@ -29,6 +29,7 @@ class CreateIdentityCardsTable extends Migration
             $table->string('marriage_status');
             $table->string('profession');
             $table->string('nationality');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

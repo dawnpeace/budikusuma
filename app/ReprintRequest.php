@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReprintRequest extends Model
 {
+    protected $table = 'reprint_requests';
 
     protected $fillable = ["id_number"];
 
