@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DocumentStatus;
+use App\IdentityCardSubmission;
 use Illuminate\Http\Request;
 use App\KtpSubmission;
 use Illuminate\Validation\Rule;
@@ -41,7 +42,7 @@ class IdentityCardController extends Controller
             "nationality" => "required"
         ]);
 
-        KtpSubmission::create($request->all());
-        return response([],201)->json();
+        IdentityCardSubmission::create($request->all());
+        return response()->json([], 201);
     }
 }

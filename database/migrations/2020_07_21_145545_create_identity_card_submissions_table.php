@@ -1,11 +1,11 @@
 <?php
 
+use App\Enums\DocumentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\DocumentStatus;
 
-class CreateKtpSubmissionsTable extends Migration
+class CreateIdentityCardSubmissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class CreateKtpSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ktp_submissions', function (Blueprint $table) {
+        Schema::create('identity_card_submissions', function (Blueprint $table) {
             $table->id();
+            $table->string("id_card")->nullable()->unique();
             $table->string('name');
             $table->string('gender');
             $table->string('address');
@@ -29,7 +30,7 @@ class CreateKtpSubmissionsTable extends Migration
             $table->string('marriage_status');
             $table->string('profession');
             $table->string('nationality');
-            $table->string('status')->default(DocumentStatus::HOLD);
+            $table->string("status")->default(DocumentStatus::HOLD);
             $table->timestamps();
         });
     }
@@ -41,6 +42,6 @@ class CreateKtpSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ktp_submissions');
+        Schema::dropIfExists('identity_card_reprint_applications');
     }
 }

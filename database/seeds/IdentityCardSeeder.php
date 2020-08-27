@@ -11,6 +11,6 @@ class IdentityCardSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\IdentityCard::class, 10)->create();
+        factory(App\IdentityCard::class, 20)->create();
     }
 }

@@ -15,15 +15,7 @@
                         placeholder="Nama Kepala Keluarga"
                     />
                 </div>
-                <div class="col-md-6 col-sm-12">
-                    <side-label
-                        :error="get(errors, 'errors.address[0]', '')" 
-                        name="address" 
-                        title="Alamat" 
-                        v-model="address"
-                        placeholder="Alamat"
-                    />
-                </div>
+                
                 <div class="col-md-6 col-sm-12">
                     <side-label
                         :error="get(errors, 'errors.householder_id_card[0]', '')" 
@@ -35,20 +27,11 @@
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.rt[0]', '')" 
-                        name="rt" 
-                        title="RT" 
-                        v-model="rt"
-                        placeholder="RT"
-                    />
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <side-label
-                        :error="get(errors, 'errors.rw[0]', '')" 
-                        name="rw" 
-                        title="RW" 
-                        v-model="rw"
-                        placeholder="RW"
+                        :error="get(errors, 'errors.address[0]', '')" 
+                        name="address" 
+                        title="Alamat" 
+                        v-model="address"
+                        placeholder="Alamat"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
@@ -76,6 +59,24 @@
                         title="Kecamatan" 
                         v-model="kecamatan"
                         placeholder="Kecamatan"
+                    />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <side-label
+                        :error="get(errors, 'errors.rt[0]', '')" 
+                        name="rt" 
+                        title="RT" 
+                        v-model="rt"
+                        placeholder="RT"
+                    />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <side-label
+                        :error="get(errors, 'errors.rw[0]', '')" 
+                        name="rw" 
+                        title="RW" 
+                        v-model="rw"
+                        placeholder="RW"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
@@ -226,7 +227,7 @@
                 />
         </div>
         <div class="d-flex justify-content-center mb-3">
-            <button @click="addFamilyMember" type="button" class="btn btn-small btn-secondary">Tambah Anggota Keluarga</button>
+            <button :disabled="hasSubmitted" @click="addFamilyMember" type="button" class="btn btn-small btn-secondary">Tambah Anggota Keluarga</button>
         </div>
         <div class="d-flex justify-content-center">
             <button :disabled="hasSubmitted" @click="submitForm" type="button" class="btn btn-small btn-primary">Masukkan Data KK</button>
@@ -238,6 +239,7 @@
 
 import {get, cloneDeep} from 'lodash'
 import moment from 'moment'
+
 export default {
     props : [
         "redirect_url", "submit_url"
@@ -257,20 +259,8 @@ export default {
             provinsi : null,
             householder_id_card : null,
             members : [
-               {
-                    name : this.houseHolderName,
-                    marriage_status : 'not_married',
-                    gender : 'laki-laki',
-                    id_card : null,
-                    birthdate : new Date('1990-01-01'),
-                    birthplace : null,
-                    religion : 'islam',
-                    education : null,
-                    profession : null,
-                    family_relation : 'Kepala Keluarga'
-                }
+                 ...this.getDefaultMember()
             ]
-
         }
     },
     methods : {
@@ -309,7 +299,14 @@ export default {
             this.hasSubmitted = true;
             axios.post(this.submit_url, this.formData)
                 .then(response => {
-                    console.log(response);
+                    swal({
+                        icon : 'success',
+                        title : 'Data berhasil dimasukkan',
+                        button : 'Ok'
+                    }).then((ok) => {
+                        if(ok) location.replace(this.redirect_url);
+                        this.resetForm();
+                    })
                 })
                 .catch(e => {
                     console.log(e);
@@ -318,7 +315,36 @@ export default {
                 });
         },
         getDynamicError(attribute, index){
-            return get(this.errors, ['errors','members.' + index + '.' +attribute, 0], '');
+            let message = get(this.errors, ['errors','members.' + index + '.' +attribute, 0], '');
+            return message.replace(/.[0-9]./, " ");
+        },
+        resetForm(){
+            this.householder_name = null,
+            this.address = null;
+            this.rt = null;
+            this.rw = null;
+            this.zipcode = null;
+            this.kecamatan = null;
+            this.kabupaten = null;
+            this.kelurahan = null;
+            this.provinsi = null;
+            this.householder_id_card=null;
+            this.members = this.getDefaultMember();
+            this.hasSubmitted = false;
+        },
+        getDefaultMember(){
+            return [{
+                name : this.householder_name,
+                marriage_status : 'not_married',
+                gender : 'laki-laki',
+                id_card : null,
+                birthdate : new Date('1990-01-01'),
+                birthplace : null,
+                religion : 'islam',
+                education : null,
+                profession : null,
+                family_relation : 'Kepala Keluarga'
+            }];
         }
     },
     computed : {

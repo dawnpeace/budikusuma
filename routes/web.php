@@ -1,5 +1,8 @@
 <?php
 
+use App\enums\DocumentStatus;
+use App\IdentityCardSubmission;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'main');
 
 Auth::routes();
 
@@ -38,17 +39,7 @@ Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function(){
 
 Route::group(['prefix' => 'persyaratan', 'as' => 'requirement.'], function(){
     Route::get('/', 'RequirementsContentController@index')->name('index');
-    Route::get('ktp', 'RequirementsContentController@ktp')->name('ktp');
-    Route::post('ktp', 'RequirementsContentController@ktpSubmit')->name('ktp.submit');
-
-    Route::get('kk', 'RequirementsContentController@kk')->name('kk');
-    Route::post('kk', 'RequirementsContentController@kkSubmit')->name('kk.submit');
-
-    Route::get('kia', 'RequirementsContentController@kia')->name('kia');
-    Route::post('kia', 'RequirementsContentController@kiaSubmit')->name('kia.submit');
-
-    Route::get('akta-lahir', 'RequirementsContentController@aktaLahir')->name('al');
-    Route::post('akta-lahir', 'RequirementsContentController@aktaLahirSubmit')->name('al.submit');
+    Route::get('document', 'RequirementsContentController@getItem')->name('show');
 });
 
 Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Reprint'], function(){
@@ -73,10 +64,17 @@ Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Rep
 });
 
 
-Route::group(['prefix' => 'api'], function(){
-    Route::get('document', 'Api/RequirementsController@index');
+// Admin Routes Starts Here
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
+    Route::group(['prefix' => 'pengajuan', 'namespace' => 'Submission', 'as' => 'submission.'], function() {
+        Route::view('/ktp', 'admin.submission.ktp')->name('ktp');
+        Route::get('/ktp/datatable', 'IdentityCardController@datatable')->name('ktp.datatable');
+        Route::get('/ktp/edit/{card}', 'IdentityCardController@edit')->name('ktp.edit');
+        Route::post('/ktp/hapus/{card}', 'IdentityCardController@delete')->name('ktp.delete');
+    });
 });
 
+Route::view('asun','admin.main');
 
-Route::get('asun','Reprint\FamilyCardController@something');
 

@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center col-12 pt-3">
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button :disabled="disableSubmit" class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
     </div>
@@ -120,6 +120,7 @@ export default {
             birthdate : new Date('2000-01-01'),
             mother_identity_card_number : null,
             father_identity_card_number : null,
+            disableSubmit : false
         }
     },
     computed :{
@@ -138,15 +139,31 @@ export default {
     methods : {
         get,
         submitForm(){
+            this.disableSubmit = true;
             axios.post(
                 this.submit_url, this.formData
             ).then(response => {
-                console.log(response);
-                window.location.replace = this.redirect_url;
+                this.disableSubmit = false;
+                swal({
+                    icon : "success",
+                    title : "Data berhasil dimasukkan",
+                    button : "Ok"
+                }).then((ok) => {
+                    if(ok) window.location.replace(this.redirect_url);
+                    this.resetForm();
+                })
             }).catch(e => {
-                console.log(e.response.data);
                 this.errors = e.response.data;
+                this.disableSubmit = false;
             });
+        },
+        resetForm(){
+                this.name = '';
+                this.gender = '';
+                this.family_card_number = '';
+                this.birthdate = new Date('2000-01-01');
+                this.mother_identity_card_number = '';
+                this.father_identity_card_number = '';
         }
     }
 }

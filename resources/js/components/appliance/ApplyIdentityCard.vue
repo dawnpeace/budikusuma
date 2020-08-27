@@ -2,7 +2,7 @@
     <div>
         <h5 class="text-center">Daftar E-KTP</h5>
         <hr>
-        <form @submit.prevent="submitForm()" class="row" action="">
+        <form id="submission" @submit.prevent="submitForm()" class="row" action="">
             <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Pemilik</label>
                 <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Pemilik</label>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-9 col-sm-12">  
                 <div class="form-group">
-                    <select :class="{'is-invalid': get(this.errors, 'errors.gender[0]', false)}" v-model="gender" id="" class="form-control">
+                    <select name="gender" :class="{'is-invalid': get(this.errors, 'errors.gender[0]', false)}" v-model="gender" id="" class="form-control">
                         <option value="laki-laki" selected>Laki - laki</option>
                         <option value="perempuan">Perempuan</option>
                     </select>
@@ -57,6 +57,7 @@
                     input-class="form-control"
                     id="birthdate"
                     format="dd-MM-yyyy"
+                    name="birthdate"
                     v-model="birthdate"
                     placeholder="Tanggal Lahir" 
                     :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}" 
@@ -73,6 +74,7 @@
                     <input 
                     v-model="address" 
                     placeholder="Alamat" 
+                    name="alamat"
                     type="text" 
                     :class="{'is-invalid': get(this.errors, 'errors.address[0]', false)}" 
                     class="form-control">
@@ -87,7 +89,7 @@
                 <div class="form-group">
                     <input 
                     v-model="rt" 
-                    placeholder="RT" 
+                    placeholder="RT"
                     type="text"
                     :class="{'is-invalid': get(this.errors, 'errors.rt[0]', false)}" 
                     class="form-control">
@@ -201,7 +203,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center col-12 pt-3">
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button :disabled="disableSubmit" class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
     </div>
@@ -230,7 +232,8 @@ export default {
             marriage_status : "not_married",
             profession : null,
             nationality : null,
-            submitted : false
+            submitted : false,
+            disableSubmit : false
         }
     },
     computed :{
@@ -255,13 +258,38 @@ export default {
     methods : {
         get,
         submitForm(){
+            this.disableSubmit = true;
             axios.post(
                 this.submit_url, this.formData
             ).then(response => {
-                window.location.replace(redirect_url)
+                this.disableSubmit = false;
+                this.resetForm();
+                swal({
+                    icon : "success",
+                    title : "Data berhasil dimasukkan",
+                    button : "Ok"
+                }).then((ok) => {
+                    if(ok) window.location.replace(this.redirect_url);
+                })
             }).catch(e => {
                 this.errors = e.response.data;
+                this.disableSubmit = false;
             });
+        },
+        resetForm(){
+            this.name = '';
+            this.birthdate = new Date('2000-01-01');
+            this.birthplace = '';
+            this.gender = "laki-laki",
+            this.address = '';
+            this.rt = '';
+            this.rw = '';
+            this.kelurahan = '';
+            this.kecamatan = '';
+            this.religion = "islam";
+            this.marriage_status = "not_married";
+            this.profession = '';
+            this.nationality = '';
         }
     }
 }

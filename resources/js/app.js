@@ -26,8 +26,25 @@ require('./bootstrap');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./components/admin/', true, /\.vue$/i)
+
+const pascalToCamelCase = str => {
+    str = str.charAt(0).toLowerCase() + str.slice(1);
+    return camelCaseToKebabCase(str);
+}
+
+const camelCaseToKebabCase = str => str.replace(/[A-Z]/g, change => '-' + change.charAt(0).toLowerCase());
+
+const createComponentNameByPath = path => {
+    let arrPath = path.split('/');
+    arrPath.shift();
+    let reduced = arrPath.reduce((before, after) => before + '-' + pascalToCamelCase(after));
+    let kebabCased = reduced.split('.');
+    return kebabCased[0];
+}
+
+files.keys()
+    .map(key => Vue.component(createComponentNameByPath(key), files(key).default))
 
 Vue.component('side-label', require('./components/base/SideLabelInput.vue').default);
 
@@ -50,6 +67,7 @@ Vue.component('reprint-birth-certificate', require('./components/reprint/Reprint
 Vue.component('reprint-child-id-card', require('./components/reprint/ReprintChildIdentityCard.vue').default);
 
 Vue.component('reprint-check', require('./components/reprint/CheckReprint.vue').default);
+
 
 Vue.component('datepicker', Datepicker);
 

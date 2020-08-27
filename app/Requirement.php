@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requirement extends Model
 {
-    public static $KTP = "KTP";
     protected $table = "requirements";
     protected $fillable = ["document", "description"];
 

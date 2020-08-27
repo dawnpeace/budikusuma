@@ -46,6 +46,7 @@ class FamilyCardController extends Controller
     {
         return [
             "householder_name" => "required",
+            "householder_id_card" => "required|numeric",
             "address" => "required",
             "rt" => "required",
             "rw" => "required",
