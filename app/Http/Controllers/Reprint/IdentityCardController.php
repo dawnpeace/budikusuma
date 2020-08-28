@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\IdentityCard;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class IdentityCardController extends Controller
 {
@@ -25,7 +26,7 @@ class IdentityCardController extends Controller
         
         $idCard = $this->getIdentityCard($request->identity_card_number, $request->birthdate);
 
-        return !is_null($idCard) ? response()->json($idCard) : response()->json([], 404);
+        return !is_null($idCard) ? response()->json($idCard, 200) : response()->json([], 404);
     }
 
     public function addToReprint(Request $request)
@@ -34,11 +35,9 @@ class IdentityCardController extends Controller
             "identity_card_number" => "required|numeric",
             "birthdate" => "required|date_format:d-m-Y"
         ]);
-        DB::transaction(function() use ($request){
+        return DB::transaction(function() use ($request){
             $idCard = $this->getIdentityCard($request->identity_card_number, $request->birthdate);
-
-            if (!$idCard) return response()->json([], 404);
-
+            if (is_null($idCard)) return response()->json([], 404);
             try {
                 $result = $idCard->submitReprint();
                 return response()->json($result, 201);
@@ -46,7 +45,6 @@ class IdentityCardController extends Controller
                 return response()->json(["message" => $e->getMessage()], 400);
             }
         });
-        
     }
 
 

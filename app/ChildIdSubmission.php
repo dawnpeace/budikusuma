@@ -9,8 +9,10 @@ class ChildIdSubmission extends Model
     protected $table = "child_id_submission";
 
     protected $fillable = [
-        "name", "family_card_number", "birthdate", "mother_identity_card_number",
-        "father_identity_card_number", "status"
+        "name", "gender", "birthplace", "birthdate", 
+        "family_card_number", "householder_name", "religion",
+        "birth_certificate_number", "citizenship", 
+        "address", "rt", "rw", "kecamatan", "kelurahan","status"
     ];
 
     protected $dates = [

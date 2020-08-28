@@ -20,6 +20,39 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tempat Lahir</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Tempat Lahir</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="birthplace" 
+                        placeholder="Tempat Lahir" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.birthplace[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <datepicker 
+                        input-class="form-control"
+                        id="birthdate"
+                        format="dd-MM-yyyy"
+                        v-model="birthdate"
+                        placeholder="Tanggal Lahir" 
+                        :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.birthdate[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                 <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
             </div>
@@ -50,54 +83,151 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
-            </div>
-            <div class="col-md-9 col-sm-12">
-                <div class="form-group">
-                    <datepicker 
-                        input-class="form-control"
-                        id="birthdate"
-                        format="dd-MM-yyyy"
-                        v-model="birthdate"
-                        placeholder="Tanggal Lahir" 
-                        :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.birthdate[0]', '')}}</div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No KTP Ibu</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No KTP Ibu</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Kepala Keluarga</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Kepala Keluarga</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <input 
-                        v-model="mother_identity_card_number" 
-                        placeholder="Nama Anak" 
+                        v-model="householder_name" 
+                        placeholder="Nama Kepala Keluarga" 
                         type="text" 
-                        :class="{'is-invalid': get(this.errors, 'errors.mother_identity_card_number[0]', false)}"
+                        :class="{'is-invalid': get(this.errors, 'errors.householder_name[0]', false)}"
                         class="form-control"/>
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.mother_identity_card_number[0]', '')}}</div>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.householder_name[0]', '')}}</div>
                 </div>
             </div>
 
-
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No KTP Ayah</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No KTP Ayah</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nomor Akta Kelahiran</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nomor Akta Kelahiran</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <input 
-                        v-model="father_identity_card_number" 
-                        placeholder="Nama Anak" 
+                        v-model="birth_certificate_number" 
+                        placeholder="Nomor Akta Kelahiran" 
                         type="text" 
-                        :class="{'is-invalid': get(this.errors, 'errors.father_identity_card_number[0]', false)}"
+                        :class="{'is-invalid': get(this.errors, 'errors.birth_certificate_number[0]', false)}"
                         class="form-control"/>
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.father_identity_card_number[0]', '')}}</div>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.birth_certificate_number[0]', '')}}</div>
                 </div>
             </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Agama</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Agama</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.religion[0]', false)}" v-model="religion"  id="" class="form-control">
+                        <option selected value="islam">Islam</option>
+                        <option value="kristen protestan">Kristen Protestan</option>
+                        <option value="kristen katolik">Kristen Katolik</option>
+                        <option value="buddha">Buddha</option>
+                        <option value="hindu">Hindu</option>
+                        <option value="konghucu">Konghucu</option>
+                    </select>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.religion[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kewarganegaraan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Kewarganegaraan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="citizenship" 
+                        placeholder="Kewarganegaraan" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.birth_certificate_number[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.birth_certificate_number[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Alamat</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Alamat</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="address" 
+                        placeholder="Alamat" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.address[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.address[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">RT</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">RT</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="rt" 
+                        placeholder="RT" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.rt[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.rt[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">RW</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">RW</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="rw" 
+                        placeholder="RW" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.rw[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.rw[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kelurahan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Kelurahan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="kelurahan" 
+                        placeholder="Kelurahan" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.kelurahan[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kecamatan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Kecamatan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="kecamatan" 
+                        placeholder="Kecamatan" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.kecamatan[0]', '')}}</div>
+                </div>
+            </div>
+
             <div class="d-flex justify-content-center col-12 pt-3">
                 <button :disabled="disableSubmit" class="btn btn-primary" type="submit">Submit</button>
             </div>
@@ -115,24 +245,39 @@ export default {
         return {
             errors : null,
             name : null,
+            birthplace : null,
+            birthdate : new Date('2000-01-01'),
             gender : 'laki-laki',
             family_card_number : null,
-            birthdate : new Date('2000-01-01'),
-            mother_identity_card_number : null,
-            father_identity_card_number : null,
+            householder_name : null,
+            birth_certificate_number : null,
+            citizenship : null,
+            address : null,
+            rt : null,
+            rw : null,
+            kecamatan : null,
+            kelurahan : null,
+            religion : 'islam',
             disableSubmit : false
         }
     },
     computed :{
         formData(){
             return {
-                errors : null,
                 name : this.name,
                 gender : this.gender,
-                family_card_number : this.family_card_number,
+                birthplace : this.birthplace,
                 birthdate : moment(this.birthdate).format("DD-MM-YYYY"),
-                mother_identity_card_number : this.mother_identity_card_number,
-                father_identity_card_number : this.family_card_number
+                family_card_number : this.family_card_number,
+                householder_name : this.householder_name,
+                birth_certificate_number : this.birth_certificate_number,
+                citizenship : this.citizenship,
+                address : this.address,
+                rt : this.rt,
+                rw : this.rw,
+                kecamatan : this.kecamatan,
+                kelurahan : this.kelurahan,
+                religion : this.religion
             }
         }
     },
@@ -158,12 +303,21 @@ export default {
             });
         },
         resetForm(){
-                this.name = '';
-                this.gender = '';
-                this.family_card_number = '';
-                this.birthdate = new Date('2000-01-01');
-                this.mother_identity_card_number = '';
-                this.father_identity_card_number = '';
+                this.name = null;
+                this.gender = 'laki-laki';
+                this.birthplace = null,
+                this.birthdate = new Date('2000-01-01'),
+                this.family_card_number = null,
+                this.householder_name = null,
+                this.birth_certificate_number = null,
+                this.citizenship = null,
+                this.address = null,
+                this.rt = null;
+                this.rw = null;
+                this.kecamatan = null;
+                this.kelurahan = null;
+                this.religion = 'islam';
+                this.disableSubmit = false;
         }
     }
 }

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BirthCertificateController extends Controller
 {
@@ -35,16 +36,18 @@ class BirthCertificateController extends Controller
             "id" => "required"
         ]);
 
-        $birthCertificate = $this->getBirthCertificate($request->mother_identity_card_number, $request->birthdate, $request->id);
-        
-        if(is_null($birthCertificate)) return response()->json([], 404);
-
-        try{
-            $birthCertificate->submitReprint();
-            return response()->json([], 201);
-        } catch (Exception $e){
-            return response()->json(["message" => $e->getMessage()], 400);
-        }
+        return DB::transaction(function() use ($request){
+            $birthCertificate = $this->getBirthCertificate($request->mother_identity_card_number, $request->birthdate, $request->id);
+            
+            if(is_null($birthCertificate)) return response()->json([], 404);
+    
+            try{
+                $birthCertificate->submitReprint();
+                return response()->json([], 201);
+            } catch (Exception $e){
+                return response()->json(["message" => $e->getMessage()], 400);
+            }
+        });
     }
 
     public function getBirthCertificate($motherIdCard, $birthdate, $id = null)

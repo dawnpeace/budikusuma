@@ -17,14 +17,26 @@ class ChildIdCardController extends Controller
     {
         $request->validate([
             "name" => "required",
+            "birthplace" => "required",
+            "birthdate" => "required|date|date_format:d-m-Y",
             "gender" => [
                 "required",
                 Rule::in(["laki-laki", "perempuan"])
             ],
             "family_card_number" => "required|numeric",
-            "birthdate" => "required|date|date_format:d-m-Y",
-            "mother_identity_card_number" => "required|numeric",
-            "father_identity_card_number" => "required|numeric"
+            "householder_name" => "required",
+            "birth_certificate_number" => "required",
+            "citizenship" => "required",
+            "address" => "required",
+            "rt" => "required|numeric",
+            "rw" => "required|numeric",
+            "kecamatan" => "required",
+            "kelurahan" => "required",
+            "religion" => [
+                "required",
+                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
+            ],
+            
         ]);
         ChildIdSubmission::create($request->all());
         return response([], 201);

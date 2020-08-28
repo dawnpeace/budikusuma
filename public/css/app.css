@@ -13977,3 +13977,7 @@ a.text-dark:focus {
   width: inherit;
 }
 
+.bg-info-light {
+  background-color: #a6d4fc !important;
+}
+

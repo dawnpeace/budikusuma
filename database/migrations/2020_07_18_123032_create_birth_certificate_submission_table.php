@@ -16,7 +16,7 @@ class CreateBirthCertificateSubmissionTable extends Migration
     {
         Schema::create('birth_certificate_submission', function (Blueprint $table) {
             $table->id();
-            $table->string("id_card")->unique();
+            $table->string("id_card")->nullable()->unique();
             $table->string("name");
             $table->string("gender");
             $table->string("mother_identity_card_number");

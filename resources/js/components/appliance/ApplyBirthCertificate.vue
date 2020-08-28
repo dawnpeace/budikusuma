@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5>Daftar Akte Kelahiran</h5>
+        <h5 class="text-center">Daftar Akta Kelahiran</h5>
         <hr>
         <form @submit.prevent="submitForm()" class="row" action="" method="post">
             <div class="col-md-3 col-sm-12">
@@ -148,7 +148,7 @@
             </div>
 
             <div class="d-flex justify-content-center col-12 pt-3">
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button :disabled="disableSubmit" class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
     </div>
@@ -172,6 +172,7 @@ export default {
             mother_name : null,
             father_identity_card_number : null,
             father_name : null,
+            disableSubmit : false,
         }
     },
     computed :{
@@ -192,14 +193,34 @@ export default {
     methods : {
         get,
         submitForm(){
+            this.disableSubmit = true;
             axios.post(
                 this.submit_url, this.formData
             ).then(response => {
-                console.log(response);
+                swal({
+                    title  : 'Data berhasil dimasukkan!',
+                    button : 'Ok',
+                    icon : 'success'
+                }).then( ok => {
+                    if(ok) window.location.replace(this.redirect_url);
+                    this.resetForm();
+                })
             }).catch(e => {
                 console.log(e.response.data);
                 this.errors = e.response.data;
             });
+        },
+        resetForm(){
+            this.name = null;
+            this.gender = 'laki-laki';
+            this.family_card_number = null;
+            this.birthdate = null;
+            this.birthplace = new Date('2000-01-01');
+            this.mother_identity_card_number = null;
+            this.mother_name = null;
+            this.father_identity_card_number = null;
+            this.father_name = null;
+            this.disableSubmit = false;
         }
     }
 }

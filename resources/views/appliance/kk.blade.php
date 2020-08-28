@@ -7,10 +7,10 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item bread"><a href="{{url('/')}}">Utama</a></li>
                 <li class="breadcrumb-item">Pengajuan<a href="#"></a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                <li class="breadcrumb-item active" aria-current="page">KK</li>
             </ol>
         </nav>
-
+        @include('appliance.info-card')
         <apply-family-card redirect_url='{{url("/")}}' submit_url='{{route("apply.kartukeluarga.submit")}}' />
 
     </div>

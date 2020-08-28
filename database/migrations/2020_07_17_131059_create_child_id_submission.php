@@ -16,11 +16,13 @@ class CreateChildIdSubmission extends Migration
     {
         Schema::create('child_id_submission', function (Blueprint $table) {
             $table->id();
-            $table->string('card_number')->unique();
+            $table->string('card_number')->nullable()->unique();
             $table->string("name");
             $table->string("gender");
             $table->string("family_card_number");
+            $table->string("birth_certificate_number");
             $table->date("birthdate");
+            $table->string('birthplace');
             $table->string("address");
             $table->string("householder_name");
             $table->string("religion");

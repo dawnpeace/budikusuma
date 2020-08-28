@@ -7,9 +7,10 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item bread"><a href="{{url('/')}}">Utama</a></li>
                 <li class="breadcrumb-item">Pengajuan<a href="#"></a></li>
-                <li class="breadcrumb-item active" aria-current="page">Akte Lahir</li>
+                <li class="breadcrumb-item active" aria-current="page">Akta Lahir</li>
             </ol>
         </nav>
+        @include('appliance.info-card')
         <div class="card card-boy">
             <div class="p-4">
                 <apply-birth-certificate redirect_url='{{url("/")}}' submit_url='{{route("apply.aktelahir.submit")}}' />

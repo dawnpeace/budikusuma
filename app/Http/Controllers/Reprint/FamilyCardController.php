@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reprint;
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FamilyCardController extends Controller
 {
@@ -31,17 +32,19 @@ class FamilyCardController extends Controller
             "id_card" => "required|numeric",
             "householder_id_card" => "required|numeric"
         ]);
+        return DB::transaction(function() use ($request){
+            $idCard = $this->getFamilyCard($request->id_card, $request->householder_id_card);
 
-        $idCard = $this->getFamilyCard($request->id_card, $request->householder_id_card);
+            if (!$idCard) return response()->json([], 404);
 
-        if (!$idCard) return response()->json([], 404);
-
-        try {
-            $result = $idCard->submitReprint();
-            return response()->json($result, 201);
-        } catch (\Exception $e) {
-            return response(["message" => $e->getMessage()], 400);
-        }
+            try {
+                $result = $idCard->submitReprint();
+                return response()->json($result, 201);
+            } catch (\Exception $e) {
+                return response(["message" => $e->getMessage()], 400);
+            }
+        });
+        
     }
 
     private function getFamilyCard($idCard, $householderId)

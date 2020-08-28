@@ -2397,7 +2397,8 @@ __webpack_require__.r(__webpack_exports__);
       mother_identity_card_number: null,
       mother_name: null,
       father_identity_card_number: null,
-      father_name: null
+      father_name: null,
+      disableSubmit: false
     };
   },
   computed: {
@@ -2420,12 +2421,33 @@ __webpack_require__.r(__webpack_exports__);
     submitForm: function submitForm() {
       var _this = this;
 
+      this.disableSubmit = true;
       axios.post(this.submit_url, this.formData).then(function (response) {
-        console.log(response);
+        swal({
+          title: 'Data berhasil dimasukkan!',
+          button: 'Ok',
+          icon: 'success'
+        }).then(function (ok) {
+          if (ok) window.location.replace(_this.redirect_url);
+
+          _this.resetForm();
+        });
       })["catch"](function (e) {
         console.log(e.response.data);
         _this.errors = e.response.data;
       });
+    },
+    resetForm: function resetForm() {
+      this.name = null;
+      this.gender = 'laki-laki';
+      this.family_card_number = null;
+      this.birthdate = null;
+      this.birthplace = new Date('2000-01-01');
+      this.mother_identity_card_number = null;
+      this.mother_name = null;
+      this.father_identity_card_number = null;
+      this.father_name = null;
+      this.disableSubmit = false;
     }
   }
 });
@@ -2551,6 +2573,136 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2559,24 +2711,39 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errors: null,
       name: null,
+      birthplace: null,
+      birthdate: new Date('2000-01-01'),
       gender: 'laki-laki',
       family_card_number: null,
-      birthdate: new Date('2000-01-01'),
-      mother_identity_card_number: null,
-      father_identity_card_number: null,
+      householder_name: null,
+      birth_certificate_number: null,
+      citizenship: null,
+      address: null,
+      rt: null,
+      rw: null,
+      kecamatan: null,
+      kelurahan: null,
+      religion: 'islam',
       disableSubmit: false
     };
   },
   computed: {
     formData: function formData() {
       return {
-        errors: null,
         name: this.name,
         gender: this.gender,
-        family_card_number: this.family_card_number,
+        birthplace: this.birthplace,
         birthdate: moment__WEBPACK_IMPORTED_MODULE_1___default()(this.birthdate).format("DD-MM-YYYY"),
-        mother_identity_card_number: this.mother_identity_card_number,
-        father_identity_card_number: this.family_card_number
+        family_card_number: this.family_card_number,
+        householder_name: this.householder_name,
+        birth_certificate_number: this.birth_certificate_number,
+        citizenship: this.citizenship,
+        address: this.address,
+        rt: this.rt,
+        rw: this.rw,
+        kecamatan: this.kecamatan,
+        kelurahan: this.kelurahan,
+        religion: this.religion
       };
     }
   },
@@ -2603,12 +2770,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     resetForm: function resetForm() {
-      this.name = '';
-      this.gender = '';
-      this.family_card_number = '';
-      this.birthdate = new Date('2000-01-01');
-      this.mother_identity_card_number = '';
-      this.father_identity_card_number = '';
+      this.name = null;
+      this.gender = 'laki-laki';
+      this.birthplace = null, this.birthdate = new Date('2000-01-01'), this.family_card_number = null, this.householder_name = null, this.birth_certificate_number = null, this.citizenship = null, this.address = null, this.rt = null;
+      this.rw = null;
+      this.kecamatan = null;
+      this.kelurahan = null;
+      this.religion = 'islam';
+      this.disableSubmit = false;
     }
   }
 });
@@ -3991,7 +4160,7 @@ __webpack_require__.r(__webpack_exports__);
 
       swal({
         title: "Apakah anda yakin ingin melanjutkan ?",
-        icon: "info",
+        icon: "warning",
         buttons: ["Batal", "Ok"]
       }).then(function (value) {
         if (value) _this.submitReprint(id);
@@ -4036,7 +4205,6 @@ __webpack_require__.r(__webpack_exports__);
         birthdate: moment__WEBPACK_IMPORTED_MODULE_1___default()(new Date(this.birthdate)).format('DD-MM-YYYY'),
         mother_identity_card_number: this.mother_identity_card_number
       };
-      console.log(data.mother_identity_card_number);
       axios.post(this.reprint_url, data).then(function (response) {
         _this3.reprint = true;
         swal("Permintaan Berhasil Disimpan!", "", "success").then(function (value) {
@@ -4318,6 +4486,18 @@ __webpack_require__.r(__webpack_exports__);
             break;
         }
       });
+    },
+    confirmationDialog: function confirmationDialog() {
+      var _this3 = this;
+
+      swal({
+        dangerMode: true,
+        icon: 'warning',
+        title: 'Apakah anda yakin ingin melanjutkan',
+        buttons: ["Batal", "OK"]
+      }).then(function (ok) {
+        if (ok) _this3.submitReprint();
+      });
     }
   }
 });
@@ -4556,6 +4736,18 @@ __webpack_require__.r(__webpack_exports__);
             break;
         }
       });
+    },
+    confirmationDialog: function confirmationDialog() {
+      var _this3 = this;
+
+      swal({
+        dangerMode: true,
+        icon: 'warning',
+        title: 'Apakah anda yakin ingin melanjutkan',
+        buttons: ["Batal", "OK"]
+      }).then(function (ok) {
+        if (ok) _this3.submitReprint();
+      });
     }
   }
 });
@@ -4744,7 +4936,8 @@ __webpack_require__.r(__webpack_exports__);
       identity_card_number: null,
       birthdate: new Date('1990-01-01'),
       data: null,
-      reprinted: false
+      reprinted: false,
+      confirmed: false
     };
   },
   computed: {
@@ -4816,6 +5009,18 @@ __webpack_require__.r(__webpack_exports__);
             swal("Terjadi Kesalahan !", "Tolong coba beberapa saat lagi!", "error");
             break;
         }
+      });
+    },
+    confirmationDialog: function confirmationDialog() {
+      var _this3 = this;
+
+      swal({
+        dangerMode: true,
+        icon: 'warning',
+        title: 'Apakah anda yakin ingin melanjutkan',
+        buttons: ["Batal", "OK"]
+      }).then(function (ok) {
+        if (ok) _this3.submitReprint();
       });
     }
   }
@@ -78844,7 +79049,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h5", [_vm._v("Daftar Akte Kelahiran")]),
+    _c("h5", { staticClass: "text-center" }, [_vm._v("Daftar Akta Kelahiran")]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -79242,564 +79447,6 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(9)
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("Nama Lengkap Anak")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("Nama Anak")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("Jenis Kelamin")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("Jenis Kelamin")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("Tanggal Lahir")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("Tanggal Lahir")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("Tempat Lahir")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("Tempat Lahir")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("No. Kartu Keluarga")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("No. Kartu Keluarga")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("No KTP Ibu")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("No KTP Ibu")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("Nama Ibu")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("Nama Ibu")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("No KTP Ayah")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("No KTP Ayah")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
-          attrs: { for: "" }
-        },
-        [_vm._v("Nama Ayah")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
-          attrs: { for: "" }
-        },
-        [_vm._v("Nama Ayah")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex justify-content-center col-12 pt-3" },
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
-        )
-      ]
-    )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appliance/ApplyChildIdentityCard.vue?vue&type=template&id=76d8732e&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appliance/ApplyChildIdentityCard.vue?vue&type=template&id=76d8732e& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h5", { staticClass: "text-center" }, [
-      _vm._v("Daftar Kartu Identitas Anak")
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "row",
-        attrs: { action: "", method: "post" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.submitForm()
-          }
-        }
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.name,
-                  expression: "name"
-                }
-              ],
-              staticClass: "form-control",
-              class: {
-                "is-invalid": _vm.get(this.errors, "errors.name[0]", false)
-              },
-              attrs: { placeholder: "Nama Anak", type: "text" },
-              domProps: { value: _vm.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.name = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(_vm._s(_vm.get(this.errors, "errors.name[0]", "")))
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.gender,
-                    expression: "gender"
-                  }
-                ],
-                staticClass: "form-control",
-                class: {
-                  "is-invalid": _vm.get(this.errors, "errors.gender[0]", false)
-                },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.gender = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "laki-laki", selected: "" } }, [
-                  _vm._v("Laki - laki")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "perempuan" } }, [
-                  _vm._v("Perempuan")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(_vm._s(_vm.get(this.errors, "errors.gender[0]", "")))
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.family_card_number,
-                  expression: "family_card_number"
-                }
-              ],
-              staticClass: "form-control",
-              class: {
-                "is-invalid": _vm.get(
-                  this.errors,
-                  "errors.family_card_number[0]",
-                  false
-                )
-              },
-              attrs: { placeholder: "No. Kartu Keluarga", type: "text" },
-              domProps: { value: _vm.family_card_number },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.family_card_number = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                _vm._s(_vm.get(this.errors, "errors.family_card_number[0]", ""))
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c("datepicker", {
-                class: {
-                  "is-invalid": _vm.get(
-                    this.errors,
-                    "errors.birthdate[0]",
-                    false
-                  )
-                },
-                attrs: {
-                  "input-class": "form-control",
-                  id: "birthdate",
-                  format: "dd-MM-yyyy",
-                  placeholder: "Tanggal Lahir"
-                },
-                model: {
-                  value: _vm.birthdate,
-                  callback: function($$v) {
-                    _vm.birthdate = $$v
-                  },
-                  expression: "birthdate"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.get(this.errors, "errors.birthdate[0]", "")))
-              ])
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.mother_identity_card_number,
-                  expression: "mother_identity_card_number"
-                }
-              ],
-              staticClass: "form-control",
-              class: {
-                "is-invalid": _vm.get(
-                  this.errors,
-                  "errors.mother_identity_card_number[0]",
-                  false
-                )
-              },
-              attrs: { placeholder: "Nama Anak", type: "text" },
-              domProps: { value: _vm.mother_identity_card_number },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.mother_identity_card_number = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                _vm._s(
-                  _vm.get(
-                    this.errors,
-                    "errors.mother_identity_card_number[0]",
-                    ""
-                  )
-                )
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.father_identity_card_number,
-                  expression: "father_identity_card_number"
-                }
-              ],
-              staticClass: "form-control",
-              class: {
-                "is-invalid": _vm.get(
-                  this.errors,
-                  "errors.father_identity_card_number[0]",
-                  false
-                )
-              },
-              attrs: { placeholder: "Nama Anak", type: "text" },
-              domProps: { value: _vm.father_identity_card_number },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.father_identity_card_number = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(
-                _vm._s(
-                  _vm.get(
-                    this.errors,
-                    "errors.father_identity_card_number[0]",
-                    ""
-                  )
-                )
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
         _c(
           "div",
           { staticClass: "d-flex justify-content-center col-12 pt-3" },
@@ -79883,6 +79530,58 @@ var staticRenderFns = [
             "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
           attrs: { for: "" }
         },
+        [_vm._v("Tanggal Lahir")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tanggal Lahir")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tempat Lahir")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tempat Lahir")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
         [_vm._v("No. Kartu Keluarga")]
       ),
       _vm._v(" "),
@@ -79894,6 +79593,801 @@ var staticRenderFns = [
           attrs: { for: "" }
         },
         [_vm._v("No. Kartu Keluarga")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("No KTP Ibu")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("No KTP Ibu")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Ibu")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Ibu")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("No KTP Ayah")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("No KTP Ayah")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Ayah")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Ayah")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appliance/ApplyChildIdentityCard.vue?vue&type=template&id=76d8732e&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appliance/ApplyChildIdentityCard.vue?vue&type=template&id=76d8732e& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h5", { staticClass: "text-center" }, [
+      _vm._v("Daftar Kartu Identitas Anak")
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        staticClass: "row",
+        attrs: { action: "", method: "post" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submitForm()
+          }
+        }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(this.errors, "errors.name[0]", false)
+              },
+              attrs: { placeholder: "Nama Anak", type: "text" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.name[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.birthplace,
+                  expression: "birthplace"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(
+                  this.errors,
+                  "errors.birthplace[0]",
+                  false
+                )
+              },
+              attrs: { placeholder: "Tempat Lahir", type: "text" },
+              domProps: { value: _vm.birthplace },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.birthplace = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.birthplace[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("datepicker", {
+                class: {
+                  "is-invalid": _vm.get(
+                    this.errors,
+                    "errors.birthdate[0]",
+                    false
+                  )
+                },
+                attrs: {
+                  "input-class": "form-control",
+                  id: "birthdate",
+                  format: "dd-MM-yyyy",
+                  placeholder: "Tanggal Lahir"
+                },
+                model: {
+                  value: _vm.birthdate,
+                  callback: function($$v) {
+                    _vm.birthdate = $$v
+                  },
+                  expression: "birthdate"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.get(this.errors, "errors.birthdate[0]", "")))
+              ])
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.gender,
+                    expression: "gender"
+                  }
+                ],
+                staticClass: "form-control",
+                class: {
+                  "is-invalid": _vm.get(this.errors, "errors.gender[0]", false)
+                },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.gender = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "laki-laki", selected: "" } }, [
+                  _vm._v("Laki - laki")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "perempuan" } }, [
+                  _vm._v("Perempuan")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.gender[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.family_card_number,
+                  expression: "family_card_number"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(
+                  this.errors,
+                  "errors.family_card_number[0]",
+                  false
+                )
+              },
+              attrs: { placeholder: "No. Kartu Keluarga", type: "text" },
+              domProps: { value: _vm.family_card_number },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.family_card_number = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                _vm._s(_vm.get(this.errors, "errors.family_card_number[0]", ""))
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(5),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.householder_name,
+                  expression: "householder_name"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(
+                  this.errors,
+                  "errors.householder_name[0]",
+                  false
+                )
+              },
+              attrs: { placeholder: "Nama Kepala Keluarga", type: "text" },
+              domProps: { value: _vm.householder_name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.householder_name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                _vm._s(_vm.get(this.errors, "errors.householder_name[0]", ""))
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(6),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.birth_certificate_number,
+                  expression: "birth_certificate_number"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(
+                  this.errors,
+                  "errors.birth_certificate_number[0]",
+                  false
+                )
+              },
+              attrs: { placeholder: "Nomor Akta Kelahiran", type: "text" },
+              domProps: { value: _vm.birth_certificate_number },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.birth_certificate_number = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.get(this.errors, "errors.birth_certificate_number[0]", "")
+                )
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(7),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.religion,
+                    expression: "religion"
+                  }
+                ],
+                staticClass: "form-control",
+                class: {
+                  "is-invalid": _vm.get(
+                    this.errors,
+                    "errors.religion[0]",
+                    false
+                  )
+                },
+                attrs: { id: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.religion = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { selected: "", value: "islam" } }, [
+                  _vm._v("Islam")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "kristen protestan" } }, [
+                  _vm._v("Kristen Protestan")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "kristen katolik" } }, [
+                  _vm._v("Kristen Katolik")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "buddha" } }, [
+                  _vm._v("Buddha")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "hindu" } }, [_vm._v("Hindu")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "konghucu" } }, [
+                  _vm._v("Konghucu")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.religion[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(8),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.citizenship,
+                  expression: "citizenship"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(
+                  this.errors,
+                  "errors.birth_certificate_number[0]",
+                  false
+                )
+              },
+              attrs: { placeholder: "Kewarganegaraan", type: "text" },
+              domProps: { value: _vm.citizenship },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.citizenship = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.get(this.errors, "errors.birth_certificate_number[0]", "")
+                )
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(9),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.address,
+                  expression: "address"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(this.errors, "errors.address[0]", false)
+              },
+              attrs: { placeholder: "Alamat", type: "text" },
+              domProps: { value: _vm.address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.address = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.address[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(10),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.rt,
+                  expression: "rt"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(this.errors, "errors.rt[0]", false)
+              },
+              attrs: { placeholder: "RT", type: "text" },
+              domProps: { value: _vm.rt },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.rt = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.rt[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(11),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.rw,
+                  expression: "rw"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(this.errors, "errors.rw[0]", false)
+              },
+              attrs: { placeholder: "RW", type: "text" },
+              domProps: { value: _vm.rw },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.rw = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.rw[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(12),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.kelurahan,
+                  expression: "kelurahan"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(this.errors, "errors.kelurahan[0]", false)
+              },
+              attrs: { placeholder: "Kelurahan", type: "text" },
+              domProps: { value: _vm.kelurahan },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.kelurahan = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.kelurahan[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(13),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.kecamatan,
+                  expression: "kecamatan"
+                }
+              ],
+              staticClass: "form-control",
+              class: {
+                "is-invalid": _vm.get(this.errors, "errors.kecamatan[0]", false)
+              },
+              attrs: { placeholder: "Kecamatan", type: "text" },
+              domProps: { value: _vm.kecamatan },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.kecamatan = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.get(this.errors, "errors.kecamatan[0]", "")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-flex justify-content-center col-12 pt-3" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { disabled: _vm.disableSubmit, type: "submit" }
+              },
+              [_vm._v("Submit")]
+            )
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Lengkap Anak")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Anak")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tempat Lahir")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Tempat Lahir")]
       )
     ])
   },
@@ -79935,17 +80429,17 @@ var staticRenderFns = [
             "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
           attrs: { for: "" }
         },
-        [_vm._v("No KTP Ibu")]
+        [_vm._v("Jenis Kelamin")]
       ),
       _vm._v(" "),
       _c(
         "label",
         {
           staticClass:
-            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
           attrs: { for: "" }
         },
-        [_vm._v("No KTP Ibu")]
+        [_vm._v("Jenis Kelamin")]
       )
     ])
   },
@@ -79961,7 +80455,7 @@ var staticRenderFns = [
             "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
           attrs: { for: "" }
         },
-        [_vm._v("No KTP Ayah")]
+        [_vm._v("No. Kartu Keluarga")]
       ),
       _vm._v(" "),
       _c(
@@ -79971,7 +80465,241 @@ var staticRenderFns = [
             "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
           attrs: { for: "" }
         },
-        [_vm._v("No KTP Ayah")]
+        [_vm._v("No. Kartu Keluarga")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Kepala Keluarga")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nama Kepala Keluarga")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nomor Akta Kelahiran")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Nomor Akta Kelahiran")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Agama")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Agama")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Kewarganegaraan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Kewarganegaraan")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Alamat")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Alamat")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("RT")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("RT")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("RW")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("RW")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Kelurahan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Kelurahan")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block",
+          attrs: { for: "" }
+        },
+        [_vm._v("Kecamatan")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass:
+            "w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none",
+          attrs: { for: "" }
+        },
+        [_vm._v("Kecamatan")]
       )
     ])
   }
@@ -79999,7 +80727,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { staticClass: "w-100", attrs: { action: "" } },
+    { staticClass: "w-100 mb-3", attrs: { action: "" } },
     [
       _c("div", { staticClass: "card card-body mb-3" }, [
         _c("div", { staticClass: "row" }, [
@@ -82562,7 +83290,7 @@ var render = function() {
         _vm._l(_vm.data, function(child, idx) {
           return _c(
             "div",
-            { key: idx, staticClass: "border w-100 py-2 rounded mb-3" },
+            { key: idx, staticClass: "border w-100 py-2 rounded mb-3 pt-3" },
             [
               _c("div", { staticClass: "d-none d-sm-none d-md-block" }, [
                 _c("div", { staticClass: "row" }, [
@@ -82697,7 +83425,7 @@ var render = function() {
           )
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "d-flex justify-content-center my-3" }, [
+        _c("div", { staticClass: "d-flex justify-content-center mb-3 mt-5" }, [
           _c(
             "button",
             {
@@ -83065,7 +83793,11 @@ var render = function() {
             {
               staticClass: "btn btn-sm btn-success mx-1",
               attrs: { disabled: _vm.reprint, type: "button" },
-              on: { click: _vm.submitReprint }
+              on: {
+                click: function($event) {
+                  return _vm.confirmationDialog()
+                }
+              }
             },
             [_vm._v("Ajukan Cetak Ulang")]
           ),
@@ -83387,7 +84119,11 @@ var render = function() {
             {
               staticClass: "btn btn-sm btn-success mx-1",
               attrs: { type: "button" },
-              on: { click: _vm.submitReprint }
+              on: {
+                click: function($event) {
+                  return _vm.confirmationDialog()
+                }
+              }
             },
             [_vm._v("Ajukan Cetak Ulang")]
           ),
@@ -83730,8 +84466,12 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-sm btn-success mx-1",
-              attrs: { disabled: _vm.reprint, type: "button" },
-              on: { click: _vm.submitReprint }
+              attrs: { disabled: _vm.reprinted, type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.confirmationDialog()
+                }
+              }
             },
             [_vm._v("Ajukan Cetak Ulang")]
           ),

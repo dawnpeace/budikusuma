@@ -1,5 +1,5 @@
 <template>
-    <form action="" class="w-100">
+    <form action="" class="w-100 mb-3">
         <div class="card card-body mb-3">
             <div class="row">
                 <div class="col-12">

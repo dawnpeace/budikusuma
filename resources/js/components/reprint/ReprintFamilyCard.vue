@@ -136,7 +136,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-3">
-                    <button @click="submitReprint" type="button" class="btn btn-sm btn-success mx-1">Ajukan Cetak Ulang</button>
+                    <button @click="confirmationDialog()" type="button" class="btn btn-sm btn-success mx-1">Ajukan Cetak Ulang</button>
                     <button @click="cancel" type="button" class="btn btn-sm btn-secondary mx-1">Batal</button>
                 </div>
             </div>
@@ -214,6 +214,16 @@ export default {
                             break;
                     }
                 });
+        },
+        confirmationDialog(){
+            swal({
+                dangerMode : true,
+                icon : 'warning',
+                title : 'Apakah anda yakin ingin melanjutkan',
+                buttons : ["Batal", "OK"],
+            }).then((ok) => {
+                if(ok) this.submitReprint();
+            });
         }
     }
 }
