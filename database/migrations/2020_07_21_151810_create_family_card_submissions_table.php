@@ -1,5 +1,6 @@
 <?php
 
+use App\enums\DocumentStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,10 +21,12 @@ class CreateFamilyCardSubmissionsTable extends Migration
             $table->string("householder_id_card")->unique();
             $table->string("rt");
             $table->string("rw");
+            $table->string('address');
             $table->string("zipcode");
             $table->string("kelurahan");
             $table->string("kabupaten");
             $table->string("provinsi");
+            $table->string('status')->default(DocumentStatus::HOLD);
             $table->timestamps();
         });
     }

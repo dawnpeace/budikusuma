@@ -31,13 +31,13 @@ class FamilyCardController extends Controller
                 "kelurahan" => $request->kelurahan,
                 "kabupaten" => $request->kabupaten,
                 "provinsi" => $request->provinsi,
+                "address" => $request->address,
             ]);
             $familyCard->members()->createMany($request->members);
             DB::commit();
             return response()->json([], 201);
         } catch (Exception $e){
-            DB::rollBack();
-            Log::debug($e->getMessage());
+            return response()->json(['message' => $e->getMessage()],500);
         }
         
     }
@@ -52,6 +52,7 @@ class FamilyCardController extends Controller
             "rw" => "required",
             "zipcode" => "required",
             "kelurahan" => "required",
+            "address" => "required",
             "kecamatan" => "required",
             "kabupaten" => "required",
             "provinsi" => "required",

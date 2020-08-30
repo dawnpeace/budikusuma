@@ -37,6 +37,11 @@ Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function(){
 
 });
 
+Route::group(['prefix' => 'periksa-pengajuan', 'as' => 'check.', 'namespace' => 'Check'], function(){
+    Route::get('/', 'MainController@index')->name('index');
+    Route::post('/', 'MainController@submit')->name('submit');
+});
+
 Route::group(['prefix' => 'persyaratan', 'as' => 'requirement.'], function(){
     Route::get('/', 'RequirementsContentController@index')->name('index');
     Route::get('document', 'RequirementsContentController@getItem')->name('show');

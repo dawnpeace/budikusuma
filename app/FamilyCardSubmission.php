@@ -9,7 +9,7 @@ class FamilyCardSubmission extends Model
     protected $table = "family_card_submissions";
     protected $fillable = [
         "id_number", "householder", "householder_id_card", "rt", "rw",
-        "zipcode", "kelurahan", "kabupaten", "provinsi"
+        "zipcode", "kelurahan", "kabupaten", "provinsi", "address"
     ];
 
     public function members()
