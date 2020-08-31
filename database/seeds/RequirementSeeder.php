@@ -17,7 +17,7 @@ class RequirementSeeder extends Seeder
         foreach(Document::ALL as $doc){
             Requirement::create([
                 "document" => $doc,
-                "description" => $faker->text(200)
+                "description" => "<ul><li>Peraturan 1</li><li>Peraturan 2</li><li>Peraturan 3</li><li>Peraturan 4</li><li><strong>Peraturan 5</strong></li></ul>"
             ]);
         }
     }

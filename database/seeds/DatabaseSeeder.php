@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FamilyCardSeeder::class);
         $this->call(BirthCertificateSeeder::class);
         $this->call(ChildIdSeeder::class);
+        $this->call(RequirementSeeder::class);
     }
 }

@@ -79127,13 +79127,10 @@ var render = function() {
                 _vm._m(1)
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.modalContent) +
-                    "\n                "
-                )
-              ])
+              _c("div", {
+                staticClass: "modal-body",
+                domProps: { innerHTML: _vm._s(_vm.modalContent) }
+              })
             ])
           ]
         )

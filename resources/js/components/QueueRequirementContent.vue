@@ -31,8 +31,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        {{modalContent}}
+                    <div v-html="modalContent" class="modal-body">
+                        
                     </div>
                 </div>
             </div>
