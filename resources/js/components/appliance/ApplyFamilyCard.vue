@@ -125,23 +125,6 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Status Perkawinan</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Status Perkawinan</label>
-                </div>
-                <div class="col-md-9 col-sm-12">
-                    <div class="form-group">
-                        <select :class="{'is-invalid': getDynamicError('marriage_status', index)}" v-model="family.marriage_status"  id="" class="form-control">
-                            <option value="not_married">Belum Kawin</option>
-                            <option value="married">Kawin</option>
-                            <option value="widowed">Duda / Janda</option>
-                        </select>
-                        <div class="invalid-feedback">{{getDynamicError('marriage_status', index)}}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3 col-sm-12">
                     <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                     <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
                 </div>
@@ -269,7 +252,6 @@ export default {
         addFamilyMember(){
             let family = {
                 name : null,
-                marriage_status : 'not_married',
                 gender : 'laki-laki',
                 birthdate : new Date('1990-01-01'),
                 birthplace : null,
@@ -335,7 +317,6 @@ export default {
         getDefaultMember(){
             return [{
                 name : this.householder_name,
-                marriage_status : 'not_married',
                 gender : 'laki-laki',
                 id_card : null,
                 birthdate : new Date('1990-01-01'),

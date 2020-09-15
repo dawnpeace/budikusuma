@@ -28,6 +28,7 @@
         "datatables.net-dt": "^1.10.21",
         "moment": "^2.27.0",
         "sweetalert": "^2.1.2",
+        "sweetalert2": "^9.17.1",
         "vue-froala-wysiwyg": "^3.1.1-1",
         "vue-turbolinks": "^2.1.0",
         "vuejs-datepicker": "^1.6.2"

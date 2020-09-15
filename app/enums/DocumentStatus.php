@@ -1,7 +1,8 @@
 <?php
 namespace App\enums;
 
-class DocumentStatus {
+class DocumentStatus 
+{
 
     const HOLD = "00";
     const IN_PROGRESS = "01";
@@ -10,5 +11,8 @@ class DocumentStatus {
     const DONE = "04";
     const STATUS_NOT_DONE = [
         self::HOLD, self::IN_PROGRESS, self::APPROVED, self::REJECTED
+    ];
+    const ALL = [
+        self::HOLD, self::IN_PROGRESS, self::APPROVED, self::REJECTED, self::DONE
     ];
 }

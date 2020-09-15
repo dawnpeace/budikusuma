@@ -24,8 +24,10 @@ class CreateFamilyCardSubmissionsTable extends Migration
             $table->string('address');
             $table->string("zipcode");
             $table->string("kelurahan");
+            $table->string("kecamatan");
             $table->string("kabupaten");
             $table->string("provinsi");
+            $table->softDeletes();
             $table->string('status')->default(DocumentStatus::HOLD);
             $table->timestamps();
         });

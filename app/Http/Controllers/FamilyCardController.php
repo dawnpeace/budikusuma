@@ -7,7 +7,6 @@ use Illuminate\Validation\Rule;
 use App\FamilyCardSubmission;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class FamilyCardController extends Controller
 {
@@ -29,6 +28,7 @@ class FamilyCardController extends Controller
                 "rw" => $request->rw,
                 "zipcode" => $request->zipcode,
                 "kelurahan" => $request->kelurahan,
+                "kecamatan" => $request->kecamatan,
                 "kabupaten" => $request->kabupaten,
                 "provinsi" => $request->provinsi,
                 "address" => $request->address,
@@ -47,7 +47,6 @@ class FamilyCardController extends Controller
         return [
             "householder_name" => "required",
             "householder_id_card" => "required|numeric",
-            "address" => "required",
             "rt" => "required",
             "rw" => "required",
             "zipcode" => "required",
@@ -58,17 +57,13 @@ class FamilyCardController extends Controller
             "provinsi" => "required",
             "members" => "required|array",
             "members.*.name" => "required",
-            "members.*.marriage_status" => [
-                "required",
-                Rule::in(["not_married", "married", "widowed"])
-            ],
             "members.*.gender" => [
                 "required",
                 Rule::in(["laki-laki", "perempuan"])
             ],
             "members.*.id_card" => "required|numeric",
-            "members.*birthdate" => "required|date_format:d-m-Y",
-            "members.*birthplace" => "required",
+            "members.*.birthdate" => "required|date_format:d-m-Y",
+            "members.*.birthplace" => "required",
             "members.*.religion" => [
                 "required",
                 Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])

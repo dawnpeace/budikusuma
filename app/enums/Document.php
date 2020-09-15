@@ -1,6 +1,7 @@
 <?php
 namespace App\enums;
-class Document {
+class Document 
+{
 
     const KTP = "E-KTP";
     const KK = "KK";

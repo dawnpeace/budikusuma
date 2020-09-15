@@ -32,6 +32,7 @@ class CreateChildIdSubmission extends Migration
             $table->string('kecamatan');
             $table->string('citizenship');
             $table->string("status")->default(DocumentStatus::HOLD);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

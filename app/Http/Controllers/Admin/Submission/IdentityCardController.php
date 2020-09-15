@@ -8,10 +8,13 @@ use Yajra\Datatables\Datatables;
 use App\Element\Button;
 use App\enums\DocumentStatus;
 use App\IdentityCardSubmission;
-use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 
 class IdentityCardController extends Controller
 {
+
+    private $baseRouteName = "admin.submission.ktp";
+
     public function datatable(Request $request)
     {
         $users = IdentityCardSubmission::select('id', 'id_card', 'name')
@@ -26,8 +29,8 @@ class IdentityCardController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function($row) {
                 return 
-                    Button::deleteButton(route($this->getUrlBasePath('delete'), $row->id)).
-                    Button::checkButton(route($this->getUrlBasePath('edit'), $row->id));
+                    Button::deleteButton(route($this->baseRouteName . '.delete', $row->id)).
+                    Button::checkButton(route($this->baseRouteName . '.edit', $row->id));
                 
             })
             ->make(true);
@@ -35,17 +38,54 @@ class IdentityCardController extends Controller
 
     public function delete(IdentityCardSubmission $card)
     {
-
+        $card->delete();
+        return response()->json();
     }
 
     public function edit(IdentityCardSubmission $card)
     {
-
+        $submitUrl = route($this->baseRouteName . '.update', $card);
+        $redirectUrl = route($this->baseRouteName);
+        $deleteUrl = route($this->baseRouteName . '.delete', $card);
+        return view('admin.submission.ktp.edit', compact('submitUrl', 'card', 'redirectUrl', 'deleteUrl'));
     }
 
-    private function getUrlBasePath($string = '')
+    public function update(IdentityCardSubmission $card, Request $request)
     {
-        return 'admin.submission.ktp.' . $string; 
+        $request->validate([
+            "id_card" => [
+                Rule::requiredIf($request->status == DocumentStatus::DONE),
+                'numeric'
+            ],
+            "name" => "required",
+            "gender" => [
+                "required",
+                Rule::in(["laki-laki", "perempuan"])
+            ],
+            "address" => "required",
+            "birthplace" => "required",
+            "birthdate" => "required|date_format:d-m-Y",
+            "rt" => "required|numeric",
+            "rw" => "required|numeric",
+            "kelurahan" => "required",
+            "kecamatan" => "required",
+            "profession" => "required",
+            "religion" => [
+                "required",
+                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
+            ],
+            "marriage_status" => [
+                "required",
+                Rule::in(["not_married", "married", "widowed"])
+            ],
+            "nationality" => "required",
+            "status" => [
+                "required",
+                Rule::in(["00", "01", "02", "03", "04"])
+            ]
+        ]);
+        $card->update($request->all());
+        return response()->json();
     }
 
 }

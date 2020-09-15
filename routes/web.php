@@ -73,10 +73,37 @@ Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Rep
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
     Route::group(['prefix' => 'pengajuan', 'namespace' => 'Submission', 'as' => 'submission.'], function() {
-        Route::view('/ktp', 'admin.submission.ktp')->name('ktp');
-        Route::get('/ktp/datatable', 'IdentityCardController@datatable')->name('ktp.datatable');
-        Route::get('/ktp/edit/{card}', 'IdentityCardController@edit')->name('ktp.edit');
-        Route::post('/ktp/hapus/{card}', 'IdentityCardController@delete')->name('ktp.delete');
+        Route::prefix('ktp')->group(function(){
+            Route::view('/', 'admin.submission.ktp.index')->name('ktp');
+            Route::get('/datatable', 'IdentityCardController@datatable')->name('ktp.datatable');
+            Route::get('/edit/{card}', 'IdentityCardController@edit')->name('ktp.edit');
+            Route::post('/update/{card}', 'IdentityCardController@update')->name('ktp.update');
+            Route::post('/hapus/{card}', 'IdentityCardController@delete')->name('ktp.delete');
+        });
+
+        Route::prefix('kia')->group(function(){
+            Route::view('/', 'admin.submission.kia.index')->name('kia');
+            Route::get('/datatable', 'ChildIdCardController@datatable')->name('kia.datatable');
+            Route::get('/edit/{card}', 'ChildIdCardController@edit')->name('kia.edit');
+            Route::post('/update/{card}', 'ChildIdCardController@update')->name('kia.update');
+            Route::post('/hapus/{card}', 'ChildIdCardController@delete')->name('kia.delete');
+        });
+
+        Route::prefix('kk')->group(function () {
+            Route::view('/', 'admin.submission.kk.index')->name('kk');
+            Route::get('/datatable', 'FamilyCardController@datatable')->name('kk.datatable');
+            Route::get('/edit/{card}', 'FamilyCardController@edit')->name('kk.edit');
+            Route::post('/update/{card}', 'FamilyCardController@update')->name('kk.update');
+            Route::post('/hapus/{card}', 'FamilyCardController@delete')->name('kk.delete');
+        });
+
+        Route::prefix('akta-lahir')->group(function () {
+            Route::view('/', 'admin.submission.kia.index')->name('al');
+            Route::get('/datatable', 'BirthCertificateController@datatable')->name('al.datatable');
+            Route::get('/edit/{card}', 'BirthCertificateController@edit')->name('al.edit');
+            Route::post('/update/{card}', 'BirthCertificateController@update')->name('al.update');
+            Route::post('/hapus/{card}', 'BirthCertificateController@delete')->name('al.delete');
+        });
     });
 });
 

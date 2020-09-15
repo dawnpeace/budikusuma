@@ -142,9 +142,9 @@
                         v-model="citizenship" 
                         placeholder="Kewarganegaraan" 
                         type="text" 
-                        :class="{'is-invalid': get(this.errors, 'errors.birth_certificate_number[0]', false)}"
+                        :class="{'is-invalid': get(this.errors, 'errors.citizenship[0]', false)}"
                         class="form-control"/>
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.birth_certificate_number[0]', '')}}</div>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.citizenship[0]', '')}}</div>
                 </div>
             </div>
 

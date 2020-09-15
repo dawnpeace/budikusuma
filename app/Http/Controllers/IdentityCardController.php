@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DocumentStatus;
+use App\enums\MarriageStatus;
 use App\IdentityCardSubmission;
 use Illuminate\Http\Request;
 use App\KtpSubmission;
@@ -37,7 +38,7 @@ class IdentityCardController extends Controller
             ],
             "marriage_status" => [
                 "required",
-                Rule::in(["not_married", "married", "widowed"])
+                Rule::in(MarriageStatus::ALL)
             ],
             "nationality" => "required"
         ]);

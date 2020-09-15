@@ -1,4 +1,5 @@
-import swal from 'sweetalert'
+import {swal} from 'sweetalert'
+import Swal from 'sweetalert2'
 import axios from 'axios'
 
 export function deleteRow(routeUrl){
@@ -27,6 +28,31 @@ export function deleteRow(routeUrl){
     });
 }
 
-export function goToUrl(routeUrl){
-    window.location.href = routeUrl;
+export function confirmationModal() {
+    return Swal.fire({
+        title: "Konfirmasi",
+        text: "Anda yakin ingin melanjutkan?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    })
+}
+
+export function errorModal() {
+    return swal({
+        icon : 'danger',
+        button: 'Ok',
+        title : 'Terjadi kesalahan'
+    })
+}
+
+export function successModal(attributes){
+    return Swal.fire({
+        text: "",
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+        ...attributes
+    });
 }

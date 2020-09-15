@@ -182,7 +182,7 @@
                     <select :class="{'is-invalid': get(this.errors, 'errors.marriage_status[0]', false)}" v-model="marriage_status"  id="" class="form-control">
                         <option selected value="not_married">Belum Kawin</option>
                         <option value="married">Kawin</option>
-                        <option value="widowed">Duda / Janda</option>
+                        <option value="widower">Duda / Janda</option>
                     </select>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.marriage_status[0]', '')}}</div>
                 </div>

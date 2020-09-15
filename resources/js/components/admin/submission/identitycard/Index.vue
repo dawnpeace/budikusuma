@@ -1,11 +1,11 @@
 <template>
     <div class="w-100">
-        <h5 class="text-center">Form Pembuatan Kartu Tanda Penduduk</h5>
+        <h5 class="text-center">Daftar Pengajuan Kartu Tanda Penduduk</h5>
         <hr>
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                    <label for=""></label>
+        <div class="px-5">
+            <div class="row mb-3">
+                <label for="" class="col-12">Pilih Jenis Status Dokumen</label>
+                <div class="form-group col-12">
                     <select @change="changeByDocStatus" v-model="status" class="form-control">
                         <option value="00">Tunggu</option>
                         <option value="01">Dalam Proses</option>
@@ -20,16 +20,13 @@
                 <thead>
                     <tr>
                         <th>
-                            No.
+                            Nomor Kartu
                         </th>
                         <th>
-                            Identity Card Number
+                            Nama
                         </th>
                         <th>
-                            Name
-                        </th>
-                        <th>
-                            Action
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -44,6 +41,8 @@
 <script>
 import DataTable from 'datatables.net';
 import * as dt from 'datatables.net-dt';
+import {confirmationModal} from '../../../../helper'
+import Swal from 'sweetalert2'
 export default {
     props : [
         'ajax_url'
@@ -54,13 +53,52 @@ export default {
             processing : true,
             ajax : this.ajax_url,
             columns: [
-                { data: 'id', name: 'id' },
-                { data: 'identity_card_number', name: 'identity_card_number' },
+                { data: 'id_card', name: 'id_card' },
                 { data: 'name', name: 'name' },
                 { data: 'action', name: 'action' }
+            ],
+            columnDefs : [
+                {
+                    targets : [2],
+                    orderable : false,
+                    searchable : false
+                },
             ]
         });
         
+        this.dataTable.on('draw.dt', item => {
+            let delBtn = document.querySelectorAll('button.dt-btn-del').forEach(el => {
+                el.addEventListener('click', () => {
+                    confirmationModal()
+                        .then(response => {
+                            if(response.value){
+                                let url = el.dataset.deleteUrl;
+                                axios.post(url)
+                                    .then(response => {
+                                        Swal.fire({
+                                            icon : 'success',
+                                            title : 'Data berhasil dihapus'
+                                        }).then( () => {
+                                            this.dataTable.draw();
+                                        });
+                                    })
+                                    .catch(error => {
+                                        Swal.fire({
+                                            icon : 'error',
+                                            title : 'Terjadi Kesalahan'
+                                        });
+                                    })
+                            }
+                        })
+                });
+            });
+
+            let checkButton = document.querySelectorAll('button.dt-btn-forward').forEach(el => {
+                el.addEventListener('click', () => {
+                    document.location.href = el.dataset.forwardUrl;
+                })
+            });
+        });
     },
     data(){
         return {
@@ -72,6 +110,7 @@ export default {
         changeByDocStatus(){
             this.dataTable.ajax.url(this.ajax_url + '?status=' + this.status).load();
         }
+
     }
 
 }
