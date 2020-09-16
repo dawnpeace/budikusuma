@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BirthCertificateSubmission extends Model
 {
+    use SoftDeletes;
+
     protected $table = "birth_certificate_submission";
 
     protected $fillable = [

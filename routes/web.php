@@ -98,7 +98,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         });
 
         Route::prefix('akta-lahir')->group(function () {
-            Route::view('/', 'admin.submission.kia.index')->name('al');
+            Route::view('/', 'admin.submission.al.index')->name('al');
             Route::get('/datatable', 'BirthCertificateController@datatable')->name('al.datatable');
             Route::get('/edit/{card}', 'BirthCertificateController@edit')->name('al.edit');
             Route::post('/update/{card}', 'BirthCertificateController@update')->name('al.update');
