@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Requirement;
-use App\Enums\Document;
+use App\enums\Document;
 use Illuminate\Validation\Rule;
 
 class RequirementsContentController extends Controller

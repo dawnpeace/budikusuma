@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BirthCertificateSubmission;
+use App\enums\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +20,7 @@ class BirthCertificateController extends Controller
             "name" => "required",
             "gender" => [
                 "required",
-                Rule::in(["laki-laki", "perempuan"])
+                Rule::in(Gender::ALL)
             ],
             "family_card_number" => "required|numeric",
             "birthdate" => "required|date|date_format:d-m-Y",
