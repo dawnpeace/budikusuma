@@ -54,7 +54,7 @@ export default {
             ajax : this.ajax_url,
             columns: [
                 { data: 'id_card', name: 'id_card' },
-                { data: 'householder', name: 'householder' },
+                { data: 'name', name: 'name' },
                 { data: 'action', name: 'action' }
             ],
             columnDefs : [

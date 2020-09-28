@@ -1,5 +1,8 @@
 <?php
 namespace App\enums;
+
+use App\IdentityCard;
+
 class Document 
 {
 
@@ -10,4 +13,5 @@ class Document
     const ALL = [
         self::KTP, self::KK, self::KIA, self::AKTA_LAHIR
     ];
+    
 }

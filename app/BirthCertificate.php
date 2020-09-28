@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\ClassName;
 use App\Traits\Reprintable;
 use Illuminate\Database\Eloquent\Model;
 
 class BirthCertificate extends Model
 {
-    use Reprintable;
+    use Reprintable, ClassName;
     
     protected $cardIdName = "id_card";
 

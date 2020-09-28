@@ -319,9 +319,6 @@ export default {
            let date = new Date(this.cloneDeep(birthdate));
            return moment(date).format('DD-MM-YYYY');
        },
-       getBirthdate(){
-           return 
-       },
        deleteRecord(){
            confirmationModal()
             .then(response => {

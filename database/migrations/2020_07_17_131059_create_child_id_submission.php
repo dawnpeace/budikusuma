@@ -33,6 +33,7 @@ class CreateChildIdSubmission extends Migration
             $table->string('citizenship');
             $table->string("status")->default(DocumentStatus::HOLD);
             $table->softDeletes();
+            $table->date("published_at")->nullable();
             $table->timestamps();
         });
     }

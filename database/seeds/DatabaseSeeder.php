@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(IdentityCardSubmissionSeeder::class);
         $this->call(ChildIdSubmissionSeeder::class);
         $this->call(FamilyCardSubmissionSeeder::class);
+        $this->Call(BirthCertificateSubmissionSeeder::class);
     }
 }

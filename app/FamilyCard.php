@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\ClassName;
 use App\Traits\Reprintable;
 use Illuminate\Database\Eloquent\Model;
 
 class FamilyCard extends Model
 {
-    use Reprintable;
+    use Reprintable, ClassName;
 
     protected $table = "stored_family_cards";
 

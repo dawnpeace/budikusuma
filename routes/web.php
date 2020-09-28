@@ -1,6 +1,7 @@
 <?php
 
 use App\enums\DocumentStatus;
+use App\IdentityCard;
 use App\IdentityCardSubmission;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +73,9 @@ Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Rep
 // Admin Routes Starts Here
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
+
+    Route::get('/', 'StatisticController@index');
+
     Route::group(['prefix' => 'pengajuan', 'namespace' => 'Submission', 'as' => 'submission.'], function() {
         Route::prefix('ktp')->group(function(){
             Route::view('/', 'admin.submission.ktp.index')->name('ktp');
@@ -104,6 +108,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             Route::post('/update/{card}', 'BirthCertificateController@update')->name('al.update');
             Route::post('/hapus/{card}', 'BirthCertificateController@delete')->name('al.delete');
         });
+    });
+
+    Route::group(["prefix" => 'cetak-ulang', 'namespace' => 'Reprint', 'as' => 'reprint.'], function() {
+        Route::get('/', 'ReprintController@index')->name('index');
+        Route::get('/datatable', 'ReprintController@datatable')->name('datatable');
+        Route::get('/edit/{reprint}', 'ReprintController@edit')->name('edit');
+        Route::post('/delete/{reprint}', 'ReprintController@destroy')->name('destroy');
     });
 });
 

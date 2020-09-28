@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Traits\Statistic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FamilyCardSubmission extends Model
 {
-
-    use SoftDeletes;
+    // make su
+    use SoftDeletes, Statistic;
 
     protected $table = "family_card_submissions";
     protected $fillable = [

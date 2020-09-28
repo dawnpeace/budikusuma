@@ -38,7 +38,10 @@ class BirthCertificateController extends Controller
 
     public function edit(BirthCertificateSubmission $card)
     {
-        return view('admin.submission.al.edit', compact('card'));
+        $submitUrl = route($this->baseRouteName . '.update', $card);
+        $redirectUrl = route($this->baseRouteName);
+        $deleteUrl = route($this->baseRouteName . '.delete', $card);
+        return view('admin.submission.al.edit', compact('submitUrl', 'card', 'redirectUrl', 'deleteUrl'));
     }
 
     public function update(BirthCertificateSubmission $card, Request $request)
@@ -49,7 +52,6 @@ class BirthCertificateController extends Controller
                 "required",
                 Rule::in(Gender::ALL)
             ],
-            "family_card_number" => "required|numeric",
             "birthdate" => "required|date|date_format:d-m-Y",
             "birthplace" => "required",
             "mother_identity_card_number" => "required|numeric",

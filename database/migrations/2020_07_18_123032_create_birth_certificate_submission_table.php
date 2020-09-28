@@ -27,6 +27,7 @@ class CreateBirthCertificateSubmissionTable extends Migration
             $table->string("birthplace");
             $table->string("status")->default(DocumentStatus::HOLD);
             $table->softDeletes();
+            $table->date("published_at")->nullable();
             $table->timestamps();
         });
     }

@@ -22,7 +22,6 @@ class BirthCertificateController extends Controller
                 "required",
                 Rule::in(Gender::ALL)
             ],
-            "family_card_number" => "required|numeric",
             "birthdate" => "required|date|date_format:d-m-Y",
             "birthplace" => "required",
             "mother_identity_card_number" => "required|numeric",

@@ -1,53 +1,124 @@
 <template>
-    <div class="w-100">
-        <h5 class="text-center">Form Pembuatan Kartu Tanda Penduduk</h5>
-        <hr>
-        <div class="table-responsive">
-            <table id="myDataTable" class="table">
-                <thead>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav justify-content-center nav-tabs card-header-tabs ">
+                <li @click="changeDoc('E-KTP')" class="nav-item">
+                    <span v-bind:class="{active : currentDoc == 'E-KTP'}" class="nav-link decor-none clickable">E-KTP</span>
+                </li>
+                <li @click="changeDoc('KIA')" class="nav-item">
+                    <span v-bind:class="{active : currentDoc == 'KIA'}" class="nav-link decor-none clickable">KIA</span>
+                </li>
+                <li @click="changeDoc('KK')" class="nav-item">
+                    <span v-bind:class="{active : currentDoc == 'KK'}" class="nav-link decor-none clickable">Kartu Keluarga</span>
+                </li>
+                <li @click="changeDoc('AL')" class="nav-item">
+                    <span v-bind:class="{active : currentDoc == 'AL'}" class="nav-link decor-none clickable">Akta Lahir</span>
+                </li>
+
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive mt-5">
+                <table class="table table-sm table-bordered text-left">
                     <tr>
                         <th>
-                            No.
+                            Permintaan Ditolak Bulan Ini
                         </th>
-                        <th>
-                            Identity Card Number
-                        </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Action
-                        </th>
+                        <td>
+                            {{ rejected }}
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
+                    <tr>
+                        <th>
+                            Permintaan Selesai Bulan Ini
+                        </th>
+                        <td>
+                            {{ finished }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Permintaan Dalam Proses Bulan Ini
+                        </th>
+                        <td>
+                            {{ inProgress }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Total Permintaan Bulan Ini
+                        </th>
+                        <td>
+                            {{ monthly }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Total Seluruh Data Masuk
+                        </th>
+                        <td>
+                            {{ totalEntry }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Total Data yang Telah Direkam
+                        </th>
+                        <td>
+                            {{ totalPublished }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import DataTable from 'datatables.net';
-import * as dt from 'datatables.net-dt';
+
 export default {
     props : [
-        'ajax_url'
+        "cards"
     ],
     mounted(){
-        $('#myDataTable').DataTable({
-            serverSide : true,
-            processing : true,
-            ajax : this.ajax_url,
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'identity_card_number', name: 'identity_card_number' },
-                { data: 'name', name: 'name' },
-                { data: 'action', name: 'action' }
-            ]
-        });
-        
+        this.changeDoc('E-KTP');
+    },
+    data(){
+        return {
+            currentDoc : 'E-KTP',
+            finished : 0,
+            inProgress : 0,
+            monthly : 0,
+            rejected : 0,
+            totalEntry : 0,
+            totalPublished : 0,
+        }
+    },
+    methods : {
+        changeDoc(doc){
+            let cardInfo;
+            this.currentDoc = doc;
+            switch(doc){
+                case 'E-KTP':
+                    cardInfo = this.cards.ktp;
+                    break;
+                case 'KIA':
+                    cardInfo = this.cards.kia;
+                    break;
+                case 'KK':
+                    cardInfo = this.cards.kk;
+                    break;
+                case 'AL':
+                    cardInfo = this.cards.akta_lahir;
+                    break;
+            }
+            this.finished = cardInfo.finished;
+            this.inProgress = cardInfo.in_progress;
+            this.monthly = cardInfo.monthly;
+            this.rejected = cardInfo.rejected;
+            this.totalEntry = cardInfo.total_entry;
+            this.totalPublished = cardInfo.total_published
+        }
     }
 }
 </script>

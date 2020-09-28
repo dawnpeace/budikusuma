@@ -6,10 +6,10 @@
         Daftar Pengajuan Dokumen
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">KTP</a>
-        <a class="dropdown-item" href="#">KIA</a>
-        <a class="dropdown-item" href="#">KK</a>
-        <a class="dropdown-item" href="#">Akte Kelahiran</a>
+        <a class="dropdown-item" href="{{route('admin.submission.ktp')}}">KTP</a>
+        <a class="dropdown-item" href="{{route('admin.submission.kia')}}">KIA</a>
+        <a class="dropdown-item" href="{{route('admin.submission.kk')}}">KK</a>
+        <a class="dropdown-item" href="{{route('admin.submission.al')}}">Akta Kelahiran</a>
     </div>
 </li>
 <li class="nav-item dropdown">

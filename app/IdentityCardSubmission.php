@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\Statistic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class IdentityCardSubmission extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Statistic;
 
     protected $table = 'identity_card_submissions';
 

@@ -29,6 +29,7 @@ class CreateFamilyCardSubmissionsTable extends Migration
             $table->string("provinsi");
             $table->softDeletes();
             $table->string('status')->default(DocumentStatus::HOLD);
+            $table->date("published_at")->nullable();
             $table->timestamps();
         });
     }

@@ -13981,3 +13981,16 @@ a.text-dark:focus {
   background-color: #a6d4fc !important;
 }
 
+.decor-none {
+  text-decoration: none;
+  color: inherit;
+}
+
+.decor-none:hover {
+  color: inherit;
+}
+
+.clickable {
+  cursor: pointer;
+}
+

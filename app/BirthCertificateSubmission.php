@@ -2,19 +2,20 @@
 
 namespace App;
 
+use App\Traits\Statistic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BirthCertificateSubmission extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Statistic;
 
     protected $table = "birth_certificate_submission";
 
     protected $fillable = [
         "name", "gender", "mother_identity_card_number",
         "mother_name", "father_identity_card_number",
-        "father_name", "birthdate", "birthplace", "id_card"
+        "father_name", "birthdate", "birthplace", "id_card",
     ];
 
     protected $dates =[

@@ -68,22 +68,6 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No. Kartu Keluarga</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No. Kartu Keluarga</label>
-            </div>
-            <div class="col-md-9 col-sm-12">
-                <div class="form-group">
-                    <input 
-                        v-model="family_card_number" 
-                        placeholder="No. Kartu Keluarga" 
-                        type="text" 
-                        :class="{'is-invalid': get(this.errors, 'errors.family_card_number[0]', false)}"
-                        class="form-control"/>
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.family_card_number[0]', '')}}</div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No KTP Ibu</label>
                 <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No KTP Ibu</label>
             </div>
@@ -167,7 +151,6 @@ export default {
             gender : 'laki-laki',
             birthdate : new Date('2000-01-01'),
             birthplace : null,
-            family_card_number : null,
             mother_identity_card_number : null,
             mother_name : null,
             father_identity_card_number : null,
@@ -180,7 +163,6 @@ export default {
             return {
                 name : this.name,
                 gender : this.gender,
-                family_card_number : this.family_card_number,
                 birthdate : moment(this.birthdate).format("DD-MM-YYYY"),
                 birthplace : this.birthplace,
                 mother_identity_card_number : this.mother_identity_card_number,
@@ -213,7 +195,6 @@ export default {
         resetForm(){
             this.name = null;
             this.gender = 'laki-laki';
-            this.family_card_number = null;
             this.birthdate = null;
             this.birthplace = new Date('2000-01-01');
             this.mother_identity_card_number = null;

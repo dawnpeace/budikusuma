@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Traits\ClassName;
 use App\Traits\Reprintable;
 use Illuminate\Database\Eloquent\Model;
 
 class ChildIdentityCard extends Model
 {
 
-    use Reprintable;
+    use Reprintable, ClassName;
 
     protected $cardIdName = "card_number";
 
