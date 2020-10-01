@@ -15,4 +15,9 @@ class ReprintRequest extends Model
         return $this->morphTo();
     }
 
+    public function isPrinted()
+    {
+        return !is_null($this->printed_at);
+    }
+
 }

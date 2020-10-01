@@ -40,8 +40,8 @@ export function confirmationModal() {
 }
 
 export function errorModal() {
-    return swal({
-        icon : 'danger',
+    return Swal.fire({
+        icon : 'error',
         button: 'Ok',
         title : 'Terjadi kesalahan'
     })

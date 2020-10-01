@@ -11,6 +11,7 @@ use App\IdentityCard;
 use App\ReprintRequest;
 use Illuminate\Http\Request;
 use App\Element\Button;
+use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
 class ReprintController extends Controller
@@ -60,11 +61,33 @@ class ReprintController extends Controller
 
     public function edit(ReprintRequest $reprint, Request $request)
     {
-        return view('admin.reprint.edit', ['document' => $reprint]);
+        $reprint->load('reprintable');
+        $deleteUrl = route($this->baseRouteName . '.destroy', $reprint);
+        $redirectUrl = route($this->baseRouteName . '.index');
+        $submitUrl = route($this->baseRouteName . '.submit' ,$reprint);
+        $document = $reprint;
+        return view('admin.reprint.edit', compact(['deleteUrl', 'redirectUrl', 'document', 'submitUrl']));
     }
 
-    public function destroy(ReprintRequest $request)
+    public function destroy(ReprintRequest $reprint)
     {
+        // $reprint->delete();
+    }
 
+    public function markAsPrinted(ReprintRequest $reprint, Request $request)
+    {
+        $request->validate([
+            "printed_at" => "required|date|date_format:d-m-Y"
+        ]);
+
+        if ( !$reprint->isPrinted() ) {
+            $reprint->printed_at = Carbon::createFromFormat('d-m-Y', $request->printed_at);
+            $reprint->save();
+            return response()->json();
+        } 
+
+        return response()->json([
+            "message" => "Data telah dicetak"
+        ], 400);
     }
 }

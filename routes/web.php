@@ -115,6 +115,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('/datatable', 'ReprintController@datatable')->name('datatable');
         Route::get('/edit/{reprint}', 'ReprintController@edit')->name('edit');
         Route::post('/delete/{reprint}', 'ReprintController@destroy')->name('destroy');
+        Route::post('/submit/{reprint}', 'ReprintController@markAsPrinted')->name('submit');
+    });
+
+    Route::group(["prefix" => "persyaratan", "namespace" => "Requirement", "as" => "requirement."], function(){
+        Route::get('/', 'RequirementController@index')->name('index');
+        Route::post('/', 'RequirementController@store')->name('store');
     });
 });
 

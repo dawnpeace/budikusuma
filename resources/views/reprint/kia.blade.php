@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('/')}}">Utama</a></li>
                 <li class="breadcrumb-item">Cetak Ulang</li>
-                <li class="breadcrumb-item active" aria-current="page">Kartu Identitas Anak</li>
+                <li class="breadcrumb-item active" aria-current="page">KIA</li>
             </ol>
         </nav>
         <div class="card card-boy">
