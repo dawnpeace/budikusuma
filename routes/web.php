@@ -3,6 +3,7 @@
 use App\enums\DocumentStatus;
 use App\IdentityCard;
 use App\IdentityCardSubmission;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
@@ -122,8 +123,69 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('/', 'RequirementController@index')->name('index');
         Route::post('/', 'RequirementController@store')->name('store');
     });
+
+    Route::group(["prefix" => "arsip", "namespace" => "Stored", "as" => "stored."], function() {
+        Route::group(["prefix" => "ktp" ,"as" => "ktp."], function(){
+            Route::get('/', 'IdentityCardController@index')->name('index');
+            Route::get('/datatable', 'IdentityCardController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'IdentityCardController@edit')->name('edit');
+            Route::post('/update/{card}', 'IdentityCardController@update')->name('update');
+            Route::get('/export', 'IdentityCardController@export')->name('export');
+        });
+
+        Route::group(["prefix" => "akta-lahir", "as" => "al."], function () {
+            Route::get('/', 'BirthCertificateController@index')->name('index');
+            Route::get('/datatable', 'BirthCertificateController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'BirthCertificateController@edit')->name('edit');
+            Route::post('/update/{card}', 'BirthCertificateController@update')->name('update');
+            Route::get('/export', 'BirthCertificateController@export')->name('export');
+
+        });
+
+        Route::group(["prefix" => "kia", "as" => "kia."], function () {
+            Route::get('/', 'ChildIdController@index')->name('index');
+            Route::get('/datatable', 'ChildIdController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'ChildIdController@edit')->name('edit');
+            Route::post('/update/{card}', 'ChildIdController@update')->name('update');
+            Route::get('/export', 'ChildIdController@export')->name('export');
+
+        });
+    });
+
+    Route::group(["prefix" => "pengajuan-terkualifikasi", "namespace" => "Qualified", "as" => "qualified."], function() {
+        Route::group(["prefix" => "ktp", "as" => "ktp."], function(){
+            Route::get('/', 'IdentityCardController@index')->name('index');
+            Route::get('/datatable', 'IdentityCardController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'IdentityCardController@edit')->name('edit');
+            Route::post('/update/{card}', 'IdentityCardController@update')->name('update');
+        });
+        
+        Route::group(["prefix" => "akta-lahir", "as" => "al."], function(){
+            Route::get('/', 'BirthCertificateController@index')->name('index');
+            Route::get('/datatable', 'BirthCertificateController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'BirthCertificateController@edit')->name('edit');
+            Route::post('/update/{card}', 'BirthCertificateController@update')->name('update');
+        });
+
+        Route::group(["prefix" => "kia", "as" => "kia."], function () {
+            Route::get('/', 'ChildIdCardController@index')->name('index');
+            Route::get('/datatable', 'ChildIdCardController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'ChildIdCardController@edit')->name('edit');
+            Route::post('/update/{card}', 'ChildIdCardController@update')->name('update');
+        });
+
+        Route::group(["prefix" => "kk", "as" => "kk."], function () {
+            Route::get('/', 'FamilyCardController@index')->name('index');
+            Route::get('/datatable', 'FamilyCardController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'FamilyCardController@edit')->name('edit');
+            Route::post('/update/{card}', 'FamilyCardController@update')->name('update');
+        });
+
+    });
 });
 
-Route::view('asun','admin.main');
+Route::get('test', function(){
+    return (new App\Exports\IdentityCardExport('2020-09-27', '2020-10-12'))->getResult();
+});
 
 

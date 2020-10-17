@@ -19,5 +19,10 @@ class Button {
     {
         return '<button data-forward-url="' . $routeUrl . '" class="btn btn-sm btn-secondary mx-1 dt-btn-forward">Periksa</button>';
     }
+
+    public static function viewButton($index)
+    {
+        return '<button data-index="' . $index . '" class="btn btn-sm btn-primary mx-1 dt-btn-view">Periksa</button>';
+    }
  
 }

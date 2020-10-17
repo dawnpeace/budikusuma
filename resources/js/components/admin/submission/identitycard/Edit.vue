@@ -275,21 +275,8 @@ export default {
    computed :{
        form(){
            return {
-               id_card : this.formData.card,
-               name : this.formData.name,
-               gender : this.formData.gender,
-               address : this.formData.address,
-               birthplace : this.formData.birthplace,
+               ...this.formData,
                birthdate : this.getLocaleBirthdate(),
-               rt : this.formData.rt,
-               rw : this.formData.rw,
-               kelurahan : this.formData.kelurahan,
-               kecamatan : this.formData.kecamatan,
-               religion : this.formData.religion,
-               marriage_status : this.formData.marriage_status,
-               profession : this.formData.profession,
-               nationality : this.formData.nationality,
-               status : this.formData.status
            }
        }
    },

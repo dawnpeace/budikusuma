@@ -47,6 +47,7 @@ class BirthCertificateController extends Controller
     public function update(BirthCertificateSubmission $card, Request $request)
     {
         $request->validate([
+            "id_card" => "required_if:status," . DocumentStatus::DONE,
             "name" => "required",
             "gender" => [
                 "required",
@@ -58,6 +59,10 @@ class BirthCertificateController extends Controller
             "mother_name" => "required",
             "father_identity_card_number" => "required|numeric",
             "father_name" => "required",
+            "status" => [
+                "required",
+                Rule::in(DocumentStatus::ALL)
+            ]
         ]);
 
         $card->update($request->all());

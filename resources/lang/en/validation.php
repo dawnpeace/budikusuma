@@ -133,6 +133,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'id_card' => [
+            'required_if' => 'The id card field is required when status is done.',
+        ],
     ],
 
     /*

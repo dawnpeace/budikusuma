@@ -31,9 +31,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div v-html="modalContent" class="modal-body">
-                        
-                    </div>
+                    <froalaView class="p-5" v-model="modalContent"/>
                 </div>
             </div>
         </div>

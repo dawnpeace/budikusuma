@@ -6,6 +6,21 @@
                     <h5 class="text-center">Daftar Kartu Keluarga</h5>
                     <hr>
                 </div>
+
+                <div class="d-none d-md-block d-sm-none col-12 mb-5 px-5">
+                    <div class="form-group">
+                        <label class="text-center w-100">Nomor Kartu Keluarga</label>
+                        <input v-model="formData.id_number" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="d-sm-block d-md-none col-12">
+                    <div class="form-group">
+                        <label>Nomor Kartu Keluarga</label>
+                        <input v-model="formData.id_number" type="text" class="form-control">
+                    </div>
+                </div>
+
                 <div class="col-md-6 col-sm-12">
                     <side-label
                         :error="get(errors, 'errors.householder[0]', '')" 
@@ -268,7 +283,8 @@ export default {
                 status : get(this.card, 'status', ''),
                 members : [
                     ...this.card.members
-                ]
+                ],
+                id_number : get(this.card, 'id_number', ''),
             }
         }
     },

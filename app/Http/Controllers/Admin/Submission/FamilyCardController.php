@@ -54,7 +54,7 @@ class FamilyCardController extends Controller
         $request->validate($this->getRule());
         $famCardRequest = $request->only([
             "householder_name", "householder_id_card", "address", "rt", "rw", "zipcode",
-            "kelurahan", "kecamatan", "kabupaten", "provinsi", "members", "status"
+            "kelurahan", "kecamatan", "kabupaten", "provinsi", "members", "status", "id_number"
         ]);
         
         DB::transaction(function() use ($famCardRequest, $request, $card) {
@@ -69,7 +69,7 @@ class FamilyCardController extends Controller
 
                     $collection['birthdate'] = Carbon::createFromFormat('d-m-Y', $collection->get('birthdate'))->format('Y-m-d');
 
-                    if (!$collection->isEmpty('id')) { 
+                    if ( !$collection->isEmpty('id') ) { 
                         $card->members()
                             ->where('id', $collection->get('id'))
                             ->update($collection->toArray());

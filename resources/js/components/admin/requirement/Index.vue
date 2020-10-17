@@ -16,7 +16,7 @@
                 :config="froalaConfig"
                 v-model="froalaText"/>
 
-            <froalaView class="py-5" v-model="froalaText"/>
+            <froalaView class="py-5 border border-dark mb-3" v-model="froalaText"/>
             <div class="d-flex justify-content-center">
                 <button @click="submitChange" class="btn btn-sm btn-primary" type="button">Submit</button>
             </div>
