@@ -33,19 +33,4 @@ class IdentityCardSubmission extends Model
         'birthdate'
     ];
 
-    // public function publish()
-    // {
-    //     DB::transaction(function(){
-    //         if( !IdentityCard::isIdExist($this->id_card) ) {
-    //             $data = $this->toArray();
-    //             $data["identity_card_number"] = $this->id_card;
-    //             IdentityCard::create($data);
-    //             $this->published_at = now();
-    //             $this->save();
-    //         } else {
-    //             throw new \Exception("Id Exist");
-    //         }
-    //     });
-    // }
-
 }

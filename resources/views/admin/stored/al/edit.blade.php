@@ -3,8 +3,8 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item bread"><a href="{{url('/')}}">Utama</a></li>
-            <li class="breadcrumb-item">Arsip<a href="#"></a></li>
+            <li class="breadcrumb-item bread"><a href="{{url('/admin')}}">Utama</a></li>
+            <li class="breadcrumb-item">Arsip</li>
             <li class="breadcrumb-item active" aria-current="page">KTP</li>
         </ol>
     </nav>

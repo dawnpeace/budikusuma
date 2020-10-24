@@ -35,6 +35,8 @@ class FamilyCardController extends Controller
 
     public function edit(FamilyCardSubmission $card)
     {
+
+        $card->load('members');
         $redirectUrl = route($this->baseRouteName . '.index');
         $submitUrl = route($this->baseRouteName . '.update', $card);
         return view('admin.qualified.kk.edit', compact('card', 'redirectUrl', 'submitUrl'));

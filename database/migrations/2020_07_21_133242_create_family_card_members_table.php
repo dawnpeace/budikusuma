@@ -17,14 +17,14 @@ class CreateFamilyCardMembersTable extends Migration
             $table->id();
             $table->foreignId("family_card_id")->constrained("stored_family_cards");
             $table->string("name");
-            $table->string("id_number")->nullable();
+            $table->string("id_card")->nullable();
             $table->string("gender");
             $table->string("birthplace");
             $table->date("birthdate");
             $table->string("religion");
             $table->string("education");
             $table->string("profession");
-            $table->string("relation");
+            $table->string("family_relation");
             $table->timestamps();
         });
     }

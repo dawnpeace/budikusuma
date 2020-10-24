@@ -17,14 +17,19 @@ class ChildIdentityCard extends Model
 
     protected $table = "stored_children_ids";
 
+    protected $dates = [
+        "birthdate"
+    ];
+
     protected $fillable = [
         "card_number", "name", "gender", "family_card_number",
         "birthdate", "householder_name", "address", "religion", 
-        "rt", "rw", "kelurahan", "kecamatan", "citizenship"
+        "rt", "rw", "kelurahan", "kecamatan", "citizenship", "birthplace", "birth_certificate_number"
     ];
 
     public function reprintable()
     {
         return $this->morphMany(ReprintRequest::class, 'reprintable');
     }
+
 }

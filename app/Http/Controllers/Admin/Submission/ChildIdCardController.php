@@ -11,6 +11,7 @@ use App\Element\Button;
 use App\enums\Gender;
 use App\enums\Religion;
 use Illuminate\Validation\Rule;
+use App\Rules\EmptyOrNumericByStatus;
 
 
 class ChildIdCardController extends Controller
@@ -62,6 +63,7 @@ class ChildIdCardController extends Controller
             ],
             "card_number" => [
                 Rule::requiredIf($request->status == DocumentStatus::DONE),
+                new EmptyOrNumericByStatus($request),
             ],
             "address" => "required",
             "birthdate" => "required|date_format:d-m-Y",

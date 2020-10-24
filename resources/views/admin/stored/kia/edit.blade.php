@@ -5,11 +5,11 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item bread"><a href="{{url('/admin')}}">Utama</a></li>
             <li class="breadcrumb-item">Arsip</li>
-            <li class="breadcrumb-item active" aria-current="page">Akta Lahir</li>
+            <li class="breadcrumb-item active" aria-current="page">KIA</li>
         </ol>
     </nav>
     <div class="card card-body">
-        <stored-birth-certificate-index :latest_date="{{ json_encode($latestDate) }}" :oldest_date="{{ json_encode($oldestDate) }}"  ajax_url="{{ $ajaxUrl }}" export_url="{{ $exportUrl }}"/>
+        <stored-child-id-card-edit :card="{{ json_encode($card) }}" submit_url="{{ $submitUrl }}" redirect_url="{{ $redirectUrl }}"/>
     </div>
 </div>
 @endsection

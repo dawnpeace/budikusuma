@@ -150,6 +150,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             Route::get('/export', 'ChildIdController@export')->name('export');
 
         });
+
+        Route::group(["prefix" => "kk", "as" => "kk."], function () {
+            Route::get('/', 'FamilyCardController@index')->name('index');
+            Route::get('/datatable', 'FamilyCardController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'FamilyCardController@edit')->name('edit');
+            Route::post('/update/{card}', 'FamilyCardController@update')->name('update');
+            Route::get('/export', 'FamilyCardController@export')->name('export');
+        });
     });
 
     Route::group(["prefix" => "pengajuan-terkualifikasi", "namespace" => "Qualified", "as" => "qualified."], function() {
@@ -185,7 +193,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 });
 
 Route::get('test', function(){
-    return (new App\Exports\IdentityCardExport('2020-09-27', '2020-10-12'))->getResult();
 });
 
 

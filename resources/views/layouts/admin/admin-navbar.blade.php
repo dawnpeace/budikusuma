@@ -34,8 +34,8 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{route('admin.stored.ktp.index')}}">KTP</a>
-        <a class="dropdown-item" href="{{route('admin.submission.kia')}}">KIA</a>
-        <a class="dropdown-item" href="{{route('admin.submission.kk')}}">KK</a>
+        <a class="dropdown-item" href="{{route('admin.stored.kia.index')}}">KIA</a>
+        <a class="dropdown-item" href="{{route('admin.stored.kk.index')}}">KK</a>
         <a class="dropdown-item" href="{{route('admin.stored.al.index')}}">Akta Kelahiran</a>
     </div>
 </li>

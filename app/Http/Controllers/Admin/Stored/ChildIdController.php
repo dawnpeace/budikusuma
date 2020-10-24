@@ -11,6 +11,8 @@ use App\Element\Button;
 use Illuminate\Validation\Rule;
 use App\enums\Gender;
 use App\Exports\ChildIdentityCardExport;
+use App\enums\DocumentStatus;
+use App\enums\Religion;
 
 class ChildIdController extends Controller
 {
@@ -28,7 +30,7 @@ class ChildIdController extends Controller
     public function datatable(Request $request)
     {
 
-        $card = ChildIdentityCard::select('id', 'id_card', 'name', 'created_at');
+        $card = ChildIdentityCard::select('id', 'card_number', 'name', 'created_at');
 
         if ($request->has('start_date') && $request->has('end_date')) {
             $rules = [
@@ -63,17 +65,36 @@ class ChildIdController extends Controller
     public function update(ChildIdentityCard $card, Request $request)
     {
         $request->validate([
+            "card_number" => [
+                "require",
+                "unique:App\ChildIdentityCard,card_number," . $card->card_number,
+            ],
             "name" => "required",
             "gender" => [
-                "required",
-                Rule::in(Gender::ALL)
+                "required", Rule::in(Gender::ALL)
             ],
-            "birthdate" => "required|date|date_format:d-m-Y",
+            "card_number" => [
+                Rule::requiredIf($request->status == DocumentStatus::DONE),
+            ],
+            "address" => "required",
+            "birthdate" => "required|date_format:d-m-Y",
             "birthplace" => "required",
-            "mother_identity_card_number" => "required|numeric",
-            "mother_name" => "required",
-            "father_identity_card_number" => "required|numeric",
-            "father_name" => "required",
+            "family_card_number" => "required|numeric",
+            "householder_name" => "required",
+            "birth_certificate_number" => "required|numeric",
+            "citizenship" => "required",
+            "rt" => "required|numeric",
+            "rw" => "required|numeric",
+            "kelurahan" => "required",
+            "kecamatan" => "required",
+            "religion" => [
+                "required",
+                Rule::in(Religion::ALL)
+            ],
+            "status" => [
+                "required",
+                Rule::in(DocumentStatus::ALL)
+            ]
         ]);
         $card->update($request->all());
     }

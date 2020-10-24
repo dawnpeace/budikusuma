@@ -163,48 +163,40 @@ export default {
    },
    methods : {
        get,
-       cloneDeep,
-       confirmationModal,
-       successModal,
-       moment,
-       getLocaleBirthdate(){
-           let birthdate = get(this.card ,'birthdate', null);
-           let date = new Date(this.cloneDeep(birthdate));
-           return moment(date).format('DD-MM-YYYY');
-       },
-       deleteRecord(){
-           confirmationModal()
-            .then(response => {
-                if(response.isConfirmed){
-                    axios.post(this.delete_url)
-                    .then(response => {
-                        successModal({title : 'Data berhasil dihapus!', showCancelButton : false})
+        cloneDeep,
+        moment,
+       submitArchieve(){
+            confirmationModal()
+                .then(ok => {
+                    if(ok.isConfirmed){
+                        axios.post(this.submit_url)
                             .then(response => {
-                                location.replace(this.redirect_url) 
+                                successModal({
+                                    title : "Data berhasil diarsipkan", 
+                                    onClose : () => {
+                                        location.replace(this.redirect_url);
+                                    }
+                                });
+                            })
+                            .catch(err => {
+                                let statusCode = err.response.status;
+                                switch(statusCode){
+                                    case 400 :
+                                        errorModal({title : err.response.data}); 
+                                        break;
+                                    case 401:
+                                    case 403:
+                                        errorModal({title : "Terjadi Kesalahan"});
+                                        break;
+                                    case 500:
+                                        errorModal({title : "Internal Server Error"});
+                                        break;
+                                }
                             });
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-                }
-            });
-           
-       },
-       updateRecord(){
-           confirmationModal()
-            .then(ok => {
-                if(ok.isConfirmed){
-                    axios.post(this.submit_url, this.form)
-                        .then(response => {
-                            successModal({title : 'Data berhasil diperbaharui!', showCancelButton : false})
-                                .then(response => location.replace(this.redirect_url));
-                        })
-                        .catch(err => {
-                            this.errors = err.response.data;
-                        })
-                }
-            })
-       }
+                    }
+                })
+                
+        }
    }
 }
 </script>

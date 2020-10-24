@@ -2,15 +2,27 @@
 
 namespace App;
 
+use App\Traits\Latest;
+use App\Traits\Oldest;
+use App\Traits\Publishable;
 use App\Traits\Statistic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ChildIdSubmission extends Model
 {
-    use SoftDeletes, Statistic;
+    use SoftDeletes, Statistic, Publishable;
 
     protected $table = "child_id_submission";
+
+    protected static $selfIdName = "card_number";
+
+    protected static $publishIdName = "card_number";
+
+    protected static function getTargetClass()
+    {
+        return ChildIdentityCard::getClassName();
+    }
 
     protected $fillable = [
         "card_number" ,"name", "gender", "birthplace", "birthdate", 

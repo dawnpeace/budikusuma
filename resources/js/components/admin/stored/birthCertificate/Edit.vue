@@ -189,6 +189,7 @@ export default {
         updateRecord(){
             confirmationModal()
                 .then(ok => {
+                    this.disableSubmit = true;
                     if(ok.isConfirmed){
                         axios.post(this.submit_url, this.form)
                             .then(response => {
@@ -197,6 +198,7 @@ export default {
                             })
                             .catch(err => {
                                 this.errors = err.response.data;
+                                this.disableSubmit = false;
                             })
                     }
                 })

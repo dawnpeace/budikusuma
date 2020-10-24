@@ -234,7 +234,7 @@
             </div>
             <div class="d-flex justify-content-center col-12 pt-3">
                 <button :disabled="disableSubmit" class="btn btn-primary mx-1 btn-sm" type="submit">Perbaharui</button>
-                <button @click="deleteRecord" class="btn btn-danger mx-1 btn-sm" type="button">Hapus</button>
+                <button :disabled="disableDelete" @click="deleteRecord" class="btn btn-danger mx-1 btn-sm" type="button">Hapus</button>
             </div>
         </form>
     </div>
@@ -253,6 +253,7 @@ export default {
        return {
            errors : null,
            disableSubmit : false,
+           disableDelete : false,
            formData : {
                id_card : get(this.card, 'id_card', ''),
                name : get(this.card, 'name', ''),
@@ -296,15 +297,18 @@ export default {
        deleteRecord(){
            confirmationModal()
             .then(response => {
+                this.disableDelete = true;
                 if(response.isConfirmed){
                     axios.post(this.delete_url)
                     .then(response => {
+                        this.disableSubmit = false;
                         successModal({title : 'Data berhasil dihapus!', showCancelButton : false})
                             .then(response => {
                                 location.replace(this.redirect_url) 
                             });
                     })
                     .catch(e => {
+                        this.disableDelete = false;
                         console.log(e);
                     });
                 }
@@ -314,6 +318,7 @@ export default {
        updateRecord(){
            confirmationModal()
             .then(ok => {
+                this.disableSubmit = true;
                 if(ok.isConfirmed){
                     axios.post(this.submit_url, this.form)
                         .then(response => {
@@ -322,6 +327,7 @@ export default {
                         })
                         .catch(err => {
                             this.errors = err.response.data;
+                            this.disableSubmit = false;
                         })
                 }
             })

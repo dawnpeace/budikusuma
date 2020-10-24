@@ -15,13 +15,15 @@ class CreateStoredChildrenIdsTable extends Migration
     {
         Schema::create('stored_children_ids', function (Blueprint $table) {
             $table->id();
-            $table->string('card_number')->unique();
+            $table->string('card_number')->nullable()->unique();
             $table->string("name");
             $table->string("gender");
             $table->string("family_card_number");
+            $table->string("birth_certificate_number");
             $table->date("birthdate");
-            $table->string("householder_name");
+            $table->string('birthplace');
             $table->string("address");
+            $table->string("householder_name");
             $table->string("religion");
             $table->string('rt');
             $table->string('rw');

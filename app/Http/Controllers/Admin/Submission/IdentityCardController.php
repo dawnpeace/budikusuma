@@ -8,6 +8,7 @@ use Yajra\Datatables\Datatables;
 use App\Element\Button;
 use App\enums\DocumentStatus;
 use App\IdentityCardSubmission;
+use App\Rules\EmptyOrNumericByStatus;
 use Illuminate\Validation\Rule;
 
 class IdentityCardController extends Controller
@@ -55,7 +56,7 @@ class IdentityCardController extends Controller
         $request->validate([
             "id_card" => [
                 Rule::requiredIf($request->status == DocumentStatus::DONE),
-                'numeric'
+                new EmptyOrNumericByStatus($request),
             ],
             "name" => "required",
             "gender" => [
