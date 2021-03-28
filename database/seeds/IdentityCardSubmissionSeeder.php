@@ -11,6 +11,6 @@ class IdentityCardSubmissionSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\IdentityCardSubmission::class, 100)->create();
+        factory(App\IdentityCardSubmission::class, 1)->create();
     }
 }

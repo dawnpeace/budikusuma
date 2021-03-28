@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item bread"><a href="{{url('/admin')}}">Utama</a></li>
             <li class="breadcrumb-item">Arsip</li>
-            <li class="breadcrumb-item active" aria-current="page">KTP</li>
+            <li class="breadcrumb-item active" aria-current="page">Akta Lahir</li>
         </ol>
     </nav>
     <div class="card card-body">

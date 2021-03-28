@@ -28,7 +28,8 @@ class ChildIdSubmission extends Model
         "card_number" ,"name", "gender", "birthplace", "birthdate", 
         "family_card_number", "householder_name", "religion",
         "birth_certificate_number", "citizenship", 
-        "address", "rt", "rw", "kecamatan", "kelurahan", "status"
+        "address", "rt", "rw", "kecamatan", "kelurahan", "status",
+        "user_id"
     ];
 
     protected $dates = [

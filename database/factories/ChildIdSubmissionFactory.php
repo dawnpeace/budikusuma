@@ -21,6 +21,7 @@ $factory->define(ChildIdSubmission::class, function (Faker $faker) {
         "rw" => "02",
         "kelurahan" => "Sanatab",
         "kecamatan" => "Sanatab",
-        "citizenship" => "WNI"
+        "citizenship" => "WNI",
+        "user_id" => 1,
     ];
 });

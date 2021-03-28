@@ -1,10 +1,6 @@
 <?php
 
-use App\enums\DocumentStatus;
-use App\IdentityCard;
-use App\IdentityCardSubmission;
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,26 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'main');
+Route::view('/', 'main')->name('dashboard');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function(){
-    Route::get('/buat-ktp', 'IdentityCardController@index')->name('ktp');
-    Route::post('/buat-ktp', 'IdentityCardController@store')->name('ktp.submit');
+Route::middleware('role:common')->group(function(){
 
-    Route::get('/buat-kia', 'ChildIdCardController@index')->name('kia');
-    Route::post('/buat-kia', 'ChildIdCardController@store')->name('kia.submit');
+    Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function () {
+        Route::get('/buat-ktp', 'IdentityCardController@index')->name('ktp');
+        Route::post('/buat-ktp', 'IdentityCardController@store')->name('ktp.submit');
 
-    Route::get('/buat-akte-lahir', 'BirthCertificateController@index')->name('aktelahir');
-    Route::post('/buat-akte-lahir', 'BirthCertificateController@store')->name('aktelahir.submit');
+        Route::get('/buat-kia', 'ChildIdCardController@index')->name('kia');
+        Route::post('/buat-kia', 'ChildIdCardController@store')->name('kia.submit');
 
-    Route::get('/buat-kartu-keluarga', 'FamilyCardController@index')->name('kartukeluarga');
-    Route::post('/buat-kartu-keluarga', 'FamilyCardController@store')->name('kartukeluarga.submit');
+        Route::get('/buat-akta-lahir', 'BirthCertificateController@index')->name('aktelahir');
+        Route::post('/buat-akta-lahir', 'BirthCertificateController@store')->name('aktelahir.submit');
 
+        Route::get('/buat-kartu-keluarga', 'FamilyCardController@index')->name('kartukeluarga');
+        Route::post('/buat-kartu-keluarga', 'FamilyCardController@store')->name('kartukeluarga.submit');
+
+        Route::get('/buat-akta-kematian', 'DeathCertificateController@index')->name('aktakematian');
+        Route::post('/buat-akta-kematian', 'DeathCertificateController@store')->name('aktakematian.submit');
+    });
 });
+
 
 Route::group(['prefix' => 'periksa-pengajuan', 'as' => 'check.', 'namespace' => 'Check'], function(){
     Route::get('/', 'MainController@index')->name('index');
@@ -109,6 +111,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             Route::post('/update/{card}', 'BirthCertificateController@update')->name('al.update');
             Route::post('/hapus/{card}', 'BirthCertificateController@delete')->name('al.delete');
         });
+
+        Route::prefix('akta-kematian')->group(function () {
+            Route::view('/', 'admin.submission.ak.index')->name('ak');
+            Route::get('/datatable', 'DeathCertificateController@datatable')->name('ak.datatable');
+            Route::get('/edit/{card}', 'DeathCertificateController@edit')->name('ak.edit');
+            Route::post('/update/{card}', 'DeathCertificateController@update')->name('ak.update');
+            Route::post('/hapus/{card}', 'DeathCertificateController@delete')->name('ak.delete');
+        });
     });
 
     Route::group(["prefix" => 'cetak-ulang', 'namespace' => 'Reprint', 'as' => 'reprint.'], function() {
@@ -139,7 +149,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             Route::get('/edit/{card}', 'BirthCertificateController@edit')->name('edit');
             Route::post('/update/{card}', 'BirthCertificateController@update')->name('update');
             Route::get('/export', 'BirthCertificateController@export')->name('export');
-
         });
 
         Route::group(["prefix" => "kia", "as" => "kia."], function () {
@@ -157,6 +166,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             Route::get('/edit/{card}', 'FamilyCardController@edit')->name('edit');
             Route::post('/update/{card}', 'FamilyCardController@update')->name('update');
             Route::get('/export', 'FamilyCardController@export')->name('export');
+        });
+
+        Route::group(["prefix" => "akta-kematian", "as" => "ak."], function () {
+            Route::get('/', 'DeathCertificateController@index')->name('index');
+            Route::get('/datatable', 'DeathCertificateController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'DeathCertificateController@edit')->name('edit');
+            Route::post('/update/{card}', 'DeathCertificateController@update')->name('update');
+            Route::get('/export', 'DeathCertificateController@export')->name('export');
         });
     });
 
@@ -189,10 +206,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             Route::post('/update/{card}', 'FamilyCardController@update')->name('update');
         });
 
+        Route::group(["prefix" => "akta-kematian", "as" => "ak."], function() {
+            Route::get('/', 'DeathCertificateController@index')->name('index');
+            Route::get('/datatable', 'DeathCertificateController@datatable')->name('datatable');
+            Route::get('/edit/{card}', 'DeathCertificateController@edit')->name('edit');
+            Route::post('/update/{card}', 'DeathCertificateController@update')->name('update');
+
+        });
+
     });
 });
 
-Route::get('test', function(){
-});
+
 
 

@@ -10,6 +10,7 @@
         <a class="dropdown-item" href="{{route('admin.submission.kia')}}">KIA</a>
         <a class="dropdown-item" href="{{route('admin.submission.kk')}}">KK</a>
         <a class="dropdown-item" href="{{route('admin.submission.al')}}">Akta Kelahiran</a>
+        <a class="dropdown-item" href="{{route('admin.submission.ak')}}">Akta Kematian</a>
     </div>
 </li>
 <li class="nav-item">
@@ -26,6 +27,7 @@
         <a class="dropdown-item" href="{{route('admin.qualified.kia.index')}}">KIA</a>
         <a class="dropdown-item" href="{{route('admin.qualified.kk.index')}}">KK</a>
         <a class="dropdown-item" href="{{route('admin.qualified.al.index')}}">Akta Kelahiran</a>
+        <a class="dropdown-item" href="{{route('admin.qualified.ak.index')}}">Akta Kematian</a>
     </div>
 </li>
 <li class="nav-item dropdown">
@@ -37,5 +39,6 @@
         <a class="dropdown-item" href="{{route('admin.stored.kia.index')}}">KIA</a>
         <a class="dropdown-item" href="{{route('admin.stored.kk.index')}}">KK</a>
         <a class="dropdown-item" href="{{route('admin.stored.al.index')}}">Akta Kelahiran</a>
+        <a class="dropdown-item" href="{{route('admin.stored.ak.index')}}">Akta Kematian</a>
     </div>
 </li>

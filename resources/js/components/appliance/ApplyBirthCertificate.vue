@@ -179,6 +179,7 @@ export default {
             axios.post(
                 this.submit_url, this.formData
             ).then(response => {
+                this.disableSubmit = true;
                 swal({
                     title  : 'Data berhasil dimasukkan!',
                     button : 'Ok',
@@ -188,8 +189,8 @@ export default {
                     this.resetForm();
                 })
             }).catch(e => {
-                console.log(e.response.data);
-                this.errors = e.response.data;
+                    console.log(e.response.data);
+                    this.errors = e.response.data;
             });
         },
         resetForm(){

@@ -16,9 +16,11 @@ class FamilyCardSubmission extends Model
     use SoftDeletes, Statistic, Latest, Oldest;
 
     protected $table = "family_card_submissions";
+    
     protected $fillable = [
         "id_number", "householder", "householder_id_card", "rt", "rw",
-        "zipcode", "kelurahan", "kabupaten", "provinsi", "address", "kecamatan", "status"
+        "zipcode", "kelurahan", "kabupaten", "provinsi", "address", "kecamatan", "status",
+        "user_id"
     ];
 
     public function members()

@@ -16,5 +16,6 @@ $factory->define(BirthCertificateSubmission::class, function (Faker $faker) {
         "mother_name" => $faker->name(),
         "father_identity_card_number" => $faker->randomNumber(9),
         "father_name" => $faker->name(),
+        "user_id" => 1
     ];
 });

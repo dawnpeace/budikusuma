@@ -30,6 +30,7 @@ class CreateFamilyCardSubmissionsTable extends Migration
             $table->softDeletes();
             $table->string('status')->default(DocumentStatus::HOLD);
             $table->date("published_at")->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

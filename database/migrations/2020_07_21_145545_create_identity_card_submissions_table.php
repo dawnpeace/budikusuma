@@ -31,6 +31,7 @@ class CreateIdentityCardSubmissionsTable extends Migration
             $table->string('profession');
             $table->string('nationality');
             $table->softDeletes();
+            $table->foreignId('user_id')->constrained('users');
             $table->string("status")->default(DocumentStatus::HOLD);
             $table->date('published_at')->nullable();
             $table->timestamps();

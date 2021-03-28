@@ -19,6 +19,7 @@ $factory->define(IdentityCardSubmission::class, function (Faker $faker) {
         "religion" => $faker->randomElement(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"]),
         "marriage_status" => $faker->randomElement(["not_married", "married", "widowed"]),
         "profession" => $faker->jobTitle,
-        "nationality" => "WNI"
+        "nationality" => "WNI",
+        "user_id" => 1
     ];
 });

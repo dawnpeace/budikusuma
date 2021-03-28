@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\enums\Type;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'address', 'phone', 'type', 'identity_number'
     ];
 
     /**
@@ -34,6 +35,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'verified_at' => 'datetime',
     ];
+
+    public function isCommon() {
+        return $this->type == Type::COMMON;
+    }
+
+    public function isAdmin() {
+        return $this->type == Type::ADMIN;
+    }
+
+    public function isVerified() {
+        return !empty($this->verified_at);
+    }
 }

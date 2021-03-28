@@ -18,6 +18,7 @@ class CreateReprintRequestsTable extends Migration
             $table->morphs("reprintable");
             $table->string("id_number");
             $table->dateTime("printed_at")->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

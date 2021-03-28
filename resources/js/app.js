@@ -60,6 +60,7 @@ Vue.component('apply-child-id-card', require('./components/appliance/ApplyChildI
 Vue.component('apply-birth-certificate', require('./components/appliance/ApplyBirthCertificate.vue').default);
 Vue.component('apply-family-card', require('./components/appliance/ApplyFamilyCard.vue').default);
 Vue.component('apply-id-card', require('./components/appliance/ApplyIdentityCard.vue').default);
+Vue.component('apply-death-certificate', require('./components/appliance/ApplyDeathCertificate.vue').default);
 
 Vue.component('reprint-id-card', require('./components/reprint/ReprintIdentityCard.vue').default);
 Vue.component('reprint-family-card', require('./components/reprint/ReprintFamilyCard.vue').default);

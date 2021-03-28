@@ -1,8 +1,17 @@
 @extends('layouts.app')
 @section('content')
+
+@if(session('status'))
+<div class="container alert alert-success">
+    <i class="fa fa-check-circle-o "></i> {{ session('status') }}
+</div>
+@endif
+
 <div class="container p-4 bg-white border-secondary">
+    
     <h2 class="text-center">Selamat datang di Portal Sanatab</h2>
     <hr>
+    
     <div class="row mt-5">
         <div class="col-md-4 col-sm-12 mb-4 p-3 d-flex flex-column align-items-center justify-content-center">
             <h4 class="text-center">
@@ -12,7 +21,7 @@
             </h4>
             <small class="text-center">Detail persyaratan permohonan dokumen baru.</small>
         </div>
-
+        @can('access-common-page')
         <div class="col-md-4 col-sm-12 mb-4 p-3 d-flex flex-column align-items-center justify-content-center">
             <h4 class="text-center">
                 <span class="fa fa-file-o"></span> Laman Pendaftaran Dokumen
@@ -30,9 +39,12 @@
                 <li class="list-group-item">
                     <a href="{{route('apply.aktelahir')}}">Akta Kelahiran</a>
                 </li>
+                <li class="list-group-item">
+                    <a href="{{route('apply.aktakematian')}}">Akta Kematian</a>
+                </li>
             </ul>
         </div>
-
+        
         <div class="col-md-4 col-sm-12 mb-4 p-3 d-flex flex-column align-items-center justify-content-center">
             <h4 class="text-center">
                 <span class="fa fa-address-card-o"></span> Laman Cetak Ulang Dokumen
@@ -52,6 +64,7 @@
                 </li>
             </ul>
         </div>
+        @endcan
     </div>
 </div>
 @endsection

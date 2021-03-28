@@ -17,6 +17,7 @@ $factory->define(FamilyCardSubmission::class, function (Faker $faker) {
         "kelurahan" => "sanatab",
         "kecamatan" => "sanatab",
         "kabupaten" => "sanatab",
-        "provinsi" => "Kalimantan Barat"
+        "provinsi" => "Kalimantan Barat",
+        "user_id" => 1
     ];
 });

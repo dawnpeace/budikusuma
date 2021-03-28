@@ -14,7 +14,9 @@
                 <li @click="changeDoc('AL')" class="nav-item">
                     <span v-bind:class="{active : currentDoc == 'AL'}" class="nav-link decor-none clickable">Akta Lahir</span>
                 </li>
-
+                <li @click="changeDoc('AK')" class="nav-item">
+                    <span v-bind:class="{active : currentDoc == 'AK'}" class="nav-link decor-none clickable">Akta Kematian</span>
+                </li>
             </ul>
         </div>
         <div class="card-body">
@@ -110,6 +112,9 @@ export default {
                     break;
                 case 'AL':
                     cardInfo = this.cards.akta_lahir;
+                    break;
+                case 'AK':
+                    cardInfo = this.cards.akta_kematian;
                     break;
             }
             this.finished = cardInfo.finished;
