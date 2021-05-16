@@ -10,7 +10,6 @@
                 <li class="breadcrumb-item active" aria-current="page">KK</li>
             </ol>
         </nav>
-        @include('appliance.info-card')
         <apply-family-card redirect_url='{{url("/")}}' submit_url='{{route("apply.kartukeluarga.submit")}}' />
 
     </div>

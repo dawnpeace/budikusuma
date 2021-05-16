@@ -36,6 +36,6 @@ class CreateFamilyCardMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('family_card_members');
+        Schema::dropIfExists('stored_family_card_members');
     }
 }

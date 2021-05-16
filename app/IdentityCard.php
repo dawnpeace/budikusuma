@@ -6,8 +6,11 @@ use App\Traits\ClassName;
 use App\Traits\Latest;
 use App\Traits\Oldest;
 use App\Traits\Reprintable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IdentityCard extends Model
 {
@@ -23,12 +26,30 @@ class IdentityCard extends Model
     protected $fillable = [
         "identity_card_number", "name", "gender", "address",
         "birthplace", "birthdate", "rt", "rw", "kelurahan", "address",
-        "kecamatan", "religion", "marriage_status", "profession", "nationality"
+        "kecamatan", "religion", "marriage_status", "profession", "nationality",
+        "user_id"
     ];
 
-    public function reprintable()
+    public function reprints()
     {
         return $this->morphMany(ReprintRequest::class, 'reprintable');
+    }
+
+    public function createReprint($authId)
+    {
+        return $this->reprints()->create([
+            "id_number" => $this->identity_card_number,
+            "user_id" => $authId
+        ]);
+    }
+
+    public static function hasJustPrinted()
+    {
+        return self::whereHas('reprints', function(Builder $builder) {
+                $builder->whereBetween('created_at', [Carbon::now()->addMonths(-2), Carbon::now()]);
+            })
+            ->where('user_id', Auth::id())
+            ->count();
     }
 
     /**

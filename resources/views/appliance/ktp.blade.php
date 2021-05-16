@@ -10,7 +10,6 @@
                     <li class="breadcrumb-item active" aria-current="page">E-KTP</li>
             </ol>
         </nav>
-        @include('appliance.info-card')
         <div class="card card-boy">
             <div class="p-4">
                 <apply-id-card redirect_url='{{url("/")}}' submit_url='{{route("apply.ktp.submit")}}' />

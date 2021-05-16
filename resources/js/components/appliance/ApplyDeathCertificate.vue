@@ -172,6 +172,7 @@ export default {
                     icon : 'success'
                 }).then( ok => {
                     if(ok) window.location.replace(this.redirect_url);
+                    this.disableSubmit = false;
                 });
             })
             .catch(e => {

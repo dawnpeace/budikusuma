@@ -24,6 +24,7 @@ class CreateBirthCertificatesTable extends Migration
             $table->string("father_name");
             $table->date("birthdate");
             $table->string("birthplace");
+            $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

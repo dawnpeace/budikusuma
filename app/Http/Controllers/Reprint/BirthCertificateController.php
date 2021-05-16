@@ -6,54 +6,44 @@ use App\BirthCertificate;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BirthCertificateController extends Controller
 {
     public function index()
     {
-        return view('reprint.akta-lahir');
+        $cards = BirthCertificate::where('user_id', Auth::id())
+            ->with(["reprints"])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $hasPrinted = BirthCertificate::hasJustPrinted();
+
+        if (count($cards) == 0) {
+            abort(404);
+        }
+
+        return view('reprint.akta-lahir', compact(["cards", "hasPrinted"]));
     }
 
     public function submit(Request $request)
     {
-        $request->validate([
-            "mother_identity_card_number" => "required|numeric",
-            "birthdate" => "required|date_format:d-m-Y"
-        ]);
+        $card = BirthCertificate::where('id', $request->card)
+            ->withCount(['reprints' => function (Builder $builder) {
+                $builder->whereBetween('created_at', [Carbon::now()->addMonths(-2), Carbon::now()]);
+            }])
+            ->firstOrFail();
 
-        $children = $this->getBirthCertificate($request->mother_identity_card_number, $request->birthdate);
-        
-        return count($children) ? response()->json($children) : response()->json([], 404);
+        if (!$card->reprints_count) {
+            $reprint = $card->createReprint(Auth::id());
+            return response()->json($reprint, 201);
+        }
+
+        return response()->json(["birth_certificate" => "There's processed request"], 422);
     }
 
-    public function addToReprint(Request $request)
-    {
-        $request->validate([
-            "mother_identity_card_number" => "required|numeric",
-            "birthdate" => "required|date_format:d-m-Y",
-            "id" => "required"
-        ]);
-
-        return DB::transaction(function() use ($request){
-            $birthCertificate = $this->getBirthCertificate($request->mother_identity_card_number, $request->birthdate, $request->id);
-            
-            if(is_null($birthCertificate)) return response()->json([], 404);
     
-            try{
-                $birthCertificate->submitReprint();
-                return response()->json([], 201);
-            } catch (Exception $e){
-                return response()->json(["message" => $e->getMessage()], 400);
-            }
-        });
-    }
-
-    public function getBirthCertificate($motherIdCard, $birthdate, $id = null)
-    {
-        $builder = BirthCertificate::where('mother_identity_card_number', $motherIdCard)
-            ->where('birthdate', Carbon::createFromFormat('d-m-Y', $birthdate)->format('Y-m-d'));
-        return !is_null($id) ? $builder->where('id', $id)->first() : $builder->get();
-    }
 }

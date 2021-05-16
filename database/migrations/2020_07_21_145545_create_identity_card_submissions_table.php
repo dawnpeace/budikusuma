@@ -45,6 +45,6 @@ class CreateIdentityCardSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('identity_card_reprint_applications');
+        Schema::dropIfExists('identity_card_submissions');
     }
 }

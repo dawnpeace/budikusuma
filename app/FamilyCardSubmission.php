@@ -6,8 +6,10 @@ use App\Exceptions\NaturalIdUsedExceptions;
 use App\Traits\Latest;
 use App\Traits\Oldest;
 use App\Traits\Statistic;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FamilyCardSubmission extends Model
@@ -46,9 +48,11 @@ class FamilyCardSubmission extends Model
                 $publish->kecamatan = $this->kecamatan;
                 $publish->provinsi = $this->provinsi;
                 $publish->address = $this->address;
+                $publish->user_id = $this->user_id;
                 $publish->save();
-
                 $publish->members()->createMany($members);
+                $this->published_at = Carbon::now();
+                $this->save();
             });
         } else {
             throw new NaturalIdUsedExceptions($this->id_mumber);

@@ -30,6 +30,7 @@ class CreateStoredChildrenIdsTable extends Migration
             $table->string('kelurahan');
             $table->string('kecamatan');
             $table->string('citizenship');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

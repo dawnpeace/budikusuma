@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use App\FamilyCardSubmission;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FamilyCardController extends Controller
 {
@@ -32,6 +33,7 @@ class FamilyCardController extends Controller
                 "kabupaten" => $request->kabupaten,
                 "provinsi" => $request->provinsi,
                 "address" => $request->address,
+                "user_id" => Auth::id()
             ]);
             $familyCard->members()->createMany($request->members);
             DB::commit();

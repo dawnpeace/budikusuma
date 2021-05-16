@@ -6,6 +6,8 @@ use App\BirthCertificateSubmission;
 use App\enums\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+
 
 class BirthCertificateController extends Controller
 {
@@ -29,6 +31,7 @@ class BirthCertificateController extends Controller
             "father_identity_card_number" => "required|numeric",
             "father_name" => "required",
         ]);
+        $request->request->add(["user_id" => Auth::id()]);
         BirthCertificateSubmission::create($request->all());
         return response([], 201);
     }

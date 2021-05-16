@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\ChildIdSubmission;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChildIdCardController extends Controller
 {
@@ -34,10 +36,10 @@ class ChildIdCardController extends Controller
             "kelurahan" => "required",
             "religion" => [
                 "required",
-                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
-            ],
-            
+                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu", "hindu"])
+            ]
         ]);
+        $request->request->add(["user_id" => Auth::id()]);
         ChildIdSubmission::create($request->all());
         return response([], 201);
     }

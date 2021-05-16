@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,28 +53,31 @@ Route::group(['prefix' => 'persyaratan', 'as' => 'requirement.'], function(){
 });
 
 Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Reprint'], function(){
+
+    Route::get('dokumen', 'MyDocumentController@index')->name('index');
+
     Route::get('ktp', 'IdentityCardController@index')->name('ktp.index');
     Route::post('ktp/submit', 'IdentityCardController@submit')->name('ktp.submit');
-    Route::post('ktp', 'IdentityCardController@addToReprint')->name('ktp.store');
 
     Route::get('kk', 'FamilyCardController@index')->name('kk.index');
     Route::post('kk/submit', 'FamilyCardController@submit')->name('kk.submit');
-    Route::post('kk', 'FamilyCardController@addToReprint')->name('kk.store');
 
     Route::get('akta-lahir', 'BirthCertificateController@index')->name('al.index');
     Route::post('akta-lahir/submit', 'BirthCertificateController@submit')->name('al.submit');
-    Route::post('akta-lahir', 'BirthCertificateController@addToReprint')->name('al.store');
+
+    Route::get('akta-kematian', 'DeathCertificateController@index')->name('ak.index');
+    Route::post('akta-kematian/submit', 'DeathCertificateController@submit')->name('ak.submit');
 
     Route::get('kia', 'ChildIdentityCardController@index')->name('kia.index');
     Route::post('kia/submit', 'ChildIdentityCardController@submit')->name('kia.submit');
-    Route::post('kia', 'ChildIdentityCardController@addToReprint')->name('kia.store');
 
     Route::get('permintaan', 'ReprintRequestController@create')->name('check');
     Route::post('permintaan', 'ReprintRequestController@submit')->name('check.submit');
 });
 
-
-// Admin Routes Starts Here
+##########################################################################
+######################## Admin Routes Starts Here ########################
+##########################################################################
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
 

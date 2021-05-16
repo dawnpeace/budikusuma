@@ -270,6 +270,7 @@ export default {
                     button : "Ok"
                 }).then((ok) => {
                     if(ok) window.location.replace(this.redirect_url);
+                    this.disableSubmit = false;
                 })
             }).catch(e => {
                 this.errors = e.response.data;

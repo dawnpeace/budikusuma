@@ -4,49 +4,44 @@ namespace App\Http\Controllers\Reprint;
 
 use App\ChildIdentityCard;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ChildIdentityCardController extends Controller
 {
     public function index()
     {
-        return view('reprint.kia');
+        $cards = ChildIdentityCard::where('user_id', Auth::id())
+            ->with(["reprints"])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $hasPrinted = ChildIdentityCard::hasJustPrinted();
+
+
+        if (count($cards) == 0) {
+            abort(404);
+        }
+
+        return view('reprint.kia', compact(["cards", "hasPrinted"]));
     }
 
     public function submit(Request $request)
     {
-        $request->validate([
-            "card_number" => "required|numeric",
-            "family_card_number" => "required|numeric"
-        ]);
+        $card = ChildIdentityCard::where('id', $request->card)
+            ->withCount(['reprints' => function (Builder $builder) {
+                $builder->whereBetween('created_at', [Carbon::now()->addMonths(-2), Carbon::now()]);
+            }])
+            ->firstOrFail();
 
-        $childIdCard = $this->getChildIdCard($request->card_number, $request->family_card_number);
-        return is_null($childIdCard) ? response()->json([], 404) : response()->json($childIdCard);
-    }
+        if (!$card->reprints_count) {
+            $reprint = $card->createReprint(Auth::id());
+            return response()->json($reprint, 201);
+        }
 
-    public function addToReprint(Request $request)
-    {
-        $request->validate([
-            "card_number" => "required|numeric",
-            "family_card_number" => "required|numeric"
-        ]);
-        
-        return DB::transaction(function() use ($request){
-            $childIdCard = $this->getChildIdCard($request->card_number, $request->family_card_number);
-    
-            try {
-                $result = $childIdCard->submitReprint();
-                return response()->json($result, 201);
-            } catch (\Exception $e) {
-                return response(["message" => $e->getMessage()], 400);
-            }
-        });
-    }
-
-    private function getChildIdCard($cardNumber, $familyCardNumber){
-        return ChildIdentityCard::where("card_number", $cardNumber)
-            ->where('family_card_number', $familyCardNumber)
-            ->first();
+        return response()->json(["death_certificate" => "There's processed request"], 422);
     }
 }

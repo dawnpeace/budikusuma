@@ -42,8 +42,7 @@ export function confirmationModal() {
 export function errorModal() {
     return Swal.fire({
         icon : 'error',
-        button: 'Ok',
-        title : 'Terjadi kesalahan'
+        title : 'Terjadi kesalahan',
     })
 }
 
@@ -56,3 +55,19 @@ export function successModal(attributes){
         ...attributes
     });
 }
+
+export function documentStatus(status) {
+    switch(status) {
+        case '00':
+            return 'Tunggu';
+        case '01':
+            return 'Dalam Proses';
+        case '02':
+            return 'Diterima';
+        case '03':
+            return 'Ditolak';
+        case '04':
+            return 'Selesai';
+    }
+}
+

@@ -10,7 +10,8 @@
                 <div class="d-none d-md-block d-sm-none col-12 mb-5 px-5">
                     <div class="form-group">
                         <label class="text-center w-100">Nomor Kartu Keluarga</label>
-                        <input v-model="formData.id_number" type="text" class="form-control">
+                        <input :class="{'is-invalid': get(this.errors, 'errors.id_number[0]', false)}" v-model="formData.id_number" type="text" class="form-control">
+                        <div class="invalid-feedback">{{get(this.errors, 'errors.id_number[0]', '') }}</div>
                     </div>
                 </div>
 
@@ -257,7 +258,7 @@
 </template>
 <script>
 
-import {get, cloneDeep} from 'lodash'
+import {get, cloneDeep, has} from 'lodash'
 import moment from 'moment'
 import { confirmationModal, successModal } from '../../../../helper'
 
@@ -291,6 +292,7 @@ export default {
     methods : {
         get,
         cloneDeep,
+        has,
         submitForm(){
             this.hasSubmitted = true;
             confirmationModal()

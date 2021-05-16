@@ -20,14 +20,12 @@ class DeathCertificateController extends Controller
             "deceased_at" => "date|date_format:d-m-Y",
             "birthdate" => "date|date_format:d-m-Y",
             "name" => "required", 
-            "birthplace" => "required",
-            
+            "birthplace" => "required"
         ];
 
         $request->validate($rules);
-        $data = $request->all();
-        $data['user_id'] = Auth::id();
-        DeathCertificateSubmission::create($data);
+        $request->request->add(["user_id" => Auth::id()]);
+        DeathCertificateSubmission::create($request->all());
         return response()->json([], 201);
     }
 }

@@ -8,6 +8,9 @@ use App\Traits\Latest;
 use App\Traits\Oldest;
 use App\Traits\Reprintable;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class FamilyCard extends Model
 {
@@ -17,12 +20,12 @@ class FamilyCard extends Model
 
     protected $fillable = [
         "id_card", "householder", "householder_id_card", "rt", "rw", "zip_code", "kelurahan", "kabupaten",
-        "kecamatan", "provinsi", "address"
+        "kecamatan", "provinsi", "address", "user_id"
     ];
 
     private $cardIdName = "id_card";
 
-    public function reprintable()
+    public function reprints()
     {
         return $this->morphMany(ReprintRequest::class, 'reprintable');
     }
@@ -32,5 +35,19 @@ class FamilyCard extends Model
         return $this->hasMany(FamilyCardMember::class, 'family_card_id');
     }
 
-    
+    public static function hasJustPrinted()
+    {
+        return self::whereHas('reprints', function (Builder $builder) {
+            $builder->whereBetween('created_at', [Carbon::now()->addMonths(-2), Carbon::now()]);
+        })->where('user_id', Auth::id())
+        ->count();
+    }
+
+    public function createReprint($authId)
+    {
+        return $this->reprints()->create([
+            "id_number" => $this->id_card,
+            "user_id" => $authId
+        ]);
+    }
 }

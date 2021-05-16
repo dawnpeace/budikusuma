@@ -25,6 +25,7 @@ class CreateDeathCertificatesTable extends Migration
             $table->string("note");
             $table->softDeletes();
             $table->string("gender");
+            $table->foreignId('user_id')->constrained('users');
             $table->string("status")->default(DocumentStatus::HOLD);
             $table->date('published_at')->nullable();
             $table->timestamps();

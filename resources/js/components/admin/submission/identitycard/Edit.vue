@@ -329,6 +329,8 @@ export default {
                             this.errors = err.response.data;
                             this.disableSubmit = false;
                         })
+                } else {
+                    this.disableSubmit = false;
                 }
             })
        }

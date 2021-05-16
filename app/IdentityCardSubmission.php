@@ -26,7 +26,8 @@ class IdentityCardSubmission extends Model
     protected $fillable = [
         "name", "gender", "birthplace", "birthdate", "address", "rt",
         "rw", "kelurahan", "kecamatan", "profession", "religion",
-        "marriage_status", "nationality", "status", "id_card"
+        "marriage_status", "nationality", "status", "id_card",
+        "user_id"
     ];
 
     protected $dates = [

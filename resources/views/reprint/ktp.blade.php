@@ -9,12 +9,14 @@
                 <li class="breadcrumb-item active" aria-current="page">E-KTP</li>
             </ol>
         </nav>
+        @include('appliance.info-card')
         <div class="card card-boy">
-            <div class="p-4">
-                <h5 class="text-center">Cetak Ulang KTP</h5>
-                <hr>
-                <reprint-id-card reprint_url="{{route('reprint.ktp.store')}}" submit_url="{{route('reprint.ktp.submit')}}" redirect_url="{{url('/')}}" />
-            </div>
+            <reprint-id-card 
+                has_printed="{{ $hasPrinted }}"
+                :cards="{{json_encode($cards)}}" 
+                submit_url="{{ route('reprint.ktp.submit') }}"
+                redirect_url="{{ route('reprint.ktp.index') }}"
+            />
         </div>
     </div>
 </div>

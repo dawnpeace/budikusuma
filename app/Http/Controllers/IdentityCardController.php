@@ -8,6 +8,7 @@ use App\IdentityCardSubmission;
 use Illuminate\Http\Request;
 use App\KtpSubmission;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class IdentityCardController extends Controller
 {
@@ -27,8 +28,8 @@ class IdentityCardController extends Controller
             "birthplace" => "required",
             "birthdate" => "required|date|date_format:d-m-Y",
             "address" => "required",
-            "rt" => "required",
-            "rw" => "required",
+            "rt" => "required|numeric",
+            "rw" => "required|numeric",
             "kelurahan" => "required",
             "kecamatan" => "required",
             "profession" => "required",
@@ -42,7 +43,8 @@ class IdentityCardController extends Controller
             ],
             "nationality" => "required"
         ]);
-
+        
+        $request->request->add(["user_id" => Auth::id()]);
         IdentityCardSubmission::create($request->all());
         return response()->json([], 201);
     }

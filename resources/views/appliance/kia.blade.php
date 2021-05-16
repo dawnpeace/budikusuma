@@ -10,7 +10,6 @@
                 <li class="breadcrumb-item active" aria-current="page">KIA</li>
             </ol>
         </nav>
-        @include('appliance.info-card')
         <div class="card card-boy">
             <div class="p-4">
                 <apply-child-id-card redirect_url='{{url("/")}}' submit_url='{{route("apply.kia.submit")}}' />

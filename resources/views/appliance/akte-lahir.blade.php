@@ -10,7 +10,6 @@
                 <li class="breadcrumb-item active" aria-current="page">Akta Lahir</li>
             </ol>
         </nav>
-        @include('appliance.info-card')
         <div class="card card-boy">
             <div class="p-4">
                 <apply-birth-certificate redirect_url='{{url("/")}}' submit_url='{{route("apply.aktelahir.submit")}}' />

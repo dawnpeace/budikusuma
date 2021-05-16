@@ -26,6 +26,7 @@ class CreateFamilyCardsTable extends Migration
             $table->string("kecamatan");
             $table->string("kabupaten");
             $table->string("provinsi");
+            $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

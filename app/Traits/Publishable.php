@@ -9,8 +9,6 @@ trait Publishable
 {
     use CheckNaturalId;
 
-    protected $publishExcept = ['user_id'];
-
     public function publish()
     {
         $clazz = __CLASS__;
@@ -21,15 +19,7 @@ trait Publishable
                     $items = $this->toArray();
                     $items[self::$publishIdName] = $items[self::$selfIdName];
 
-                    if(property_exists($clazz, 'publishExcept')) {
-                        if(is_array($this->publishExcept)) {
-                            foreach($this->publishExcept as $except) {
-                                unset($items[$except]);
-                            }
-                        } else {
-                            unset($items[$this->publishExcept]);
-                        }
-                    }
+                    
                     call_user_func_array(array(self::getTargetClass(), 'create'), [$items]);
     
                     $this->published_at = now();

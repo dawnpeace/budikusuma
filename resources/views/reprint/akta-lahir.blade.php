@@ -9,11 +9,17 @@
                 <li class="breadcrumb-item active" aria-current="page">Akta Lahir</li>
             </ol>
         </nav>
+        @include('appliance.info-card')
         <div class="card card-boy">
             <div class="p-4">
                 <h5 class="text-center">Cetak Ulang Akta Lahir</h5>
                 <hr>
-                <reprint-birth-certificate reprint_url="{{route('reprint.al.store')}}" submit_url="{{route('reprint.al.submit')}}" redirect_url="{{url('/')}}" />
+                <reprint-birth-certificate 
+                    has_printed="{{ $hasPrinted }}"
+                    :cards="{{json_encode($cards)}}" 
+                    submit_url="{{route('reprint.al.submit')}}" 
+                    redirect_url="{{route('reprint.al.index')}}"
+                />
             </div>
         </div>
     </div>

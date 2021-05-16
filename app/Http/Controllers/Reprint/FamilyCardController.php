@@ -4,53 +4,44 @@ namespace App\Http\Controllers\Reprint;
 
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FamilyCardController extends Controller
 {
 
     public function index()
     {
-        return view('reprint.kk');
+        $cards = FamilyCard::where('user_id', Auth::id())
+            ->with(["reprints"])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        $hasPrinted = FamilyCard::hasJustPrinted();
+
+        if (count($cards) == 0) {
+            abort(404);
+        }
+
+        return view('reprint.kk', compact(["cards", "hasPrinted"]));
     }
 
     public function submit(Request $request)
     {
-        $request->validate([
-            "id_card" => "required|numeric",
-            "householder_id_card" => "required|numeric"
-        ]);
+        $card = FamilyCard::where('id', $request->card)
+            ->withCount(['reprints' => function (Builder $builder) {
+                $builder->whereBetween('created_at', [Carbon::now()->addMonths(-2), Carbon::now()]);
+            }])
+            ->firstOrFail();
 
-        $familyCard = $this->getFamilyCard($request->id_card, $request->householder_id_card);
-        return is_null($familyCard) ? response()->json([], 404) : response()->json($familyCard);
+        if (!$card->reprints_count) {
+            $reprint = $card->createReprint(Auth::id());
+            return response()->json($reprint, 201);
+        }
+
+        return response()->json(["family_card" => "There's processed request"], 422);
     }
 
-    public function addToReprint(Request $request)
-    {
-        $request->validate([
-            "id_card" => "required|numeric",
-            "householder_id_card" => "required|numeric"
-        ]);
-        return DB::transaction(function() use ($request){
-            $idCard = $this->getFamilyCard($request->id_card, $request->householder_id_card);
-
-            if (!$idCard) return response()->json([], 404);
-
-            try {
-                $result = $idCard->submitReprint();
-                return response()->json($result, 201);
-            } catch (\Exception $e) {
-                return response(["message" => $e->getMessage()], 400);
-            }
-        });
-        
-    }
-
-    private function getFamilyCard($idCard, $householderId)
-    {
-        return FamilyCard::where("id_card", $idCard)
-            ->where("householder_id_card", $householderId)
-            ->first();
-    }
 }
