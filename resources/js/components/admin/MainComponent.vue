@@ -1,5 +1,5 @@
 <template>
-    <div class="card text-center">
+    <div class="card text-center mb-3">
         <div class="card-header">
             <ul class="nav justify-content-center nav-tabs card-header-tabs ">
                 <li @click="changeDoc('E-KTP')" class="nav-item">

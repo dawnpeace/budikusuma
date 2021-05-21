@@ -50,6 +50,7 @@ Vue.component('side-label', require('./components/base/SideLabelInput.vue').defa
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('requirement-content', require('./components/QueueRequirementContent.vue').default);
+Vue.component('queue-request', require('./components/QueueRequest.vue').default);
 
 Vue.component('content-identity-card', require('./components/content/IdentityCardRequirements.vue').default);
 Vue.component('content-family-card', require('./components/content/FamilyCardRequirements.vue').default);

@@ -5,17 +5,17 @@
             <table class="table table-sm table-striped table-bordered">
                 <thead>
                     <th>No Identitas</th>
-                    <th>Nama</th>
+                    <th>Nama Kepala Keluarga</th>
                     <th>Tanggal Lahir</th>
                     <th>Aksi</th>
                 </thead>
                 <tbody>
                     <tr :key="key" v-for="(card, key) in cards">
-                        <td>{{card.identity_card_number}}</td>
-                        <td>{{card.name}}</td>
+                        <td>{{card.id_card}}</td>
+                        <td>{{card.householder}}</td>
                         <td>{{dateFormat(card.birthdate)}}</td>
                         <td class="text-center">
-                            <button @click="submitReprint(card.id)" :disabled="!canReprint(card)" class="btn btn-sm btn-primary">
+                            <button @click="submitReprint(card.id)" :disabled="canReprint(card)" class="btn btn-sm btn-primary">
                                 Ajukan Cetak Ulang
                             </button>
                         </td>

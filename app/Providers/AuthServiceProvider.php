@@ -30,8 +30,12 @@ class AuthServiceProvider extends ServiceProvider
             return !is_null($user->is_verified);
         });
 
-        Gate::define('access-common-page', function($user){
+        Gate::define('access-common-page', function($user) {
             return $user->type == Type::COMMON;
+        });
+
+        Gate::define('access-admin-page', function($user) {
+            return $user->type = Type::ADMIN;
         });
     }
 }

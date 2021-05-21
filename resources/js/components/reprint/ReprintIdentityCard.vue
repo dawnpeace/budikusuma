@@ -15,7 +15,7 @@
                         <td>{{card.name}}</td>
                         <td>{{dateFormat(card.birthdate)}}</td>
                         <td class="text-center">
-                            <button @click="submitReprint(card.id)" :disabled="!canReprint(card)" class="btn btn-sm btn-primary">
+                            <button @click="submitReprint(card.id)" :disabled="canReprint(card)" class="btn btn-sm btn-primary">
                                 Ajukan Cetak Ulang
                             </button>
                         </td>

@@ -11,11 +11,11 @@
                 </thead>
                 <tbody>
                     <tr :key="key" v-for="(card, key) in cards">
-                        <td>{{card.identity_card_number}}</td>
+                        <td>{{card.identity_card}}</td>
                         <td>{{card.name}}</td>
                         <td>{{dateFormat(card.birthdate)}}</td>
                         <td class="text-center">
-                            <button @click="submitReprint(card.id)" :disabled="!canReprint(card)" class="btn btn-sm btn-primary">
+                            <button @click="submitReprint(card.id)" :disabled="canReprint(card)" class="btn btn-sm btn-primary">
                                 Ajukan Cetak Ulang
                             </button>
                         </td>
@@ -99,7 +99,7 @@ export default {
                     let children = element.reprints;
                     children.forEach(child => {
                         let mixed = {
-                            'id_card' : element.id_card,
+                            'id_card' : element.identity_card,
                             'name' : element.name,
                             'created_at' : child.created_at,
                             'printed_at' : child.printed_at

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\enums\Type;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -47,6 +48,17 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentication passed...
             return redirect()->intended('dashboard');
+        }
+    }
+
+    public function authenticated(Request $request, $user) 
+    {
+        if($user->type == Type::ADMIN) {
+            return redirect('/admin');
+        }
+
+        if($user->type == Type::COMMON) {
+            return redirect('/');
         }
     }
 }

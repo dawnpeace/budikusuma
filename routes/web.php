@@ -21,8 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware('role:common')->group(function(){
-
+Route::middleware(['auth', 'can:access-common-page'])->group(function(){
+    
     Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function () {
         Route::get('/buat-ktp', 'IdentityCardController@index')->name('ktp');
         Route::post('/buat-ktp', 'IdentityCardController@store')->name('ktp.submit');
@@ -39,6 +39,9 @@ Route::middleware('role:common')->group(function(){
         Route::get('/buat-akta-kematian', 'DeathCertificateController@index')->name('aktakematian');
         Route::post('/buat-akta-kematian', 'DeathCertificateController@store')->name('aktakematian.submit');
     });
+
+    Route::get('/pengajuan-antrian', 'QueueController@index')->name('queue.index');
+    Route::post('/pengajuan-antrian', 'QueueController@store')->name('queue.store');
 });
 
 
@@ -79,9 +82,14 @@ Route::group(["prefix" => "cetak-ulang", 'as' => 'reprint.', 'namespace' => 'Rep
 ######################## Admin Routes Starts Here ########################
 ##########################################################################
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => ["auth", "can:access-admin-page"]], function(){
+
+    Route::get('login', function() {
+        return view("admin.login");
+    });
 
     Route::get('/', 'StatisticController@index');
+    Route::get('/queue-list', 'QueueController@datatable')->name('queue.datatable');
 
     Route::group(['prefix' => 'pengajuan', 'namespace' => 'Submission', 'as' => 'submission.'], function() {
         Route::prefix('ktp')->group(function(){
