@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Stored;
 
 use App\Element\Button;
+use App\enums\Religion;
 use App\Exports\IdentityCardExport;
 use App\Http\Controllers\Controller;
 use App\IdentityCard;
@@ -78,7 +79,7 @@ class IdentityCardController extends Controller
             "profession" => "required",
             "religion" => [
                 "required",
-                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
+                Rule::in(Religion::ALL)
             ],
             "marriage_status" => [
                 "required",
