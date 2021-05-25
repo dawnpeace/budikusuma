@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Element\Button;
 use App\enums\DocumentStatus;
+use App\enums\Religion;
 use App\IdentityCardSubmission;
 use App\Rules\EmptyOrNumericByStatus;
 use Illuminate\Validation\Rule;
@@ -73,7 +74,7 @@ class IdentityCardController extends Controller
             "profession" => "required",
             "religion" => [
                 "required",
-                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
+                Rule::in(Religion::ALL)
             ],
             "marriage_status" => [
                 "required",
