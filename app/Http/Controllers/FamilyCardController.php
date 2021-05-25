@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\enums\Religion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\FamilyCardSubmission;
@@ -68,7 +69,7 @@ class FamilyCardController extends Controller
             "members.*.birthplace" => "required",
             "members.*.religion" => [
                 "required",
-                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
+                Rule::in(Religion::ALL)
             ],
             "members.*.education" => "required",
             "members.*.profession" => "required",

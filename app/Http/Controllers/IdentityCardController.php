@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\DocumentStatus;
 use App\enums\MarriageStatus;
+use App\enums\Religion;
 use App\IdentityCardSubmission;
 use Illuminate\Http\Request;
 use App\KtpSubmission;
@@ -35,7 +36,7 @@ class IdentityCardController extends Controller
             "profession" => "required",
             "religion" => [
                 "required",
-                Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu"])
+                Rule::in(Religion::ALL)
             ],
             "marriage_status" => [
                 "required",
