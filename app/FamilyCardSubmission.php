@@ -22,7 +22,7 @@ class FamilyCardSubmission extends Model
     protected $fillable = [
         "id_number", "householder", "householder_id_card", "rt", "rw",
         "zipcode", "kelurahan", "kabupaten", "provinsi", "address", "kecamatan", "status",
-        "user_id"
+        "user_id", "reason"
     ];
 
     public function members()

@@ -62,7 +62,8 @@ class BirthCertificateController extends Controller
             "status" => [
                 "required",
                 Rule::in(DocumentStatus::ALL)
-            ]
+            ],
+            "reason" => Rule::requiredIf($request->status == DocumentStatus::REJECTED)
         ]);
 
         $card->update($request->all());

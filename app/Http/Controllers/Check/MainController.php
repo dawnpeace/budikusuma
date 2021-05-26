@@ -45,7 +45,7 @@ class MainController extends Controller
 
     private function identityCard()
     {
-        $documents = IdentityCardSubmission::select('name as nama', 'created_at', 'status')
+        $documents = IdentityCardSubmission::select('name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -54,7 +54,7 @@ class MainController extends Controller
 
     private function birthCertificate()
     {
-        $documents = BirthCertificateSubmission::select('name as nama', 'created_at', 'status')
+        $documents = BirthCertificateSubmission::select('name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -63,7 +63,7 @@ class MainController extends Controller
 
     private function familyCard()
     {
-        $documents = FamilyCardSubmission::select('householder as nama','created_at', 'status')
+        $documents = FamilyCardSubmission::select('householder as nama','created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -73,7 +73,7 @@ class MainController extends Controller
 
     private function childIdCard()
     {
-        $documents = ChildIdSubmission::select('name as nama', 'created_at', 'created_at', 'status')
+        $documents = ChildIdSubmission::select('name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
         
@@ -82,7 +82,7 @@ class MainController extends Controller
 
     private function deathCertificate()
     {
-        $document = DeathCertificateSubmission::select('name', 'created_at', 'status')
+        $document = DeathCertificateSubmission::select('name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
         return response()->json($document);

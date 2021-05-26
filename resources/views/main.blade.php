@@ -45,25 +45,7 @@
             </ul>
         </div>
         
-        <div class="col-md-4 col-sm-12 mb-4 p-3 d-flex flex-column align-items-center justify-content-center">
-            <h4 class="text-center">
-                <span class="fa fa-address-card-o"></span> Laman Cetak Ulang Dokumen
-            </h4>
-            <ul class="list-group w-100">
-                <li class="list-group-item">
-                    <a href="{{route('reprint.ktp.index')}}">Kartu Tanda Penduduk</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="{{route('reprint.kk.index')}}">Kartu Keluarga</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="{{route('reprint.kia.index')}}">Kartu Identitas Anak</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="{{route('reprint.al.index')}}">Akta Kelahiran</a>
-                </li>
-            </ul>
-        </div>
+        
         @endcan
     </div>
 </div>

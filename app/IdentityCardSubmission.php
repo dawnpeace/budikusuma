@@ -27,7 +27,7 @@ class IdentityCardSubmission extends Model
         "name", "gender", "birthplace", "birthdate", "address", "rt",
         "rw", "kelurahan", "kecamatan", "profession", "religion",
         "marriage_status", "nationality", "status", "id_card",
-        "user_id"
+        "user_id", "reason"
     ];
 
     protected $dates = [

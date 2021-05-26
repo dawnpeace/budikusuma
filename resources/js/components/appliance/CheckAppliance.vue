@@ -46,6 +46,14 @@
             <div class="col-9 mb-2">
                 <span class="badge" :class="statusClass(val.status)">{{ statusInfo(val.status) }}</span>
             </div>
+
+            <div class="col-3 mb-2 text-right">
+                Keterangan
+            </div>
+
+            <div class="col-9 mb-2">
+                {{ val.reason ? val.reason : '-' }}
+            </div>
             <div class="col-12 px-5 d-flex justify-content-center my-3">
                 <div class="w-50 border-bottom"></div>
             </div>

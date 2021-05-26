@@ -56,7 +56,8 @@ class DeathCertificateController extends Controller
             "name" => "required",
             "note" => "required",
             "card_number" => "required",
-            "identity_card" => "required"
+            "identity_card" => "required",
+            "reason" => Rule::requiredIf($request->status == DocumentStatus::REJECTED)
         ]);
 
         $card->update($request->all());

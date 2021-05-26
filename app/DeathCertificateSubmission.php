@@ -22,7 +22,10 @@ class DeathCertificateSubmission extends Model
     ];
 
     protected $fillable = [
-        "name", "card_number", "identity_card", "note", "gender", "birthdate", "deceased_at", "published_at", "birthplace", "user_id", "status"
+        "name", "card_number", "identity_card", 
+        "note", "gender", "birthdate", "deceased_at", 
+        "published_at", "birthplace", "user_id", "status",
+        "reason"
     ];
 
     protected static $selfIdName = "card_number";

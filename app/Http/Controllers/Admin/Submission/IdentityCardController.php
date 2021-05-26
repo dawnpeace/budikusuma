@@ -83,8 +83,9 @@ class IdentityCardController extends Controller
             "nationality" => "required",
             "status" => [
                 "required",
-                Rule::in(["00", "01", "02", "03", "04"])
-            ]
+                Rule::in(DocumentStatus::ALL)
+            ],
+            "reason" => Rule::requiredIf($request->status == DocumentStatus::REJECTED)
         ]);
         $card->update($request->all());
         return response()->json();

@@ -55,7 +55,7 @@ class FamilyCardController extends Controller
         $request->validate($this->getRule($request), ['id_number.required_if' => 'Id number can not be empty when status is set to Done.']);
         $famCardRequest = $request->only([
             "householder_name", "householder_id_card", "address", "rt", "rw", "zipcode",
-            "kelurahan", "kecamatan", "kabupaten", "provinsi", "members", "status", "id_number"
+            "kelurahan", "kecamatan", "kabupaten", "provinsi", "members", "status", "id_number", "reason"
         ]);
         
         DB::transaction(function() use ($famCardRequest, $request, $card) {
@@ -121,7 +121,8 @@ class FamilyCardController extends Controller
             "status" => [
                 "required",
                 Rule::in(DocumentStatus::ALL)
-            ]
+            ],
+            "reason" => Rule::requiredIf($request->status == DocumentStatus::REJECTED)
         ];
     }
 }

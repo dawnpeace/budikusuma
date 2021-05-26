@@ -242,6 +242,7 @@
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kecamatan[0]', '')}}</div>
                 </div>
             </div>
+
             <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Status Dokumen</label>
                 <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Status Dokumen</label>
@@ -258,6 +259,23 @@
                     <div class="invalid-feedback">{{get(this.errors, 'errors.status[0]', '')}}</div>
                 </div>
             </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Keterangan </label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Keterangan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input 
+                        v-model="formData.reason" 
+                        placeholder="Keterangan" 
+                        type="text" 
+                        :class="{'is-invalid': get(this.errors, 'errors.reason[0]', false)}"
+                        class="form-control"/>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.reason[0]', '')}}</div>
+                </div>
+            </div>
+            
             <div class="d-flex justify-content-center col-12 pt-3">
                 <button :disabled="disableSubmit" class="btn btn-primary mx-1 btn-sm" type="submit">Perbaharui</button>
                 <button @click="deleteRecord" class="btn btn-danger mx-1 btn-sm" type="button">Hapus</button>
@@ -297,7 +315,8 @@ export default {
                 citizenship : get(this.card, 'citizenship', ''),
                 religion : get(this.card, 'religion', ''),
                 nationality : get(this.card, 'nationality', ''),
-                status : get(this.card, 'status', '00')
+                status : get(this.card, 'status', '00'),
+                reason : get(this.card, 'reason', '00'),
             }
        }
    },
