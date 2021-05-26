@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5 class="text-center mb-2">Arsip KTP</h5>
+        <h5 class="text-center mb-2">Arsip KK</h5>
         <hr>
         <div class="row mb-3">
             <div class="col-12">Filter Tanggal</div>
