@@ -1,6 +1,6 @@
 <template>
     <div class="w-100">
-        <h5 class="text-center">Daftar Pengajuan Akta Lahir</h5>
+        <h5 class="text-center">Daftar Pengajuan Akta Kematian</h5>
         <hr>
         <div class="px-5">
             <div class="row mb-3">
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -65,7 +65,7 @@ export default {
                 },
             ]
         });
-        
+
         this.dataTable.on('draw.dt', item => {
             let delBtn = document.querySelectorAll('button.dt-btn-del').forEach(el => {
                 el.addEventListener('click', () => {
