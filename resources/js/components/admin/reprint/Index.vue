@@ -11,6 +11,7 @@
                         <option value="KK">Kartu Keluarga</option>
                         <option value="KIA">Kartu Identitas Anak</option>
                         <option value="AKTA_LAHIR">Akta Kelahiran</option>
+                        <option value="AKTA_KEMATIAN">Akta Kematian</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -87,7 +88,7 @@ export default {
                 }
             ]
         });
-        
+
         this.dataTable.on('draw.dt', item => {
             let delBtn = document.querySelectorAll('button.dt-btn-del').forEach(el => {
                 el.addEventListener('click', () => {

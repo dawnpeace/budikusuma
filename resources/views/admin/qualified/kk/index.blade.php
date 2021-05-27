@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item bread"><a href="{{url('/')}}">Utama</a></li>
             <li class="breadcrumb-item">Data Terkualifikasi<a href="#"></a></li>
-            <li class="breadcrumb-item active" aria-current="page">KIA</li>
+            <li class="breadcrumb-item active" aria-current="page">KK</li>
         </ol>
     </nav>
     <div class="card card-body">

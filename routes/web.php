@@ -1,6 +1,7 @@
 <?php
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,7 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth', 'can:access-common-page'])->group(function(){
-    
+
     Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function () {
         Route::get('/buat-ktp', 'IdentityCardController@index')->name('ktp');
         Route::post('/buat-ktp', 'IdentityCardController@store')->name('ktp.submit');
@@ -196,7 +197,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
             Route::get('/edit/{card}', 'IdentityCardController@edit')->name('edit');
             Route::post('/update/{card}', 'IdentityCardController@update')->name('update');
         });
-        
+
         Route::group(["prefix" => "akta-lahir", "as" => "al."], function(){
             Route::get('/', 'BirthCertificateController@index')->name('index');
             Route::get('/datatable', 'BirthCertificateController@datatable')->name('datatable');

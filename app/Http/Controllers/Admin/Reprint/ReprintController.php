@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Reprint;
 
 use App\BirthCertificate;
 use App\ChildIdentityCard;
+use App\DeathCertificate;
 use App\enums\Document;
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
@@ -43,12 +44,15 @@ class ReprintController extends Controller
                     case Document::AKTA_LAHIR:
                         $reprintableType = BirthCertificate::getClassName();
                         break;
+                    case Document::AKTA_KEMATIAN:
+                        $reprintableType = DeathCertificate::getClassName();
+                        break;
                 }
             }
         }
         $reprintRequests = ReprintRequest::select("id", "id_number", "created_at", "printed_at")
             ->where("reprintable_type", $reprintableType);
-        
+
         return DataTables::of($reprintRequests)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -71,7 +75,7 @@ class ReprintController extends Controller
 
     public function destroy(ReprintRequest $reprint)
     {
-        // $reprint->delete();
+         $reprint->delete();
     }
 
     public function markAsPrinted(ReprintRequest $reprint, Request $request)
@@ -84,7 +88,7 @@ class ReprintController extends Controller
             $reprint->printed_at = Carbon::createFromFormat('d-m-Y', $request->printed_at);
             $reprint->save();
             return response()->json();
-        } 
+        }
 
         return response()->json([
             "message" => "Data telah dicetak"
