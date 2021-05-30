@@ -9,11 +9,13 @@ use App\Traits\Statistic;
 use App\Traits\Latest;
 use App\Traits\Oldest;
 use App\Traits\Publishable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class DeathCertificateSubmission extends Model
+class DeathCertificateSubmission extends Model implements HasMedia
 {
 
-    use SoftDeletes, Statistic, Latest, Oldest, Publishable;
+    use SoftDeletes, Statistic, Latest, Oldest, Publishable, InteractsWithMedia;
 
     protected $table = "death_certificate_submission";
 
@@ -22,8 +24,8 @@ class DeathCertificateSubmission extends Model
     ];
 
     protected $fillable = [
-        "name", "card_number", "identity_card", 
-        "note", "gender", "birthdate", "deceased_at", 
+        "name", "card_number", "identity_card",
+        "note", "gender", "birthdate", "deceased_at",
         "published_at", "birthplace", "user_id", "status",
         "reason"
     ];

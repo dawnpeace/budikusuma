@@ -9,10 +9,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="name" 
-                        placeholder="Nama Pemilik" 
-                        type="text" 
+                    <input
+                        v-model="name"
+                        placeholder="Nama Pemilik"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.name[0]', '')}}</div>
@@ -22,7 +22,7 @@
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                 <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
             </div>
-            <div class="col-md-9 col-sm-12">  
+            <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <select name="gender" :class="{'is-invalid': get(this.errors, 'errors.gender[0]', false)}" v-model="gender" id="" class="form-control">
                         <option value="laki-laki" selected>Laki - laki</option>
@@ -37,12 +37,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="birthplace" 
-                    placeholder="Tempat Lahir" 
+                    <input
+                    v-model="birthplace"
+                    placeholder="Tempat Lahir"
                     type="text"
                     id="birthplace"
-                    :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthplace[0]', '')}}</div>
                 </div>
@@ -53,14 +53,14 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <datepicker 
+                    <datepicker
                     input-class="form-control"
                     id="birthdate"
                     format="dd-MM-yyyy"
                     name="birthdate"
                     v-model="birthdate"
-                    placeholder="Tanggal Lahir" 
-                    :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}" 
+                    placeholder="Tanggal Lahir"
+                    :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"
                     ></datepicker>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthdate[0]', '')}}</div>
                 </div>
@@ -71,12 +71,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="address" 
-                    placeholder="Alamat" 
+                    <input
+                    v-model="address"
+                    placeholder="Alamat"
                     name="alamat"
-                    type="text" 
-                    :class="{'is-invalid': get(this.errors, 'errors.address[0]', false)}" 
+                    type="text"
+                    :class="{'is-invalid': get(this.errors, 'errors.address[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.address[0]', '')}}</div>
                 </div>
@@ -87,11 +87,11 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="rt" 
+                    <input
+                    v-model="rt"
                     placeholder="RT"
                     type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.rt[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.rt[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.rt[0]', '')}}</div>
                 </div>
@@ -102,11 +102,11 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="rw" 
-                    placeholder="RW" 
+                    <input
+                    v-model="rw"
+                    placeholder="RW"
                     type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.rw[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.rw[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.rw[0]', '')}}</div>
                 </div>
@@ -117,11 +117,11 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="kelurahan" 
-                    placeholder="Kelurahan / Desa" 
+                    <input
+                    v-model="kelurahan"
+                    placeholder="Kelurahan / Desa"
                     type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kelurahan[0]', '')}}</div>
                 </div>
@@ -132,11 +132,11 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="kecamatan" 
-                    placeholder="Kecamatan" 
+                    <input
+                    v-model="kecamatan"
+                    placeholder="Kecamatan"
                     type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kecamatan[0]', '')}}</div>
                 </div>
@@ -147,11 +147,11 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="profession" 
-                    placeholder="Pekerjaan" 
+                    <input
+                    v-model="profession"
+                    placeholder="Pekerjaan"
                     type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.profession[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.profession[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.profession[0]', '')}}</div>
                 </div>
@@ -162,7 +162,7 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <select :class="{'is-invalid': get(this.errors, 'errors.religion[0]', false)}" v-model="religion"  id="" class="form-control">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.religion[0]', false)}" v-model="religion"  class="form-control">
                         <option selected value="islam">Islam</option>
                         <option value="kristen protestan">Kristen Protestan</option>
                         <option value="kristen katolik">Kristen Katolik</option>
@@ -179,7 +179,7 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <select :class="{'is-invalid': get(this.errors, 'errors.marriage_status[0]', false)}" v-model="marriage_status"  id="" class="form-control">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.marriage_status[0]', false)}" v-model="marriage_status" class="form-control">
                         <option selected value="not_married">Belum Kawin</option>
                         <option value="married">Kawin</option>
                         <option value="widower">Duda / Janda</option>
@@ -187,14 +187,15 @@
                     <div class="invalid-feedback">{{get(this.errors, 'errors.marriage_status[0]', '')}}</div>
                 </div>
             </div>
+
             <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kewarganegaraan</label>
                 <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Kewarganegaraan</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="nationality" 
+                    <input
+                        v-model="nationality"
                         placeholder="Kewarganegaraan"
                         :class="{'is-invalid': get(this.errors, 'errors.nationality[0]', false)}"
                         type="text"
@@ -202,6 +203,25 @@
                     <div class="invalid-feedback">{{get(this.errors, 'errors.nationality[0]', '')}}</div>
                 </div>
             </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Dokumen Pendukung</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Dokumen Pendukung</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input
+                        @change="assignDocument"
+                        placeholder="Dokumen Pendukung"
+                        type="file"
+                        id="document"
+                        ref="document"
+                        :class="{'is-invalid': get(this.errors, 'errors.document[0]', false)}"
+                        class="form-control">
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.document[0]', '')}}</div>
+                </div>
+            </div>
+
             <div class="d-flex justify-content-center col-12 pt-3">
                 <button :disabled="disableSubmit" class="btn btn-primary" type="submit">Submit</button>
             </div>
@@ -219,26 +239,27 @@ export default {
     data() {
         return {
             errors : null,
-            name : null,
-            birthplace : null,
+            name : '',
+            birthplace : '',
             birthdate : new Date('2000-01-01'),
             gender : "laki-laki",
-            address : null,
-            rt : null,
-            rw : null,
-            kelurahan : null,
-            kecamatan : null,
+            address : '',
+            rt : '',
+            rw : '',
+            kelurahan : '',
+            kecamatan : '',
             religion : "islam",
             marriage_status : "not_married",
-            profession : null,
-            nationality : null,
+            profession : '',
+            nationality : '',
             submitted : false,
-            disableSubmit : false
+            disableSubmit : false,
+            document : ''
         }
     },
     computed :{
         formData(){
-            return {
+            let data = {
                 name : this.name,
                 birthdate : moment(this.birthdate).format("DD-MM-YYYY"),
                 birthplace : this.birthplace,
@@ -251,8 +272,15 @@ export default {
                 religion : this.religion,
                 marriage_status : this.marriage_status,
                 profession : this.profession,
-                nationality : this.nationality
+                nationality : this.nationality,
+                document : this.document
             };
+            let formData = new FormData();
+            for (let dataKey in data) {
+                formData.append(dataKey, data[dataKey]);
+                console.log(data[dataKey])
+            }
+            return formData;
         }
     },
     methods : {
@@ -260,7 +288,13 @@ export default {
         submitForm(){
             this.disableSubmit = true;
             axios.post(
-                this.submit_url, this.formData
+                this.submit_url,
+                this.formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
             ).then(response => {
                 this.disableSubmit = false;
                 this.resetForm();
@@ -291,6 +325,10 @@ export default {
             this.marriage_status = "not_married";
             this.profession = '';
             this.nationality = '';
+            document.getElementById("document").value = '';
+        },
+        assignDocument(event){
+            this.document = event.target.files[0];
         }
     }
 }

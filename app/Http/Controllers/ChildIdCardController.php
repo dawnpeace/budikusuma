@@ -37,10 +37,15 @@ class ChildIdCardController extends Controller
             "religion" => [
                 "required",
                 Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu", "hindu"])
-            ]
+            ],
+            "document" => "required|file|max:5000|mimes:pdf"
         ]);
-        $request->request->add(["user_id" => Auth::id()]);
-        ChildIdSubmission::create($request->all());
-        return response([], 201);
+        \DB::transaction(function() use ($request) {
+            $request->request->add(["user_id" => Auth::id()]);
+            $card = ChildIdSubmission::create($request->all());
+            $card->addMediaFromRequest('document')
+                ->toMediaCollection();
+            return response([], 201);
+        });
     }
 }

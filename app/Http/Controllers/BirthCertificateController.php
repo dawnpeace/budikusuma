@@ -30,9 +30,15 @@ class BirthCertificateController extends Controller
             "mother_name" => "required",
             "father_identity_card_number" => "required|numeric",
             "father_name" => "required",
+            "document" => "required|file|mimes:pdf"
         ]);
-        $request->request->add(["user_id" => Auth::id()]);
-        BirthCertificateSubmission::create($request->all());
-        return response([], 201);
+        \DB::transaction(function() use ($request) {
+            $request->request->add(["user_id" => Auth::id()]);
+            $card = BirthCertificateSubmission::create($request->all());
+            $card->addMediaFromRequest('document')
+                ->toMediaCollection();
+            return response([], 201);
+        });
+
     }
 }

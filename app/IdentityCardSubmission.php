@@ -7,10 +7,12 @@ use App\Traits\Statistic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class IdentityCardSubmission extends Model
+class IdentityCardSubmission extends Model implements HasMedia
 {
-    use SoftDeletes, Statistic, Publishable;
+    use SoftDeletes, Statistic, Publishable, InteractsWithMedia;
 
     protected $table = 'identity_card_submissions';
 
@@ -20,7 +22,7 @@ class IdentityCardSubmission extends Model
 
     protected static function getTargetClass()
     {
-        return IdentityCard::getClassName();   
+        return IdentityCard::getClassName();
     }
 
     protected $fillable = [

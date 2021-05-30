@@ -11,14 +11,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class FamilyCardSubmission extends Model
+class FamilyCardSubmission extends Model implements HasMedia
 {
 
-    use SoftDeletes, Statistic, Latest, Oldest;
+    use SoftDeletes, Statistic, Latest, Oldest, InteractsWithMedia;
 
     protected $table = "family_card_submissions";
-    
+
     protected $fillable = [
         "id_number", "householder", "householder_id_card", "rt", "rw",
         "zipcode", "kelurahan", "kabupaten", "provinsi", "address", "kecamatan", "status",

@@ -6,10 +6,12 @@ use App\Traits\Publishable;
 use App\Traits\Statistic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class BirthCertificateSubmission extends Model
+class BirthCertificateSubmission extends Model implements HasMedia
 {
-    use SoftDeletes, Statistic, Publishable;
+    use SoftDeletes, Statistic, Publishable, InteractsWithMedia;
 
     protected $table = "birth_certificate_submission";
 

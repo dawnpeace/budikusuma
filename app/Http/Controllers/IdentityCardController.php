@@ -42,11 +42,17 @@ class IdentityCardController extends Controller
                 "required",
                 Rule::in(MarriageStatus::ALL)
             ],
-            "nationality" => "required"
+            "nationality" => "required",
+            "document" => "required|file|max:5000|mimes:pdf"
         ]);
-        
+
         $request->request->add(["user_id" => Auth::id()]);
-        IdentityCardSubmission::create($request->all());
+        \DB::transaction(function() use($request) {
+            $card = IdentityCardSubmission::create($request->all());
+            $card->addMediaFromRequest('document')
+                ->toMediaCollection();
+        });
+
         return response()->json([], 201);
     }
 }

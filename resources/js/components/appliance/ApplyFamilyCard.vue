@@ -8,103 +8,121 @@
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.householder_name[0]', '')" 
-                        name="householder_name" 
-                        title="Nama Kepala Keluarga" 
+                        :error="get(errors, 'errors.householder_name[0]', '')"
+                        name="householder_name"
+                        title="Nama Kepala Keluarga"
                         v-model="householder_name"
                         placeholder="Nama Kepala Keluarga"
                     />
                 </div>
-                
+
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.householder_id_card[0]', '')" 
-                        name="householder_id_card" 
-                        title="No Identitas Kepala Keluarga" 
+                        :error="get(errors, 'errors.householder_id_card[0]', '')"
+                        name="householder_id_card"
+                        title="No Identitas Kepala Keluarga"
                         v-model="householder_id_card"
                         placeholder="No Identitas Kepala Keluarga"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.address[0]', '')" 
-                        name="address" 
-                        title="Alamat" 
+                        :error="get(errors, 'errors.address[0]', '')"
+                        name="address"
+                        title="Alamat"
                         v-model="address"
                         placeholder="Alamat"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.zipcode[0]', '')" 
-                        name="zipcode" 
-                        title="Kode POS" 
+                        :error="get(errors, 'errors.zipcode[0]', '')"
+                        name="zipcode"
+                        title="Kode POS"
                         v-model="zipcode"
                         placeholder="Kode POS"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.kelurahan[0]', '')" 
-                        name="kelurahan" 
-                        title="Desa / Kelurahan" 
+                        :error="get(errors, 'errors.kelurahan[0]', '')"
+                        name="kelurahan"
+                        title="Desa / Kelurahan"
                         v-model="kelurahan"
                         placeholder="Desa / Kelurahan"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.kecamatan[0]', '')" 
-                        name="kecamatan" 
-                        title="Kecamatan" 
+                        :error="get(errors, 'errors.kecamatan[0]', '')"
+                        name="kecamatan"
+                        title="Kecamatan"
                         v-model="kecamatan"
                         placeholder="Kecamatan"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.rt[0]', '')" 
-                        name="rt" 
-                        title="RT" 
+                        :error="get(errors, 'errors.rt[0]', '')"
+                        name="rt"
+                        title="RT"
                         v-model="rt"
                         placeholder="RT"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.rw[0]', '')" 
-                        name="rw" 
-                        title="RW" 
+                        :error="get(errors, 'errors.rw[0]', '')"
+                        name="rw"
+                        title="RW"
                         v-model="rw"
                         placeholder="RW"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.kabupaten[0]', '')" 
-                        name="kabupaten" 
-                        title="Kabupaten / Kota" 
+                        :error="get(errors, 'errors.kabupaten[0]', '')"
+                        name="kabupaten"
+                        title="Kabupaten / Kota"
                         v-model="kabupaten"
                         placeholder="Kabupaten / Kota"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12 mb-3">
                     <side-label
-                        :error="get(errors, 'errors.provinsi[0]', '')" 
-                        name="provinsi" 
-                        title="Provinsi" 
+                        :error="get(errors, 'errors.provinsi[0]', '')"
+                        name="provinsi"
+                        title="Provinsi"
                         v-model="provinsi"
                         placeholder="Provinsi"
                     />
                 </div>
+
+                <div class="col-md-3 col-sm-12">
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Dokumen Pendukung</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Dokumen Pendukung</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="form-group">
+                        <input
+                            @change="assignDocument"
+                            placeholder="Dokumen Pendukung"
+                            type="file"
+                            id="document"
+                            ref="document"
+                            :class="{'is-invalid': get(this.errors, 'errors.document[0]', false)}"
+                            class="form-control">
+                        <div class="invalid-feedback">{{get(this.errors, 'errors.document[0]', '')}}</div>
+                    </div>
+                </div>
             </div>
         </div>
- 
+
         <div v-for="(family, index) in members" v-bind:key="index" class="card card-body mb-3">
             <div class="d-flex justify-content-end">
                 <button v-show="index > 0" @click="removeFamilyMember(index)" class="btn btn-danger btn-sm" type="button">Hapus</button>
             </div>
-            
+
             <div class="clearfix"></div>
             <h5 class="text-center mb-3">{{defaultLabelling(index, "Kepala Keluarga", "Anggota Keluarga")}}</h5>
             <side-label
@@ -128,7 +146,7 @@
                     <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                     <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
                 </div>
-                <div class="col-md-9 col-sm-12">  
+                <div class="col-md-9 col-sm-12">
                     <div class="form-group">
                         <select :class="{'is-invalid': getDynamicError('gender', index)}" v-model="family.gender" id="" class="form-control">
                             <option value="laki-laki" selected>Laki - laki</option>
@@ -145,12 +163,12 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
-                        <datepicker 
+                        <datepicker
                         input-class="form-control"
                         format="dd-MM-yyyy"
                         v-model="family.birthdate"
-                        placeholder="Tanggal Lahir" 
-                        :class="{'is-invalid':getDynamicError('birthdate', index)}" 
+                        placeholder="Tanggal Lahir"
+                        :class="{'is-invalid':getDynamicError('birthdate', index)}"
                         ></datepicker>
                         <div class="invalid-feedback">{{getDynamicError('birthdate', index)}}</div>
                     </div>
@@ -158,9 +176,9 @@
             </div>
 
             <side-label
-                :error="getDynamicError('birthplace', index)" 
-                name="birthplace" 
-                title="Tempat Lahir" 
+                :error="getDynamicError('birthplace', index)"
+                name="birthplace"
+                title="Tempat Lahir"
                 v-model="family.birthplace"
                 placeholder="Tempat Lahir"
                 />
@@ -186,28 +204,31 @@
             </div>
 
             <side-label
-                :error="getDynamicError('education', index)" 
-                name="education" 
-                title="Pendidikan" 
+                :error="getDynamicError('education', index)"
+                name="education"
+                title="Pendidikan"
                 v-model="family.education"
                 placeholder="Pendidikan"
                 />
 
             <side-label
-                :error="getDynamicError('profession', index)" 
-                name="profession" 
-                title="Pekerjaan" 
+                :error="getDynamicError('profession', index)"
+                name="profession"
+                title="Pekerjaan"
                 v-model="family.profession"
                 placeholder="Pekerjaan"
                 />
-            
+
             <side-label
-                :error="getDynamicError('family_relation', index)" 
-                name="family_relation" 
-                title="Status Hubungan Dalam Keluarga" 
+                :error="getDynamicError('family_relation', index)"
+                name="family_relation"
+                title="Status Hubungan Dalam Keluarga"
                 v-model="family.family_relation"
                 placeholder="Status Hubungan Dalam Keluarga"
                 />
+
+
+
         </div>
         <div class="d-flex justify-content-center mb-3">
             <button :disabled="hasSubmitted" @click="addFamilyMember" type="button" class="btn btn-small btn-secondary">Tambah Anggota Keluarga</button>
@@ -215,7 +236,7 @@
         <div class="d-flex justify-content-center">
             <button :disabled="hasSubmitted" @click="submitForm" type="button" class="btn btn-small btn-primary">Masukkan Data KK</button>
         </div>
-        
+
     </form>
 </template>
 <script>
@@ -230,20 +251,21 @@ export default {
     data(){
         return {
             hasSubmitted : false,
-            errors : null,
-            householder_name : null,
-            address : null,
-            rt : null,
-            rw : null,
-            zipcode : null,
-            kecamatan : null,
-            kabupaten : null,
-            kelurahan : null,
-            provinsi : null,
-            householder_id_card : null,
+            errors : '',
+            householder_name : '',
+            address : '',
+            rt : '',
+            rw : '',
+            zipcode : '',
+            kecamatan : '',
+            kabupaten : '',
+            kelurahan : '',
+            provinsi : '',
+            householder_id_card : '',
             members : [
                  ...this.getDefaultMember()
-            ]
+            ],
+            document: ''
         }
     },
     methods : {
@@ -251,14 +273,14 @@ export default {
         cloneDeep,
         addFamilyMember(){
             let family = {
-                name : null,
+                name : '',
                 gender : 'laki-laki',
                 birthdate : new Date('1990-01-01'),
-                birthplace : null,
+                birthplace : '',
                 religion : 'islam',
-                education : null,
-                profession : null,
-                family_relation : null
+                education : '',
+                profession : '',
+                family_relation : ''
             };
             this.members.push(family);
         },
@@ -279,7 +301,14 @@ export default {
         },
         submitForm(){
             this.hasSubmitted = true;
-            axios.post(this.submit_url, this.formData)
+            axios.post(
+                this.submit_url,
+                this.formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                 .then(response => {
                     swal({
                         icon : 'success',
@@ -291,7 +320,6 @@ export default {
                     })
                 })
                 .catch(e => {
-                    console.log(e);
                     this.errors = e.response.data;
                     this.hasSubmitted = false;
                 });
@@ -301,31 +329,36 @@ export default {
             return message.replace(/.[0-9]./, " ");
         },
         resetForm(){
-            this.householder_name = null,
-            this.address = null;
-            this.rt = null;
-            this.rw = null;
-            this.zipcode = null;
-            this.kecamatan = null;
-            this.kabupaten = null;
-            this.kelurahan = null;
-            this.provinsi = null;
+            this.householder_name = '',
+            this.address = '';
+            this.rt = '';
+            this.rw = '';
+            this.zipcode = '';
+            this.kecamatan = '';
+            this.kabupaten = '';
+            this.kelurahan = '';
+            this.provinsi = '';
             this.householder_id_card=null;
             this.members = this.getDefaultMember();
             this.hasSubmitted = false;
+            this.document = '';
+            document.getElementById('document').value = '';
         },
         getDefaultMember(){
             return [{
                 name : this.householder_name,
                 gender : 'laki-laki',
-                id_card : null,
+                id_card : '',
                 birthdate : new Date('1990-01-01'),
-                birthplace : null,
+                birthplace : '',
                 religion : 'islam',
-                education : null,
-                profession : null,
+                education : '',
+                profession : '',
                 family_relation : 'Kepala Keluarga'
             }];
+        },
+        assignDocument(event){
+            this.document = event.target.files[0];
         }
     },
     computed : {
@@ -343,7 +376,7 @@ export default {
             return data;
         },
         formData(){
-            return {
+            let mainData =  {
                 householder_name : this.householder_name,
                 address : this.address,
                 rt : this.rt,
@@ -353,9 +386,21 @@ export default {
                 kabupaten : this.kabupaten,
                 kelurahan : this.kelurahan,
                 provinsi : this.provinsi,
-                members : this.computedMember,
                 householder_id_card : this.householder_id_card
             };
+            let membersData = this.computedMember;
+
+            let form = new FormData();
+            for (let mainDataKey in mainData) {
+                form.append(mainDataKey, mainData[mainDataKey]);
+            }
+            membersData.forEach(function (value, index) {
+                for (let valueKey in value) {
+                    form.append(`members[${index}][${valueKey}]`, value[valueKey]);
+                }
+            });
+            form.append('document', this.document);
+            return form;
         }
     },
     watch : {

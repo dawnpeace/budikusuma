@@ -9,10 +9,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="name" 
-                        placeholder="Nama Anak" 
-                        type="text" 
+                    <input
+                        v-model="name"
+                        placeholder="Nama Anak"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.name[0]', '')}}</div>
@@ -23,7 +23,7 @@
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                 <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
             </div>
-            <div class="col-md-9 col-sm-12">  
+            <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <select :class="{'is-invalid': get(this.errors, 'errors.gender[0]', false)}" v-model="gender" class="form-control">
                         <option value="laki-laki" selected>Laki - laki</option>
@@ -39,12 +39,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <datepicker 
+                    <datepicker
                         input-class="form-control"
                         id="birthdate"
                         format="dd-MM-yyyy"
                         v-model="birthdate"
-                        placeholder="Tanggal Lahir" 
+                        placeholder="Tanggal Lahir"
                         :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthdate[0]', '')}}</div>
                 </div>
@@ -56,12 +56,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="birthplace" 
-                    placeholder="Tempat Lahir" 
+                    <input
+                    v-model="birthplace"
+                    placeholder="Tempat Lahir"
                     type="text"
                     id="birthplace"
-                    :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthplace[0]', '')}}</div>
                 </div>
@@ -73,10 +73,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="mother_identity_card_number" 
-                        placeholder="No KTP Ibu" 
-                        type="text" 
+                    <input
+                        v-model="mother_identity_card_number"
+                        placeholder="No KTP Ibu"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.mother_identity_card_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.mother_identity_card_number[0]', '')}}</div>
@@ -89,10 +89,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="mother_name" 
-                        placeholder="Nama Ibu" 
-                        type="text" 
+                    <input
+                        v-model="mother_name"
+                        placeholder="Nama Ibu"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.mother_name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.mother_name[0]', '')}}</div>
@@ -105,10 +105,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="father_identity_card_number" 
-                        placeholder="No KTP Ayah" 
-                        type="text" 
+                    <input
+                        v-model="father_identity_card_number"
+                        placeholder="No KTP Ayah"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.father_identity_card_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.father_identity_card_number[0]', '')}}</div>
@@ -121,13 +121,31 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="father_name" 
-                        placeholder="Nama Ayah" 
-                        type="text" 
+                    <input
+                        v-model="father_name"
+                        placeholder="Nama Ayah"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.father_name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.father_name[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Dokumen Pendukung</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Dokumen Pendukung</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <input
+                        @change="assignDocument"
+                        placeholder="Dokumen Pendukung"
+                        type="file"
+                        id="document"
+                        ref="document"
+                        :class="{'is-invalid': get(this.errors, 'errors.document[0]', false)}"
+                        class="form-control">
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.document[0]', '')}}</div>
                 </div>
             </div>
 
@@ -147,20 +165,21 @@ export default {
     data(){
         return {
             errors : null,
-            name : null,
+            name : '',
             gender : 'laki-laki',
             birthdate : new Date('2000-01-01'),
-            birthplace : null,
-            mother_identity_card_number : null,
-            mother_name : null,
-            father_identity_card_number : null,
-            father_name : null,
+            birthplace : '',
+            mother_identity_card_number : '',
+            mother_name : '',
+            father_identity_card_number : '',
+            father_name : '',
             disableSubmit : false,
+            document : ''
         }
     },
     computed :{
         formData(){
-            return {
+            let data = {
                 name : this.name,
                 gender : this.gender,
                 birthdate : moment(this.birthdate).format("DD-MM-YYYY"),
@@ -169,7 +188,15 @@ export default {
                 mother_name : this.mother_name,
                 father_identity_card_number : this.father_identity_card_number,
                 father_name : this.father_name
+            };
+
+            let formData = new FormData;
+
+            for (let dataKey in data) {
+                formData.append(dataKey, data[dataKey]);
             }
+            formData.append('document', this.document);
+            return formData;
         }
     },
     methods : {
@@ -177,7 +204,13 @@ export default {
         submitForm(){
             this.disableSubmit = true;
             axios.post(
-                this.submit_url, this.formData
+                this.submit_url,
+                this.formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
             ).then(response => {
                 this.disableSubmit = true;
                 swal({
@@ -189,8 +222,8 @@ export default {
                     this.resetForm();
                 })
             }).catch(e => {
-                    console.log(e.response.data);
                     this.errors = e.response.data;
+                    this.disableSubmit = false;
             });
         },
         resetForm(){
@@ -203,7 +236,13 @@ export default {
             this.father_identity_card_number = null;
             this.father_name = null;
             this.disableSubmit = false;
+            document.getElementById('document').value = ''
+            this.document = ''
+        },
+        assignDocument(event){
+            this.document = event.target.files[0];
         }
+
     }
 }
 </script>

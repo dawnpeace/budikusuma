@@ -21,7 +21,7 @@ class FamilyCardController extends Controller
     {
         $rules = $this->getStoreRule();
         $request->validate($rules);
-        try{            
+        try{
             DB::beginTransaction();
             $familyCard = FamilyCardSubmission::create([
                 "householder" => $request->householder_name,
@@ -37,12 +37,14 @@ class FamilyCardController extends Controller
                 "user_id" => Auth::id()
             ]);
             $familyCard->members()->createMany($request->members);
+            $familyCard->addMediaFromRequest('document')
+                ->toMediaCollection();
             DB::commit();
             return response()->json([], 201);
         } catch (Exception $e){
             return response()->json(['message' => $e->getMessage()],500);
         }
-        
+
     }
 
     private function getStoreRule()
@@ -58,6 +60,7 @@ class FamilyCardController extends Controller
             "kecamatan" => "required",
             "kabupaten" => "required",
             "provinsi" => "required",
+            "document" => "required|file|max:5000:mimes:pdf",
             "members" => "required|array",
             "members.*.name" => "required",
             "members.*.gender" => [

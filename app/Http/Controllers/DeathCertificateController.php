@@ -19,13 +19,19 @@ class DeathCertificateController extends Controller
             "identity_card" => "required|numeric",
             "deceased_at" => "date|date_format:d-m-Y",
             "birthdate" => "date|date_format:d-m-Y",
-            "name" => "required", 
-            "birthplace" => "required"
+            "name" => "required",
+            "birthplace" => "required",
+            "document" => "required|file|max:5000|mimes:pdf"
         ];
 
         $request->validate($rules);
-        $request->request->add(["user_id" => Auth::id()]);
-        DeathCertificateSubmission::create($request->all());
+
+        \DB::transaction(function () use ($request) {
+            $request->request->add(["user_id" => Auth::id()]);
+            $card = DeathCertificateSubmission::create($request->all());
+            $card->addMediaFromRequest('document')
+                ->toMediaCollection();
+        });
         return response()->json([], 201);
     }
 }
