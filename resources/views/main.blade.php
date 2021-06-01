@@ -12,7 +12,7 @@
         <div class="row">
             <div class="card col-12">
                 <div class="card-body">
-                    <h2 class="text-center">Selamat datang di Portal Sanatab</h2>
+                    <h2 class="text-center"><img style="width: 50px; height: 64px" src="{{asset('img/logo-sambas.png')}}" class="img img-thumbnail border-none" alt=""> Selamat datang di Portal Sanatab</h2>
                 </div>
             </div>
         </div>
