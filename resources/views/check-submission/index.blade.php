@@ -10,7 +10,14 @@
         </nav>
         <div class="card card-boy">
             <div class="p-4">
-                <check-appliance redirect_url='{{url("/")}}' submit_url='{{route("check.submit")}}' />
+                <check-appliance
+                    ktp_pdf_url="{{route('check.pdf.ktp')}}"
+                    kk_pdf_url="{{route('check.pdf.kk')}}"
+                    kia_pdf_url="{{route('check.pdf.kia')}}"
+                    al_pdf_url="{{route('check.pdf.al')}}"
+                    ak_pdf_url="{{route('check.pdf.ak')}}"
+                    redirect_url='{{url("/")}}'
+                    submit_url='{{route("check.submit")}}' />
             </div>
         </div>
     </div>

@@ -63,4 +63,9 @@ class FamilyCardSubmission extends Model implements HasMedia
 
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

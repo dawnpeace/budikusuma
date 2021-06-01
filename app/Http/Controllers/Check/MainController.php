@@ -8,10 +8,8 @@ use App\DeathCertificateSubmission;
 use App\enums\Document;
 use App\FamilyCardSubmission;
 use App\Http\Controllers\Controller;
-use App\IdentityCard;
 use App\IdentityCardSubmission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
@@ -45,7 +43,7 @@ class MainController extends Controller
 
     private function identityCard()
     {
-        $documents = IdentityCardSubmission::select('name as nama', 'created_at', 'status', 'reason')
+        $documents = IdentityCardSubmission::select('id', 'name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -54,7 +52,7 @@ class MainController extends Controller
 
     private function birthCertificate()
     {
-        $documents = BirthCertificateSubmission::select('name as nama', 'created_at', 'status', 'reason')
+        $documents = BirthCertificateSubmission::select('id', 'name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -63,7 +61,7 @@ class MainController extends Controller
 
     private function familyCard()
     {
-        $documents = FamilyCardSubmission::select('householder as nama','created_at', 'status', 'reason')
+        $documents = FamilyCardSubmission::select('id', 'householder as nama','created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
 
@@ -73,16 +71,16 @@ class MainController extends Controller
 
     private function childIdCard()
     {
-        $documents = ChildIdSubmission::select('name as nama', 'created_at', 'status', 'reason')
+        $documents = ChildIdSubmission::select('id', 'name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
-        
+
         return response()->json($documents);
     }
 
     private function deathCertificate()
     {
-        $document = DeathCertificateSubmission::select('name as nama', 'created_at', 'status', 'reason')
+        $document = DeathCertificateSubmission::select('id', 'name as nama', 'created_at', 'status', 'reason')
             ->where('user_id', Auth::id())
             ->get();
         return response()->json($document);

@@ -22,8 +22,8 @@
                     <button @click="submit" :disabled="isDisabled" class="btn btn-primary btn-sm">Search</button>
                 </div>
         </div>
-        
-        
+
+
         <div :key="key" v-for="(val,key) in data" class="row" :class="key == 0 ? 'mt-5' : 'mt-2'">
             <div class="col-3 mb-2 text-right">
                 Nama
@@ -54,11 +54,19 @@
             <div class="col-9 mb-2">
                 {{ val.reason ? val.reason : '-' }}
             </div>
+
+            <div v-if="val.status == '04'" class="col-3 mb-2 text-right">
+                Dokumen Pendukung
+            </div>
+            <div v-if="val.status == '04'" class="col-9 mb-2">
+                <a :href="pdfUrl + '/' + val.id" class="btn btn-sm btn-dark">Unduh Dokumen Pendukung</a>
+            </div>
+
             <div class="col-12 px-5 d-flex justify-content-center my-3">
                 <div class="w-50 border-bottom"></div>
             </div>
         </div>
-       
+
 
     </div>
 </template>
@@ -69,15 +77,15 @@ import Swal from 'sweetalert2'
 import moment from 'moment'
 export default {
     props : [
-        "redirect_url", "submit_url"
+        "redirect_url", "submit_url", "ktp_pdf_url", "kia_pdf_url", "kk_pdf_url", "ak_pdf_url", "al_pdf_url"
     ],
     data(){
         return {
             errors : null,
             document : 'E-KTP',
             data : [],
-            isDisabled : false
-
+            isDisabled : false,
+            pdfUrl : '',
         }
     },
     computed:{
@@ -95,7 +103,27 @@ export default {
             axios.post(this.submit_url, this.request)
                 .then( response => {
                     this.data = response.data;
-                    if(this.data.length == 0) Swal.fire('Data tidak ditemukan', '', 'success');
+                    if(this.data.length == 0) {
+                        Swal.fire('Data tidak ditemukan', '', 'success');
+                    } else {
+                        switch (this.document) {
+                            case 'E-KTP':
+                                this.pdfUrl = this.ktp_pdf_url;
+                                break;
+                            case 'KIA':
+                                this.pdfUrl = this.kia_pdf_url;
+                                break;
+                            case 'KK':
+                                this.pdfUrl = this.kk_pdf_url;
+                                break;
+                            case 'AL':
+                                this.pdfUrl = this.al_pdf_url;
+                                break;
+                            case 'AK':
+                                this.pdfUrl = this.ak_pdf_url;
+                                break;
+                        }
+                    }
                 })
                 .catch( err => {
                     this.err = err.response.data;
@@ -131,8 +159,8 @@ export default {
 
             }
         }
-       
-        
+
+
     }
 }
 </script>

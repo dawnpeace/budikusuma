@@ -27,7 +27,7 @@ class ChildIdSubmission extends Model implements HasMedia
     }
 
     protected $fillable = [
-        "card_number" ,"name", "gender", "birthplace", "birthdate",
+        "card_number", "name", "gender", "birthplace", "birthdate",
         "family_card_number", "householder_name", "religion",
         "birth_certificate_number", "citizenship",
         "address", "rt", "rw", "kecamatan", "kelurahan", "status",
@@ -38,5 +38,9 @@ class ChildIdSubmission extends Model implements HasMedia
         'birthdate'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

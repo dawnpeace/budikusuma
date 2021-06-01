@@ -39,4 +39,10 @@ class DeathCertificateSubmission extends Model implements HasMedia
         return DeathCertificate::getClassName();
     }
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

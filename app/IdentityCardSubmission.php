@@ -36,4 +36,8 @@ class IdentityCardSubmission extends Model implements HasMedia
         'birthdate'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -63,6 +63,14 @@ Route::middleware(['auth', 'can:access-common-page'])->group(function(){
 Route::group(['prefix' => 'periksa-pengajuan', 'as' => 'check.', 'namespace' => 'Check'], function(){
     Route::get('/', 'MainController@index')->name('index');
     Route::post('/', 'MainController@submit')->name('submit');
+
+    Route::group(['namespace' => 'Pdf', 'as' => 'pdf.'], function() {
+        Route::get('/ktp/{card?}', 'IdentityCardController@pdf')->name('ktp');
+        Route::get('/kia/{card?}', 'ChildIdCardController@pdf')->name('kia');
+        Route::get('/kk/{card?}', 'FamilyCardController@pdf')->name('kk');
+        Route::get('/al/{card?}', 'BirthCertificateController@pdf')->name('al');
+        Route::get('/ak/{card?}', 'DeathCertificateController@pdf')->name('ak');
+    });
 });
 
 Route::group(['prefix' => 'persyaratan', 'as' => 'requirement.'], function(){

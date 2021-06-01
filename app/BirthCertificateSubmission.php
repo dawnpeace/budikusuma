@@ -35,4 +35,9 @@ class BirthCertificateSubmission extends Model implements HasMedia
         return BirthCertificate::getClassName();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
