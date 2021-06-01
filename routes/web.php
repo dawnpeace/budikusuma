@@ -18,11 +18,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'main')->name('dashboard');
 
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('media/{media?}', 'MediaController@getMedia')
+    ->middleware('auth')
+    ->name("media");
+
 Route::middleware(['auth', 'can:access-common-page'])->group(function(){
+
+    Route::prefix('pdf')->namespace('Reprint')->group(function(){
+        Route::get('akta-lahir/{card?}', 'BirthCertificateController@pdf')->name('al.pdf');
+        Route::get('kk/{card?}', 'FamilyCardController@pdf')->name('kk.pdf');
+        Route::get('kia/{card?}', 'ChildIdentityCard@pdf')->name('kia.pdf');
+        Route::get('akta-kematian/{card?}', 'DeathCertificateController@pdf')->name('ak.pdf');
+        Route::get('ktp/{card?}', 'IdentityCardController@pdf')->name('ktp.pdf');
+    });
 
     Route::group(['prefix' => 'pengajuan', 'as' => 'apply.'], function () {
         Route::get('/buat-ktp', 'IdentityCardController@index')->name('ktp');

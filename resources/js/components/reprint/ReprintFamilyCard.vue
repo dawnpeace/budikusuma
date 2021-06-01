@@ -15,9 +15,10 @@
                         <td>{{card.householder}}</td>
                         <td>{{dateFormat(card.birthdate)}}</td>
                         <td class="text-center">
-                            <button @click="submitReprint(card.id)" :disabled="canReprint(card)" class="btn btn-sm btn-primary">
+                            <button @click="submitReprint(card.id)" :disabled="canReprint(card)" class="btn mt-1 btn-sm btn-primary">
                                 Ajukan Cetak Ulang
                             </button>
+                            <a class="btn btn-dark btn-sm mt-1" :href="`${media_url}\\${card.id}`">Download Dokumen Pendukung</a>
                         </td>
                     </tr>
                 </tbody>
@@ -50,10 +51,10 @@ import moment from 'moment';
 import {confirmationModal, successModal, errorModal} from '../../helper'
 import Swal from 'sweetalert2';
 export default {
-    props : ["cards", "submit_url", "redirect_url", "has_printed"],
+    props : ["cards", "submit_url", "redirect_url", "has_printed", "media_url"],
     data(){
         return {
-            
+
         }
     },
     methods : {
@@ -67,7 +68,7 @@ export default {
                         axios.post(this.submit_url, {card : id})
                             .then(success => {
                                 successModal({
-                                    title : "Permintaan berhasil dibuat.", 
+                                    title : "Permintaan berhasil dibuat.",
                                     onClose : () => {
                                         location.replace(this.redirect_url);
                                     }

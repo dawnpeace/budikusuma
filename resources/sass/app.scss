@@ -38,3 +38,23 @@ tbody.loopable::before {
     display: block;
     height: 0.5rem;
 }
+
+.btn-thumbnail-top {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    border-radius: 50%;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    transition: all .25s ease-in-out
+}
+
+.bg-book {
+    background-image:url("/public/img/book.png");
+}
+

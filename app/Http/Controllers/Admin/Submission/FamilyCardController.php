@@ -47,7 +47,8 @@ class FamilyCardController extends Controller
         $submitUrl = route($this->baseRouteName . '.update', $card);
         $redirectUrl = route($this->baseRouteName);
         $deleteUrl = route($this->baseRouteName . '.delete', $card);
-        return view('admin.submission.kk.edit', compact('submitUrl', 'card', 'redirectUrl', 'deleteUrl'));
+        $media = $card->getFirstMedia();
+        return view('admin.submission.kk.edit', compact('submitUrl', 'card', 'redirectUrl', 'deleteUrl', 'media'));
     }
 
     public function update(FamilyCardSubmission $card, Request $request)
@@ -57,7 +58,7 @@ class FamilyCardController extends Controller
             "householder_name", "householder_id_card", "address", "rt", "rw", "zipcode",
             "kelurahan", "kecamatan", "kabupaten", "provinsi", "members", "status", "id_number", "reason"
         ]);
-        
+
         DB::transaction(function() use ($famCardRequest, $request, $card) {
             $card->update($famCardRequest);
             if ($request->has('members')) {
@@ -70,12 +71,12 @@ class FamilyCardController extends Controller
 
                     $collection['birthdate'] = Carbon::createFromFormat('d-m-Y', $collection->get('birthdate'))->format('Y-m-d');
 
-                    if ( !$collection->isEmpty('id') ) { 
+                    if ( !$collection->isEmpty('id') ) {
                         $card->members()
                             ->where('id', $collection->get('id'))
                             ->update($collection->toArray());
                     }
-                } 
+                }
             }
         });
     }

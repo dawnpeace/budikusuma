@@ -9,7 +9,7 @@
         </ol>
     </nav>
     <div class="card card-body">
-        <qualified-death-certificate-edit redirect_url="{{$redirectUrl}}" submit_url="{{ $submitUrl }}" :card="{{ json_encode($card) }}" />
+        <qualified-death-certificate-edit media_url="{{route('media', $media)}}" redirect_url="{{$redirectUrl}}" submit_url="{{ $submitUrl }}" :card="{{ json_encode($card) }}" />
     </div>
 </div>
 @endsection

@@ -11,11 +11,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class IdentityCard extends Model
+class IdentityCard extends Model implements HasMedia
 {
 
-    use Reprintable, ClassName, Latest, Oldest;
+    use Reprintable, ClassName, Latest, Oldest, InteractsWithMedia;
 
     protected $table = "identity_cards";
 
@@ -61,6 +63,11 @@ class IdentityCard extends Model
         return self::query()
             ->where('identity_card_number', $idCard)
             ->count() > 0;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

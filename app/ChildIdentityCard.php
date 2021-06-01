@@ -10,11 +10,13 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class ChildIdentityCard extends Model
+class ChildIdentityCard extends Model implements HasMedia
 {
 
-    use Reprintable, ClassName, Latest, Oldest;
+    use Reprintable, ClassName, Latest, Oldest, InteractsWithMedia;
 
     protected $cardIdName = "card_number";
 
@@ -26,7 +28,7 @@ class ChildIdentityCard extends Model
 
     protected $fillable = [
         "card_number", "name", "gender", "family_card_number",
-        "birthdate", "householder_name", "address", "religion", 
+        "birthdate", "householder_name", "address", "religion",
         "rt", "rw", "kelurahan", "kecamatan", "citizenship", "birthplace", "birth_certificate_number",
         "user_id"
     ];
@@ -42,6 +44,11 @@ class ChildIdentityCard extends Model
             $builder->whereBetween('created_at', [Carbon::now()->addMonths(-2), Carbon::now()]);
         })->where('user_id', Auth::id())
         ->count();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function createReprint($authId)

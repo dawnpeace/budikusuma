@@ -13,11 +13,12 @@
             <div class="p-4">
                 <h5 class="text-center">Cetak Ulang Akta Kematian</h5>
                 <hr>
-                <reprint-death-certificate 
+                <reprint-death-certificate
                     has_printed="{{ $hasPrinted }}"
-                    :cards="{{json_encode($cards)}}" 
-                    submit_url="{{route('reprint.ak.submit')}}" 
+                    :cards="{{json_encode($cards)}}"
+                    submit_url="{{route('reprint.ak.submit')}}"
                     redirect_url="{{route('reprint.ak.index')}}"
+                    media_url="{{route('ak.pdf')}}"
                 />
             </div>
         </div>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Reprint;
 
+use App\Data\PdfData;
+use App\enums\Document;
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -18,7 +21,7 @@ class FamilyCardController extends Controller
             ->with(["reprints"])
             ->orderBy('created_at', 'desc')
             ->get();
-        
+
         $hasPrinted = FamilyCard::hasJustPrinted();
 
         if (count($cards) == 0) {
@@ -42,6 +45,20 @@ class FamilyCardController extends Controller
         }
 
         return response()->json(["family_card" => "There's processed request"], 422);
+    }
+
+    public function pdf(FamilyCard $card)
+    {
+        $card->load('user');
+        $data = new PdfData();
+        $data->setName($card->householder);
+        $data->setDocType(Document::KK);
+        $data->setDocId($card->id);
+        $data->setCardNo($card->id_card);
+        $data->setPublishedAt($card->created_at->format('d-m-Y'));
+        $data->setUserName($card->user->name);
+        $pdf = PDF::loadView('pdf.pdf', $data);
+        return $pdf->stream();
     }
 
 }

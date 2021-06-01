@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class FamilyCard extends Model
+class FamilyCard extends Model implements HasMedia
 {
-    use Reprintable, ClassName, Oldest, Latest;
+    use Reprintable, ClassName, Oldest, Latest, InteractsWithMedia;
 
     protected $table = "stored_family_cards";
 
@@ -34,6 +36,12 @@ class FamilyCard extends Model
     {
         return $this->hasMany(FamilyCardMember::class, 'family_card_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
     public static function hasJustPrinted()
     {

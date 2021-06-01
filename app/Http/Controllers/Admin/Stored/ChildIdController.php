@@ -59,7 +59,8 @@ class ChildIdController extends Controller
     {
         $submitUrl = route($this->baseRouteName . '.update', $card);
         $redirectUrl = route($this->baseRouteName . '.index');
-        return view('admin.stored.kia.edit', compact(['card', 'redirectUrl', 'submitUrl']));
+        $media = $card->getFirstMedia();
+        return view('admin.stored.kia.edit', compact(['card', 'redirectUrl', 'submitUrl', 'media']));
     }
 
     public function update(ChildIdentityCard $card, Request $request)

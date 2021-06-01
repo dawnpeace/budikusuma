@@ -78,6 +78,7 @@
             </table>
             <div class="d-flex justify-content-center">
                 <button @click="submitArchieve" class="btn btn-sm btn-primary" type="button">Arsipkan Dokumen</button>
+                <a class="btn btn-info btn-sm mx-1" :href="this.media_url">Download Dokumen Pendukung</a>
             </div>
         </div>
     </div>
@@ -90,7 +91,7 @@ import moment from 'moment'
 import {confirmationModal, errorModal, successModal} from '../../../../helper'
 export default {
     props : [
-        'card', 'submit_url', 'delete_url', 'redirect_url'
+        'card', 'submit_url', 'delete_url', 'redirect_url', 'media_url'
     ],
     data(){
         return {
@@ -120,7 +121,7 @@ export default {
                         axios.post(this.submit_url)
                             .then(response => {
                                 successModal({
-                                    title : "Data berhasil diarsipkan", 
+                                    title : "Data berhasil diarsipkan",
                                     onClose : () => {
                                         location.replace(this.redirect_url);
                                     }
@@ -130,7 +131,7 @@ export default {
                                 let statusCode = err.response.status;
                                 switch(statusCode){
                                     case 400 :
-                                        errorModal({title : err.response.data}); 
+                                        errorModal({title : err.response.data});
                                         break;
                                     case 401:
                                     case 403:
@@ -143,7 +144,7 @@ export default {
                             });
                     }
                 })
-                
+
         }
    }
 }

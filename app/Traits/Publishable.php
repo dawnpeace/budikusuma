@@ -5,7 +5,7 @@ namespace App\Traits;
 use App\Exceptions\NaturalIdUsedExceptions;
 use Illuminate\Support\Facades\DB;
 
-trait Publishable 
+trait Publishable
 {
     use CheckNaturalId;
 
@@ -19,9 +19,12 @@ trait Publishable
                     $items = $this->toArray();
                     $items[self::$publishIdName] = $items[self::$selfIdName];
 
-                    
-                    call_user_func_array(array(self::getTargetClass(), 'create'), [$items]);
-    
+                    $card = call_user_func_array(array(self::getTargetClass(), 'create'), [$items]);
+
+                    $card->addMedia($this->getFirstMedia()->getPath())
+                        ->preservingOriginal()
+                        ->toMediaCollection();
+
                     $this->published_at = now();
                     $this->save();
 

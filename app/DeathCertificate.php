@@ -9,10 +9,12 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class DeathCertificate extends Model
+class DeathCertificate extends Model implements HasMedia
 {
-    use Latest, Oldest, ClassName;
+    use Latest, Oldest, ClassName, InteractsWithMedia;
 
     protected $dates = [
         "published_at", "deceased_at", "birthdate"
@@ -25,6 +27,11 @@ class DeathCertificate extends Model
     public function reprints()
     {
         return $this->morphMany(ReprintRequest::class, 'reprintable');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public static function hasJustPrinted()

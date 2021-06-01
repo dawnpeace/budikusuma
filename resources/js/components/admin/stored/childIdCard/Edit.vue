@@ -8,10 +8,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
+                    <input
                         v-model="formData.card_number"
-                        placeholder="Nomor Kartu" 
-                        type="text" 
+                        placeholder="Nomor Kartu"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.card_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.card_number[0]', '')}}</div>
@@ -24,10 +24,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
+                    <input
                         v-model="formData.name"
-                        placeholder="Nama Anak" 
-                        type="text" 
+                        placeholder="Nama Anak"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.name[0]', '')}}</div>
@@ -40,10 +40,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.birthplace" 
-                        placeholder="Tempat Lahir" 
-                        type="text" 
+                    <input
+                        v-model="formData.birthplace"
+                        placeholder="Tempat Lahir"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthplace[0]', '')}}</div>
@@ -56,12 +56,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <datepicker 
+                    <datepicker
                         input-class="form-control"
                         id="birthdate"
                         format="dd-MM-yyyy"
                         v-model="formData.birthdate"
-                        placeholder="Tanggal Lahir" 
+                        placeholder="Tanggal Lahir"
                         :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthdate[0]', '')}}</div>
                 </div>
@@ -71,7 +71,7 @@
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                 <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
             </div>
-            <div class="col-md-9 col-sm-12">  
+            <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <select :class="{'is-invalid': get(this.errors, 'errors.gender[0]', false)}" v-model="formData.gender" class="form-control">
                         <option value="laki-laki" selected>Laki - laki</option>
@@ -87,10 +87,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.family_card_number" 
-                        placeholder="No. Kartu Keluarga" 
-                        type="text" 
+                    <input
+                        v-model="formData.family_card_number"
+                        placeholder="No. Kartu Keluarga"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.family_card_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.family_card_number[0]', '')}}</div>
@@ -103,10 +103,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.householder_name" 
-                        placeholder="Nama Kepala Keluarga" 
-                        type="text" 
+                    <input
+                        v-model="formData.householder_name"
+                        placeholder="Nama Kepala Keluarga"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.householder_name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.householder_name[0]', '')}}</div>
@@ -119,10 +119,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.birth_certificate_number" 
-                        placeholder="Nomor Akta Kelahiran" 
-                        type="text" 
+                    <input
+                        v-model="formData.birth_certificate_number"
+                        placeholder="Nomor Akta Kelahiran"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.birth_certificate_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birth_certificate_number[0]', '')}}</div>
@@ -153,10 +153,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.citizenship" 
-                        placeholder="Kewarganegaraan" 
-                        type="text" 
+                    <input
+                        v-model="formData.citizenship"
+                        placeholder="Kewarganegaraan"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.citizenship[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.citizenship[0]', '')}}</div>
@@ -169,10 +169,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.address" 
-                        placeholder="Alamat" 
-                        type="text" 
+                    <input
+                        v-model="formData.address"
+                        placeholder="Alamat"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.address[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.address[0]', '')}}</div>
@@ -185,10 +185,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.rt" 
-                        placeholder="RT" 
-                        type="text" 
+                    <input
+                        v-model="formData.rt"
+                        placeholder="RT"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.rt[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.rt[0]', '')}}</div>
@@ -201,10 +201,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.rw" 
-                        placeholder="RW" 
-                        type="text" 
+                    <input
+                        v-model="formData.rw"
+                        placeholder="RW"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.rw[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.rw[0]', '')}}</div>
@@ -217,10 +217,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.kelurahan" 
-                        placeholder="Kelurahan" 
-                        type="text" 
+                    <input
+                        v-model="formData.kelurahan"
+                        placeholder="Kelurahan"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kelurahan[0]', '')}}</div>
@@ -233,10 +233,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.kecamatan" 
-                        placeholder="Kecamatan" 
-                        type="text" 
+                    <input
+                        v-model="formData.kecamatan"
+                        placeholder="Kecamatan"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kecamatan[0]', '')}}</div>
@@ -244,6 +244,7 @@
             </div>
             <div class="d-flex justify-content-center col-12 pt-3">
                 <button :disabled="disableSubmit" class="btn btn-primary mx-1 btn-sm" type="submit">Perbaharui</button>
+                <a class="btn btn-info btn-sm mx-1" :href="this.media_url">Download Dokumen Pendukung</a>
             </div>
         </form>
     </div>
@@ -256,7 +257,7 @@ import moment from 'moment'
 import {confirmationModal, errorModal, successModal} from '../../../../helper'
 export default {
     props : [
-        'card', 'submit_url', 'delete_url', 'redirect_url'
+        'card', 'submit_url', 'delete_url', 'redirect_url', 'media_url'
     ],
     data(){
         return {
@@ -272,7 +273,6 @@ export default {
                 family_card_number : get(this.card, 'family_card_number', ''),
                 householder_name : get(this.card, 'householder_name', ''),
                 birth_certificate_number : get(this.card, 'birth_certificate_number', ''),
-                citizenship : get(this.card, 'citizenship', ''),
                 rt : get(this.card, 'rt', ''),
                 rw : get(this.card, 'rw', ''),
                 kelurahan : get(this.card, 'kelurahan', ''),

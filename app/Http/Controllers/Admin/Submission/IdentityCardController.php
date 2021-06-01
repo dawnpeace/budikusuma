@@ -30,10 +30,10 @@ class IdentityCardController extends Controller
         return Datatables::of($users)
             ->addIndexColumn()
             ->addColumn('action', function($row) {
-                return 
+                return
                     Button::deleteButton(route($this->baseRouteName . '.delete', $row->id)).
                     Button::checkButton(route($this->baseRouteName . '.edit', $row->id));
-                
+
             })
             ->make(true);
     }
@@ -49,7 +49,8 @@ class IdentityCardController extends Controller
         $submitUrl = route($this->baseRouteName . '.update', $card);
         $redirectUrl = route($this->baseRouteName);
         $deleteUrl = route($this->baseRouteName . '.delete', $card);
-        return view('admin.submission.ktp.edit', compact('submitUrl', 'card', 'redirectUrl', 'deleteUrl'));
+        $media = $card->getFirstMedia();
+        return view('admin.submission.ktp.edit', compact('submitUrl', 'card', 'redirectUrl', 'deleteUrl', 'media'));
     }
 
     public function update(IdentityCardSubmission $card, Request $request)

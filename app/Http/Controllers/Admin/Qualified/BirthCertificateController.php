@@ -38,7 +38,8 @@ class BirthCertificateController extends Controller
     {
         $redirectUrl = route($this->baseRouteName . '.index');
         $submitUrl = route($this->baseRouteName . '.update', $card);
-        return view('admin.qualified.al.edit', compact('card', 'redirectUrl', 'submitUrl'));
+        $media = $card->getFirstMedia();
+        return view('admin.qualified.al.edit', compact('card', 'redirectUrl', 'submitUrl', 'media'));
     }
 
     public function update(BirthCertificateSubmission $card)
@@ -50,5 +51,5 @@ class BirthCertificateController extends Controller
             return response()->json($e->getMessage(), 400);
         }
     }
-    
+
 }

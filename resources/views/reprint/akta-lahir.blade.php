@@ -14,11 +14,12 @@
             <div class="p-4">
                 <h5 class="text-center">Cetak Ulang Akta Lahir</h5>
                 <hr>
-                <reprint-birth-certificate 
+                <reprint-birth-certificate
                     has_printed="{{ $hasPrinted }}"
-                    :cards="{{json_encode($cards)}}" 
-                    submit_url="{{route('reprint.al.submit')}}" 
+                    :cards="{{json_encode($cards)}}"
+                    submit_url="{{route('reprint.al.submit')}}"
                     redirect_url="{{route('reprint.al.index')}}"
+                    media_url="{{route('al.pdf')}}"
                 />
             </div>
         </div>

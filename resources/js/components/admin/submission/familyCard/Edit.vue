@@ -24,103 +24,103 @@
 
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.householder[0]', '')" 
-                        name="householder" 
-                        title="Nama Kepala Keluarga" 
+                        :error="get(errors, 'errors.householder[0]', '')"
+                        name="householder"
+                        title="Nama Kepala Keluarga"
                         v-model="formData.householder"
                         placeholder="Nama Kepala Keluarga"
                     />
                 </div>
-                
+
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.householder_id_card[0]', '')" 
-                        name="householder_id_card" 
-                        title="No Identitas Kepala Keluarga" 
+                        :error="get(errors, 'errors.householder_id_card[0]', '')"
+                        name="householder_id_card"
+                        title="No Identitas Kepala Keluarga"
                         v-model="formData.householder_id_card"
                         placeholder="No Identitas Kepala Keluarga"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.address[0]', '')" 
-                        name="address" 
-                        title="Alamat" 
+                        :error="get(errors, 'errors.address[0]', '')"
+                        name="address"
+                        title="Alamat"
                         v-model="formData.address"
                         placeholder="Alamat"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.zipcode[0]', '')" 
-                        name="zipcode" 
-                        title="Kode POS" 
+                        :error="get(errors, 'errors.zipcode[0]', '')"
+                        name="zipcode"
+                        title="Kode POS"
                         v-model="formData.zipcode"
                         placeholder="Kode POS"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.kelurahan[0]', '')" 
-                        name="kelurahan" 
-                        title="Desa / Kelurahan" 
+                        :error="get(errors, 'errors.kelurahan[0]', '')"
+                        name="kelurahan"
+                        title="Desa / Kelurahan"
                         v-model="formData.kelurahan"
                         placeholder="Desa / Kelurahan"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.kecamatan[0]', '')" 
-                        name="kecamatan" 
-                        title="Kecamatan" 
+                        :error="get(errors, 'errors.kecamatan[0]', '')"
+                        name="kecamatan"
+                        title="Kecamatan"
                         v-model="formData.kecamatan"
                         placeholder="Kecamatan"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.rt[0]', '')" 
-                        name="rt" 
-                        title="RT" 
+                        :error="get(errors, 'errors.rt[0]', '')"
+                        name="rt"
+                        title="RT"
                         v-model="formData.rt"
                         placeholder="RT"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.rw[0]', '')" 
-                        name="rw" 
-                        title="RW" 
+                        :error="get(errors, 'errors.rw[0]', '')"
+                        name="rw"
+                        title="RW"
                         v-model="formData.rw"
                         placeholder="RW"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
-                        :error="get(errors, 'errors.kabupaten[0]', '')" 
-                        name="kabupaten" 
-                        title="Kabupaten / Kota" 
+                        :error="get(errors, 'errors.kabupaten[0]', '')"
+                        name="kabupaten"
+                        title="Kabupaten / Kota"
                         v-model="formData.kabupaten"
                         placeholder="Kabupaten / Kota"
                     />
                 </div>
                 <div class="col-md-6 col-sm-12 mb-3">
                     <side-label
-                        :error="get(errors, 'errors.provinsi[0]', '')" 
-                        name="provinsi" 
-                        title="Provinsi" 
+                        :error="get(errors, 'errors.provinsi[0]', '')"
+                        name="provinsi"
+                        title="Provinsi"
                         v-model="formData.provinsi"
                         placeholder="Provinsi"
                     />
                 </div>
             </div>
         </div>
- 
+
         <div v-for="(family, index) in formData.members" v-bind:key="index" class="card card-body mb-3">
             <div class="d-flex justify-content-end">
                 <button v-show="index > 0" @click="removeFamilyMember(index)" class="btn btn-danger btn-sm" type="button">Hapus</button>
             </div>
-            
+
             <div class="clearfix"></div>
             <h5 class="text-center mb-3">Anggota Keluarga</h5>
             <side-label
@@ -144,7 +144,7 @@
                     <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                     <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
                 </div>
-                <div class="col-md-9 col-sm-12">  
+                <div class="col-md-9 col-sm-12">
                     <div class="form-group">
                         <select :class="{'is-invalid': getDynamicError('gender', index)}" v-model="family.gender" id="" class="form-control">
                             <option value="laki-laki" selected>Laki - laki</option>
@@ -161,12 +161,12 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
-                        <datepicker 
+                        <datepicker
                         input-class="form-control"
                         format="dd-MM-yyyy"
                         v-model="family.birthdate"
-                        placeholder="Tanggal Lahir" 
-                        :class="{'is-invalid':getDynamicError('birthdate', index)}" 
+                        placeholder="Tanggal Lahir"
+                        :class="{'is-invalid':getDynamicError('birthdate', index)}"
                         ></datepicker>
                         <div class="invalid-feedback">{{getDynamicError('birthdate', index)}}</div>
                     </div>
@@ -174,9 +174,9 @@
             </div>
 
             <side-label
-                :error="getDynamicError('birthplace', index)" 
-                name="birthplace" 
-                title="Tempat Lahir" 
+                :error="getDynamicError('birthplace', index)"
+                name="birthplace"
+                title="Tempat Lahir"
                 v-model="family.birthplace"
                 placeholder="Tempat Lahir"
                 />
@@ -201,30 +201,30 @@
             </div>
 
             <side-label
-                :error="getDynamicError('education', index)" 
-                name="education" 
-                title="Pendidikan" 
+                :error="getDynamicError('education', index)"
+                name="education"
+                title="Pendidikan"
                 v-model="family.education"
                 placeholder="Pendidikan"
                 />
 
             <side-label
-                :error="getDynamicError('profession', index)" 
-                name="profession" 
-                title="Pekerjaan" 
+                :error="getDynamicError('profession', index)"
+                name="profession"
+                title="Pekerjaan"
                 v-model="family.profession"
                 placeholder="Pekerjaan"
                 />
-            
+
             <side-label
-                :error="getDynamicError('family_relation', index)" 
-                name="family_relation" 
-                title="Status Hubungan Dalam Keluarga" 
+                :error="getDynamicError('family_relation', index)"
+                name="family_relation"
+                title="Status Hubungan Dalam Keluarga"
                 v-model="family.family_relation"
                 placeholder="Status Hubungan Dalam Keluarga"
                 />
 
-            
+
         </div>
 
         <div class="row mt-5 mb-3">
@@ -254,10 +254,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.reason" 
-                        placeholder="Keterangan" 
-                        type="text" 
+                    <input
+                        v-model="formData.reason"
+                        placeholder="Keterangan"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.reason[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.reason[0]', '')}}</div>
@@ -267,9 +267,10 @@
 
         <div class="d-flex justify-content-center">
             <button :disabled="hasSubmitted" @click="submitForm" type="button" class="btn btn-small btn-primary mx-1">Perbaharui Data</button>
+            <a class="btn btn-info btn-sm mx-1" :href="this.media_url">Download Dokumen Pendukung</a>
             <button :disabled="hasSubmitted" @click="deleteRow" class="btn btn-sm btn-danger mx-1" type="button">Hapus</button>
         </div>
-        
+
     </form>
 </template>
 <script>
@@ -280,7 +281,7 @@ import { confirmationModal, successModal } from '../../../../helper'
 
 export default {
     props : [
-        "redirect_url", "submit_url", "card", "delete_url"
+        "redirect_url", "submit_url", "card", "delete_url", "media_url"
     ],
     data(){
         return {
@@ -336,7 +337,7 @@ export default {
                     }
                 })
                 .catch(dismiss => this.hasSubmitted = false)
-            
+
         },
         getDynamicError(attribute, index){
             let message = get(this.errors, ['errors','members.' + index + '.' +attribute, 0], '');

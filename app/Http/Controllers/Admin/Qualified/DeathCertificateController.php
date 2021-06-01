@@ -39,7 +39,8 @@ class DeathCertificateController extends Controller
     {
         $redirectUrl = route($this->baseRouteName . '.index');
         $submitUrl = route($this->baseRouteName . '.update', $card);
-        return view('admin.qualified.ak.edit', compact('card', 'redirectUrl', 'submitUrl'));
+        $media = $card->getFirstMedia();
+        return view('admin.qualified.ak.edit', compact('card', 'redirectUrl', 'submitUrl', 'media'));
     }
 
     public function update(DeathCertificateSubmission $card)

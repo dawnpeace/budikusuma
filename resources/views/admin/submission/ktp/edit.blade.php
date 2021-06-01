@@ -9,7 +9,7 @@
         </ol>
     </nav>
     <div class="card card-body">
-        <submission-identitycard-edit submit_url="{{$submitUrl}}" :card='{{json_encode($card)}}' redirect_url="{{$redirectUrl}}" delete_url="{{$deleteUrl}}"/>
+        <submission-identitycard-edit media_url="{{route('media', $media)}}" submit_url="{{$submitUrl}}" :card='{{json_encode($card)}}' redirect_url="{{$redirectUrl}}" delete_url="{{$deleteUrl}}"/>
     </div>
 </div>
 @endsection

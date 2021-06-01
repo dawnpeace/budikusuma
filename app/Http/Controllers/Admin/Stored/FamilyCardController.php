@@ -62,7 +62,8 @@ class FamilyCardController extends Controller
         $card->load('members');
         $submitUrl = route($this->baseRouteName . '.update', $card);
         $redirectUrl = route($this->baseRouteName . '.index');
-        return view('admin.stored.kk.edit', compact(['card', 'redirectUrl', 'submitUrl']));
+        $media = $card->getFirstMedia();
+        return view('admin.stored.kk.edit', compact(['card', 'redirectUrl', 'submitUrl', 'media']));
     }
 
     public function update(FamilyCard $card, Request $request)

@@ -27,7 +27,7 @@ class BirthCertificateController extends Controller
 
     public function datatable(Request $request)
     {
-        
+
         $card = BirthCertificate::select('id', 'id_card', 'name', 'created_at');
 
         if ($request->has('start_date') && $request->has('end_date')) {
@@ -57,7 +57,8 @@ class BirthCertificateController extends Controller
     {
         $submitUrl = route($this->baseRouteName . '.update', $card);
         $redirectUrl = route($this->baseRouteName . '.index');
-        return view('admin.stored.al.edit', compact(['card', 'redirectUrl', 'submitUrl']));
+        $media = $card->getFirstMedia();
+        return view('admin.stored.al.edit', compact(['card', 'redirectUrl', 'submitUrl', 'media']));
     }
 
     public function update(BirthCertificate $card, Request $request)

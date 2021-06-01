@@ -9,10 +9,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.id_card" 
-                        placeholder="No Akta" 
-                        type="text" 
+                    <input
+                        v-model="formData.id_card"
+                        placeholder="No Akta"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.id_card[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.id_card[0]', '')}}</div>
@@ -25,10 +25,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.name" 
-                        placeholder="Nama Anak" 
-                        type="text" 
+                    <input
+                        v-model="formData.name"
+                        placeholder="Nama Anak"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.name[0]', '')}}</div>
@@ -39,7 +39,7 @@
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
                 <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
             </div>
-            <div class="col-md-9 col-sm-12">  
+            <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <select :class="{'is-invalid': get(this.errors, 'errors.gender[0]', false)}" v-model="formData.gender" class="form-control">
                         <option value="laki-laki" selected>Laki - laki</option>
@@ -55,12 +55,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <datepicker 
+                    <datepicker
                         input-class="form-control"
                         id="birthdate"
                         format="dd-MM-yyyy"
                         v-model="formData.birthdate"
-                        placeholder="Tanggal Lahir" 
+                        placeholder="Tanggal Lahir"
                         :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthdate[0]', '')}}</div>
                 </div>
@@ -72,12 +72,12 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                    v-model="formData.birthplace" 
-                    placeholder="Tempat Lahir" 
+                    <input
+                    v-model="formData.birthplace"
+                    placeholder="Tempat Lahir"
                     type="text"
                     id="birthplace"
-                    :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}" 
+                    :class="{'is-invalid': get(this.errors, 'errors.birthplace[0]', false)}"
                     class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.birthplace[0]', '')}}</div>
                 </div>
@@ -89,10 +89,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.mother_identity_card_number" 
-                        placeholder="No KTP Ibu" 
-                        type="text" 
+                    <input
+                        v-model="formData.mother_identity_card_number"
+                        placeholder="No KTP Ibu"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.mother_identity_card_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.mother_identity_card_number[0]', '')}}</div>
@@ -105,10 +105,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.mother_name" 
-                        placeholder="Nama Ibu" 
-                        type="text" 
+                    <input
+                        v-model="formData.mother_name"
+                        placeholder="Nama Ibu"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.mother_name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.mother_name[0]', '')}}</div>
@@ -121,10 +121,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.father_identity_card_number" 
-                        placeholder="No KTP Ayah" 
-                        type="text" 
+                    <input
+                        v-model="formData.father_identity_card_number"
+                        placeholder="No KTP Ayah"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.father_identity_card_number[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.father_identity_card_number[0]', '')}}</div>
@@ -137,10 +137,10 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.father_name" 
-                        placeholder="Nama Ayah" 
-                        type="text" 
+                    <input
+                        v-model="formData.father_name"
+                        placeholder="Nama Ayah"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.father_name[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.father_name[0]', '')}}</div>
@@ -170,19 +170,20 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input 
-                        v-model="formData.reason" 
-                        placeholder="Keterangan" 
-                        type="text" 
+                    <input
+                        v-model="formData.reason"
+                        placeholder="Keterangan"
+                        type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.reason[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.reason[0]', '')}}</div>
                 </div>
             </div>
 
-            
+
             <div class="d-flex justify-content-center col-12 pt-3">
                 <button :disabled="disableSubmit" class="btn btn-primary mx-1" type="submit">Submit</button>
+                <a class="btn btn-info btn-sm mx-1" :href="this.media_url">Download Dokumen Pendukung</a>
                 <button @click="deleteRecord" class="btn btn-danger mx-1 btn-sm" type="button">Hapus</button>
             </div>
         </form>
@@ -194,7 +195,7 @@ import moment from 'moment'
 import {confirmationModal, errorModal, successModal} from '../../../../helper'
 export default {
     props : [
-        "card", "redirect_url", "submit_url"
+        "card", "redirect_url", "submit_url", "media_url"
     ],
     data(){
         return {
@@ -226,7 +227,7 @@ export default {
                     .then(response => {
                         successModal({title : 'Data berhasil dihapus!', showCancelButton : false})
                             .then(response => {
-                                location.replace(this.redirect_url) 
+                                location.replace(this.redirect_url)
                             });
                     })
                     .catch(e => {
@@ -234,7 +235,7 @@ export default {
                     });
                 }
             });
-           
+
        },
        updateRecord(){
            confirmationModal()

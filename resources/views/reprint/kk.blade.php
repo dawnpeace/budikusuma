@@ -13,11 +13,12 @@
             <div class="p-4">
                 <h5 class="text-center">Cetak Ulang KK</h5>
                 <hr>
-                <reprint-family-card 
+                <reprint-family-card
                     has_printed="{{ $hasPrinted }}"
-                    :cards="{{json_encode($cards)}}" 
-                    submit_url="{{route('reprint.kk.submit')}}" 
-                    redirect_url="{{route('reprint.kk.index')}}" />
+                    :cards="{{json_encode($cards)}}"
+                    submit_url="{{route('reprint.kk.submit')}}"
+                    redirect_url="{{route('reprint.kk.index')}}"
+                    media_url="{{route('kk.pdf')}}"/>
             </div>
         </div>
     </div>

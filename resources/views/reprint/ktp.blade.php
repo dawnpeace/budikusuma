@@ -11,12 +11,12 @@
         </nav>
         @include('appliance.info-card')
         <div class="card card-boy">
-            <reprint-id-card 
+            <reprint-id-card
                 has_printed="{{ $hasPrinted }}"
-                :cards="{{json_encode($cards)}}" 
+                :cards="{{json_encode($cards)}}"
                 submit_url="{{ route('reprint.ktp.submit') }}"
                 redirect_url="{{ route('reprint.ktp.index') }}"
-            />
+                media_url="{{route('ktp.pdf')}}"/>
         </div>
     </div>
 </div>

@@ -10,11 +10,13 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class BirthCertificate extends Model
+class BirthCertificate extends Model implements HasMedia
 {
-    use Reprintable, ClassName, Latest, Oldest;
-    
+    use Reprintable, ClassName, Latest, Oldest, InteractsWithMedia;
+
     protected $cardIdName = "id_card";
 
     protected $fillable = [
@@ -31,6 +33,11 @@ class BirthCertificate extends Model
     public function reprints()
     {
         return $this->morphMany(ReprintRequest::class, 'reprintable');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public static function hasJustPrinted()
