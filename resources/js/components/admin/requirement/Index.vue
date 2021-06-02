@@ -9,7 +9,6 @@
                 <option value="KK">KK</option>
                 <option value="KIA">KIA</option>
                 <option value="AKTA_LAHIR">Akta Lahir</option>
-                <option value="AKTA_LAHIR">Akta Lahir</option>
                 <option value="AKTA_KEMATIAN">Akta Kematian</option>
             </select>
 
