@@ -21,7 +21,7 @@ class ChildIdCardController extends Controller
             $data->setName($card->name);
             $data->setCreatedAt($card->created_at->format('d-m-Y'));
             $data->setDocType(Document::KIA);
-            $data->setNote($card->note);
+            $data->setNote($card->reason);
             $pdf = PDF::loadView('pdf.status', $data);
             return $pdf->stream();
         }

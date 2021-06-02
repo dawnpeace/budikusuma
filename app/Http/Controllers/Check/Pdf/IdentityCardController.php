@@ -22,7 +22,7 @@ class IdentityCardController extends Controller
             $data = new PdfStatusData();
             $data->setName($card->name);
             $data->setCreatedAt($card->created_at->format('d-m-Y'));
-            $data->setNote($card->note);
+            $data->setNote($card->reason);
             $data->setDocType(Document::KTP);
             $pdf = PDF::loadView('pdf.status', $data);
             return $pdf->stream();

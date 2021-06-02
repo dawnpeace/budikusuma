@@ -19,7 +19,7 @@ class FamilyCardController extends Controller
             $data = new PdfStatusData();
             $data->setName($card->householder);
             $data->setCreatedAt($card->created_at->format('d-m-Y'));
-            $data->setNote($card->note);
+            $data->setNote($card->reason);
             $data->setDocType(Document::KK);
             $pdf = PDF::loadView('pdf.status', $data);
             return $pdf->stream();
