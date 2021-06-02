@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Check\Pdf;
 
 use App\BirthCertificateSubmission;
 use App\Data\PdfData;
+use App\Data\PdfStatusData;
 use App\enums\Document;
 use App\enums\DocumentStatus;
 use App\Http\Controllers\Controller;
@@ -16,13 +17,11 @@ class BirthCertificateController extends Controller
     {
         if($card->status == DocumentStatus::DONE) {
             $card->load('user');
-            $data = new PdfData();
+            $data = new PdfStatusData();
             $data->setName($card->name);
+            $data->setCreatedAt($card->created_at->format('d-m-Y'));
+            $data->setNote($card->note);
             $data->setDocType(Document::AKTA_LAHIR);
-            $data->setDocId($card->id);
-            $data->setCardNo($card->id_card);
-            $data->setPublishedAt($card->created_at->format('d-m-Y'));
-            $data->setUserName($card->user->name);
             $pdf = PDF::loadView('pdf.pdf', $data);
             return $pdf->stream();
         }
