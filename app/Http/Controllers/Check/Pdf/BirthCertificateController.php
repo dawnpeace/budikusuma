@@ -22,7 +22,7 @@ class BirthCertificateController extends Controller
             $data->setCreatedAt($card->created_at->format('d-m-Y'));
             $data->setNote($card->reason);
             $data->setDocType(Document::AKTA_LAHIR);
-            $pdf = PDF::loadView('pdf.pdf', $data);
+            $pdf = PDF::loadView('pdf.status', $data);
             return $pdf->stream();
         }
         return response("", 403);
