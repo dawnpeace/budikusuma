@@ -116,10 +116,10 @@ export default {
                             case 'KK':
                                 this.pdfUrl = this.kk_pdf_url;
                                 break;
-                            case 'AL':
+                            case 'AKTA_LAHIR':
                                 this.pdfUrl = this.al_pdf_url;
                                 break;
-                            case 'AK':
+                            case 'AKTA_KEMATIAN':
                                 this.pdfUrl = this.ak_pdf_url;
                                 break;
                         }
