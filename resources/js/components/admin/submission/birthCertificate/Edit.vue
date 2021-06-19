@@ -148,8 +148,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Status Dokumen</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Status Dokumen</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Status Dokumen</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Status Dokumen</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">

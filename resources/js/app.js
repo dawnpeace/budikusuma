@@ -72,6 +72,8 @@ Vue.component('reprint-child-id-card', require('./components/reprint/ReprintChil
 Vue.component('reprint-check', require('./components/reprint/CheckReprint.vue').default);
 Vue.component('check-appliance', require('./components/appliance/CheckAppliance.vue').default);
 
+Vue.component('common-renewal-family-card-index', require('./components/renewal/familyCard/Index.vue').default);
+Vue.component('common-renewal-family-card-edit', require('./components/renewal/familyCard/Edit.vue').default);
 
 Vue.component('datepicker', Datepicker);
 

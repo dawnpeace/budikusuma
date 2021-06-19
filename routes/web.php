@@ -57,6 +57,15 @@ Route::middleware(['auth', 'can:access-common-page'])->group(function(){
 
     Route::get('/pengajuan-antrian', 'QueueController@index')->name('queue.index');
     Route::post('/pengajuan-antrian', 'QueueController@store')->name('queue.store');
+
+    Route::prefix('pembaruan')->namespace('Renewal')->as('renewal.')->group(function(){
+        Route::prefix('kk')->as('kk.')->group(function() {
+            Route::get('/', 'FamilyCardController@index')->name('index');
+            Route::get('/view/{card?}', 'FamilyCardController@edit')->name('edit');
+            Route::post('/create/{card}', 'FamilyCardController@store')->name('store');
+        });
+
+    });
 });
 
 
@@ -248,8 +257,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
             Route::post('/update/{card}', 'DeathCertificateController@update')->name('update');
 
         });
-
     });
+
+    Route::prefix('pembaruan')->namespace('Renewal')->as('renewal.')->group(function(){
+        Route::prefix('kk')->as('kk.')->group(function(){
+            Route::get('/', 'FamilyCardController@index')->name('index');
+            Route::get('/edit/{card}', 'FamilyCardController@edit')->name('edit');
+            Route::post('/update/{card}', 'FamilyCardController@update')->name('update');
+            Route::get('datatable', 'FamilyCardController@datatable')->name('datatable');
+        });
+    });
+
 });
 
 

@@ -20,8 +20,14 @@
         Cetak Ulang Dokumen
     </a>
 </li>
-<li class="nav-item {{ Route::is('check.index') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('check.index') }}">Periksa Permintaan Dokumen</a>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle {{ Route::is('check.index') || Route::is('renewal.*')  ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Periksa Permintaan
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{route('check.index')}}">Pengajuan Dokumen</a>
+        <a class="dropdown-item" href="{{route('renewal.kk.index')}}">Pembaruan Kartu Keluarga</a>
+    </div>
 </li>
 @endcan
 

@@ -60,19 +60,28 @@
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
-                    <side-label
-                        :error="get(errors, 'errors.kelurahan[0]', '')"
-                        name="kelurahan"
-                        title="Desa / Kelurahan"
-                        v-model="formData.kelurahan"
-                        placeholder="Desa / Kelurahan"
-                    />
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Kelurahan</label>
+                            <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Kelurahan</label>
+                        </div>
+                        <div class="form-group col-md-9 col-sm-12">
+                            <select :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}" v-model="formData.kelurahan"  class="form-control">
+                                <option selected value="Desa Sanatab">Desa Sanatab</option>
+                                <option value="Sanataban">Sanataban</option>
+                                <option value="Sungai Bening">Sungai Bening</option>
+                                <option value="Kaliau">Kaliau</option>
+                                <option value="Sebunga">Sebunga</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
                         :error="get(errors, 'errors.kecamatan[0]', '')"
                         name="kecamatan"
                         title="Kecamatan"
+                        :readonly="true"
                         v-model="formData.kecamatan"
                         placeholder="Kecamatan"
                     />
@@ -101,6 +110,7 @@
                         name="kabupaten"
                         title="Kabupaten / Kota"
                         v-model="formData.kabupaten"
+                        :readonly="true"
                         placeholder="Kabupaten / Kota"
                     />
                 </div>

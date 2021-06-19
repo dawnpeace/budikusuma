@@ -117,13 +117,13 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input
-                    v-model="kelurahan"
-                    placeholder="Kelurahan / Desa"
-                    type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}"
-                    class="form-control">
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.kelurahan[0]', '')}}</div>
+                    <select :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}" v-model="kelurahan"  class="form-control">
+                        <option selected value="Desa Sanatab">Desa Sanatab</option>
+                        <option value="Sanataban">Sanataban</option>
+                        <option value="Sungai Bening">Sungai Bening</option>
+                        <option value="Kaliau">Kaliau</option>
+                        <option value="Sebunga">Sebunga</option>
+                    </select>
                 </div>
             </div>
             <div class="col-md-3 col-sm-12">
@@ -134,6 +134,7 @@
                 <div class="form-group">
                     <input
                     v-model="kecamatan"
+                    :readonly="true"
                     placeholder="Kecamatan"
                     type="text"
                     :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}"
@@ -199,6 +200,7 @@
                         placeholder="Kewarganegaraan"
                         :class="{'is-invalid': get(this.errors, 'errors.nationality[0]', false)}"
                         type="text"
+                        :readonly="true"
                         class="form-control">
                     <div class="invalid-feedback">{{get(this.errors, 'errors.nationality[0]', '')}}</div>
                 </div>
@@ -246,12 +248,12 @@ export default {
             address : '',
             rt : '',
             rw : '',
-            kelurahan : '',
-            kecamatan : '',
+            kelurahan : 'Desa Sanatab',
+            kecamatan : 'Sajingan Besar',
             religion : "islam",
             marriage_status : "not_married",
             profession : '',
-            nationality : '',
+            nationality : 'WNI',
             submitted : false,
             disableSubmit : false,
             document : ''

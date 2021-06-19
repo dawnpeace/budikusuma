@@ -6,12 +6,13 @@
         </div>
         <div class="col-md-9 col-sm-12">
             <div class="form-group">
-                <input 
+                <input
                     :value="value"
                     ref="boundInput"
                     :name="name"
-                    :placeholder="customPlaceholder" 
-                    type="text" 
+                    :placeholder="customPlaceholder"
+                    type="text"
+                    :readonly="isReadonly"
                     :class="{'is-invalid': errorText}"
                     @input="$emit('input', $event.target.value)"
                     class="form-control"/>
@@ -24,13 +25,14 @@
 import {get} from 'lodash'
 export default {
     props : [
-        "title", "value", "name", "error", "placeholder"
+        "title", "value", "name", "error", "placeholder", "readonly"
     ],
     data() {
         return {
             errorText : this.error,
-            customPlaceholder : this.placeholder ?? this.title
-            
+            customPlaceholder : this.placeholder ?? this.title,
+            isReadonly : this.readonly
+
         }
     },
     methods : {
@@ -43,6 +45,9 @@ export default {
         error(newVal, oldVal){
             if(newVal !== oldVal) this.errorText = newVal;
         }
+    },
+    mounted(){
+        this.isReadonly = this.readonly == null ? false : this.readonly;
     }
 }
 </script>

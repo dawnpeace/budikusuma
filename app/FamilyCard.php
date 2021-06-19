@@ -58,4 +58,9 @@ class FamilyCard extends Model implements HasMedia
             "user_id" => $authId
         ]);
     }
+
+    public function renewal()
+    {
+        return $this->hasMany(FamilyCardRenewal::class, 'card_id');
+    }
 }

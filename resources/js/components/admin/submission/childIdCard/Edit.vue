@@ -156,6 +156,7 @@
                     <input
                         v-model="formData.citizenship"
                         placeholder="Kewarganegaraan"
+                        :readonly="true"
                         type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.birth_certificate_number[0]', false)}"
                         class="form-control"/>
@@ -217,12 +218,15 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input
-                        v-model="formData.kelurahan"
-                        placeholder="Kelurahan"
-                        type="text"
-                        :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}"
-                        class="form-control"/>
+                    <div class="form-group">
+                        <select :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}" v-model="formData.kelurahan"  class="form-control">
+                            <option selected value="Desa Sanatab">Desa Sanatab</option>
+                            <option value="Sanataban">Sanataban</option>
+                            <option value="Sungai Bening">Sungai Bening</option>
+                            <option value="Kaliau">Kaliau</option>
+                            <option value="Sebunga">Sebunga</option>
+                        </select>
+                    </div>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kelurahan[0]', '')}}</div>
                 </div>
             </div>
@@ -236,6 +240,7 @@
                     <input
                         v-model="formData.kecamatan"
                         placeholder="Kecamatan"
+                        :readonly="true"
                         type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}"
                         class="form-control"/>
@@ -308,7 +313,7 @@ export default {
                 family_card_number : get(this.card, 'family_card_number', ''),
                 householder_name : get(this.card, 'householder_name', ''),
                 birth_certificate_number : get(this.card, 'birth_certificate_number', ''),
-                citizenship : get(this.card, 'citizenship', ''),
+                citizenship : get(this.card, 'citizenship', 'WNI'),
                 rt : get(this.card, 'rt', ''),
                 rw : get(this.card, 'rw', ''),
                 kelurahan : get(this.card, 'kelurahan', ''),

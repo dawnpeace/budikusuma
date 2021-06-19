@@ -44,19 +44,28 @@
                     />
                 </div>
                 <div class="col-md-6 col-sm-12">
-                    <side-label
-                        :error="get(errors, 'errors.kelurahan[0]', '')"
-                        name="kelurahan"
-                        title="Desa / Kelurahan"
-                        v-model="kelurahan"
-                        placeholder="Desa / Kelurahan"
-                    />
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Kelurahan</label>
+                            <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Kelurahan</label>
+                        </div>
+                        <div class="form-group col-md-9 col-sm-12">
+                            <select :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}" v-model="kelurahan"  class="form-control">
+                                <option selected value="Desa Sanatab">Desa Sanatab</option>
+                                <option value="Sanataban">Sanataban</option>
+                                <option value="Sungai Bening">Sungai Bening</option>
+                                <option value="Kaliau">Kaliau</option>
+                                <option value="Sebunga">Sebunga</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <side-label
                         :error="get(errors, 'errors.kecamatan[0]', '')"
                         name="kecamatan"
                         title="Kecamatan"
+                        readonly="true"
                         v-model="kecamatan"
                         placeholder="Kecamatan"
                     />
@@ -83,6 +92,7 @@
                     <side-label
                         :error="get(errors, 'errors.kabupaten[0]', '')"
                         name="kabupaten"
+                        :readonly="true"
                         title="Kabupaten / Kota"
                         v-model="kabupaten"
                         placeholder="Kabupaten / Kota"
@@ -93,6 +103,7 @@
                         :error="get(errors, 'errors.provinsi[0]', '')"
                         name="provinsi"
                         title="Provinsi"
+                        :readonly="true"
                         v-model="provinsi"
                         placeholder="Provinsi"
                     />
@@ -219,13 +230,25 @@
                 placeholder="Pekerjaan"
                 />
 
-            <side-label
-                :error="getDynamicError('family_relation', index)"
-                name="family_relation"
-                title="Status Hubungan Dalam Keluarga"
-                v-model="family.family_relation"
-                placeholder="Status Hubungan Dalam Keluarga"
-                />
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="form-group">
+                        <select
+                            class="form-control" v-model="family.family_relation" :class="{'is-invalid':getDynamicError('family_relation', index)}">
+                            <option value="Kepala Keluarga">Kepala Keluarga</option>
+                            <option value="Istri">Istri</option>
+                            <option value="Istri">Anak</option>
+                            <option value="Saudara">Saudara</option>
+                            <option value="Family Lain">Family Lain</option>
+                        </select>
+                        <div class="invalid-feedback">{{getDynamicError('family_relation', index)}}</div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -257,10 +280,10 @@ export default {
             rt : '',
             rw : '',
             zipcode : '',
-            kecamatan : '',
-            kabupaten : '',
-            kelurahan : '',
-            provinsi : '',
+            kecamatan : 'Sajingan Besar',
+            kabupaten : 'Sambas',
+            kelurahan : 'Desa Sanatab',
+            provinsi : 'Kalimantan Barat',
             householder_id_card : '',
             members : [
                  ...this.getDefaultMember()

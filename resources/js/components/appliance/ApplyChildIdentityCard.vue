@@ -140,6 +140,7 @@
                 <div class="form-group">
                     <input
                         v-model="citizenship"
+                        :readonly="true"
                         placeholder="Kewarganegaraan"
                         type="text"
                         :class="{'is-invalid': get(this.errors, 'errors.citizenship[0]', false)}"
@@ -202,13 +203,13 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input
-                        v-model="kelurahan"
-                        placeholder="Kelurahan"
-                        type="text"
-                        :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}"
-                        class="form-control"/>
-                    <div class="invalid-feedback">{{get(this.errors, 'errors.kelurahan[0]', '')}}</div>
+                    <select :class="{'is-invalid': get(this.errors, 'errors.kelurahan[0]', false)}" v-model="kelurahan"  class="form-control">
+                        <option selected value="Desa Sanatab">Desa Sanatab</option>
+                        <option value="Sanataban">Sanataban</option>
+                        <option value="Sungai Bening">Sungai Bening</option>
+                        <option value="Kaliau">Kaliau</option>
+                        <option value="Sebunga">Sebunga</option>
+                    </select>
                 </div>
             </div>
 
@@ -222,6 +223,7 @@
                         v-model="kecamatan"
                         placeholder="Kecamatan"
                         type="text"
+                        :readonly="true"
                         :class="{'is-invalid': get(this.errors, 'errors.kecamatan[0]', false)}"
                         class="form-control"/>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.kecamatan[0]', '')}}</div>
@@ -269,12 +271,12 @@ export default {
             family_card_number : '',
             householder_name : '',
             birth_certificate_number : '',
-            citizenship : '',
+            citizenship : 'WNI',
             address : '',
             rt : '',
             rw : '',
-            kecamatan : '',
-            kelurahan : '',
+            kecamatan : 'Sajingan Besar',
+            kelurahan : 'Desa Sanatab',
             religion : 'islam',
             disableSubmit : false,
             document : ''
