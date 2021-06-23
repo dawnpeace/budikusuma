@@ -123,6 +123,18 @@
                         placeholder="Provinsi"
                     />
                 </div>
+                <div class="col-md-6 col-sm-12 mb-3">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                            <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+                        </div>
+                        <div class="col-md-9 col-sm-12">
+                            <input disabled="disabled" :value="card.type" class="form-control"></input>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -156,7 +168,7 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
-                        <select :class="{'is-invalid': getDynamicError('gender', index)}" v-model="family.gender" id="" class="form-control">
+                        <select :class="{'is-invalid': getDynamicError('gender', index)}" v-model="family.gender" class="form-control">
                             <option value="laki-laki" selected>Laki - laki</option>
                             <option value="perempuan">Perempuan</option>
                         </select>
@@ -197,7 +209,7 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
-                        <select :class="{'is-invalid': getDynamicError('religion', index)}" v-model="family.religion"  id="" class="form-control">
+                        <select :class="{'is-invalid': getDynamicError('religion', index)}" v-model="family.religion"  class="form-control">
                             <option value="islam">Islam</option>
                             <option value="kristen protestan">Kristen Protestan</option>
                             <option value="kristen katolik">Kristen Katolik</option>

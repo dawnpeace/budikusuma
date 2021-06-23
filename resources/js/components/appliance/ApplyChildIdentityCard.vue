@@ -4,8 +4,23 @@
         <hr>
         <form @submit.prevent="submitForm()" class="row" action="" method="post">
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Lengkap Anak</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Anak</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.type[0]', false)}" v-model="type" class="form-control">
+                        <option value="Baru" selected>Baru</option>
+                        <option value="Rusak">Rusak</option>
+                        <option value="Hilang">Hilang</option>
+                    </select>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.type[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Nama Lengkap Anak</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Nama Anak</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -20,8 +35,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tempat Lahir</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Tempat Lahir</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tempat Lahir</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Tempat Lahir</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -36,8 +51,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tanggal Lahir</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Tanggal Lahir</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -53,8 +68,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Kelamin</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Kelamin</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -67,8 +82,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No. Kartu Keluarga</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No. Kartu Keluarga</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">No. Kartu Keluarga</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">No. Kartu Keluarga</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -83,8 +98,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Kepala Keluarga</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Kepala Keluarga</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Nama Kepala Keluarga</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Nama Kepala Keluarga</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -99,8 +114,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nomor Akta Kelahiran</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nomor Akta Kelahiran</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Nomor Akta Kelahiran</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Nomor Akta Kelahiran</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -115,8 +130,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Agama</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Agama</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Agama</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Agama</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -133,8 +148,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kewarganegaraan</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Kewarganegaraan</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Kewarganegaraan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Kewarganegaraan</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -150,8 +165,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Alamat</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Alamat</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Alamat</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Alamat</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -166,8 +181,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">RT</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">RT</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">RT</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">RT</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -182,8 +197,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">RW</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">RW</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">RW</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">RW</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -198,8 +213,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kelurahan</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Kelurahan</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Kelurahan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Kelurahan</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -214,8 +229,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Kecamatan</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Kecamatan</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Kecamatan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Kecamatan</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -231,8 +246,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Dokumen Pendukung</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Dokumen Pendukung</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Dokumen Pendukung</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Dokumen Pendukung</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -279,7 +294,8 @@ export default {
             kelurahan : 'Desa Sanatab',
             religion : 'islam',
             disableSubmit : false,
-            document : ''
+            document : '',
+            type : "Baru"
         }
     },
     computed :{
@@ -299,6 +315,7 @@ export default {
                 kecamatan : this.kecamatan,
                 kelurahan : this.kelurahan,
                 religion : this.religion,
+                type : this.type
             };
 
             let formData = new FormData;
@@ -353,6 +370,7 @@ export default {
                 this.religion = 'islam';
                 this.disableSubmit = false;
                 this.document = '';
+                this.type = 'Baru';
                 document.getElementById('document').value = '';
         },
         assignDocument(event){

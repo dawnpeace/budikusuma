@@ -83,6 +83,7 @@ class FamilyCardController extends Controller
             "kecamatan" => "required",
             "kabupaten" => "required",
             "provinsi" => "required",
+            "reason" => "required",
             "status" => [
                 "required",
                 Rule::in(DocumentStatus::ALL)

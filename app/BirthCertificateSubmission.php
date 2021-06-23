@@ -19,7 +19,7 @@ class BirthCertificateSubmission extends Model implements HasMedia
         "id_card", "name", "gender", "mother_identity_card_number",
         "mother_name", "father_identity_card_number",
         "father_name", "birthdate", "birthplace", "id_card", "status",
-        "user_id", "reason"
+        "user_id", "reason", "type"
     ];
 
     protected $dates =[

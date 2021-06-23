@@ -31,7 +31,7 @@ class ChildIdSubmission extends Model implements HasMedia
         "family_card_number", "householder_name", "religion",
         "birth_certificate_number", "citizenship",
         "address", "rt", "rw", "kecamatan", "kelurahan", "status",
-        "user_id", "reason"
+        "user_id", "reason", "type"
     ];
 
     protected $dates = [

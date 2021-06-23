@@ -4,6 +4,14 @@
         <hr>
         <form @submit.prevent="updateRecord()" class="row" action="" method="post">
             <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <p class="form-control border-0">{{card.type}}</p>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No Akta</label>
                 <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No Akta</label>
             </div>

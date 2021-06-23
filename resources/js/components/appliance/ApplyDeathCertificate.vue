@@ -5,6 +5,21 @@
         <form @submit.prevent="submitForm()" class="row" action="" method="post">
 
             <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.type[0]', false)}" v-model="formData.type" class="form-control">
+                        <option value="Baru" selected>Baru</option>
+                        <option value="Rusak">Rusak</option>
+                        <option value="Hilang">Hilang</option>
+                    </select>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.type[0]', '')}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" >No Identitas</label>
                 <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" >No Identitas</label>
             </div>
@@ -160,7 +175,8 @@ export default {
                 birthdate : new Date('1990-01-01'),
                 deceased_at : new Date(),
                 note : "",
-                document : ""
+                document : "",
+                type : "Baru"
             },
             disableSubmit : false,
         }

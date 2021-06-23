@@ -27,7 +27,7 @@ class DeathCertificateSubmission extends Model implements HasMedia
         "name", "card_number", "identity_card",
         "note", "gender", "birthdate", "deceased_at",
         "published_at", "birthplace", "user_id", "status",
-        "reason"
+        "reason", "type"
     ];
 
     protected static $selfIdName = "card_number";

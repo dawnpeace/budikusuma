@@ -29,7 +29,7 @@ class IdentityCardSubmission extends Model implements HasMedia
         "name", "gender", "birthplace", "birthdate", "address", "rt",
         "rw", "kelurahan", "kecamatan", "profession", "religion",
         "marriage_status", "nationality", "status", "id_card",
-        "user_id", "reason"
+        "user_id", "reason", "type"
     ];
 
     protected $dates = [

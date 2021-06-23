@@ -3,6 +3,22 @@
         <h5 class="text-center">Daftar E-KTP</h5>
         <hr>
         <form id="submission" @submit.prevent="submitForm()" class="row" action="">
+
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.type[0]', false)}" v-model="type" class="form-control">
+                        <option value="Baru" selected>Baru</option>
+                        <option value="Rusak">Rusak</option>
+                        <option value="Hilang">Hilang</option>
+                    </select>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.type[0]', '')}}</div>
+                </div>
+            </div>
+
             <div class="col-md-3 col-sm-12">
                 <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Pemilik</label>
                 <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Pemilik</label>
@@ -256,7 +272,8 @@ export default {
             nationality : 'WNI',
             submitted : false,
             disableSubmit : false,
-            document : ''
+            document : '',
+            type : 'Baru'
         }
     },
     computed :{
@@ -275,7 +292,8 @@ export default {
                 marriage_status : this.marriage_status,
                 profession : this.profession,
                 nationality : this.nationality,
-                document : this.document
+                document : this.document,
+                type : this.type
             };
             let formData = new FormData();
             for (let dataKey in data) {
@@ -328,6 +346,7 @@ export default {
             this.profession = '';
             this.nationality = '';
             document.getElementById("document").value = '';
+            this.type = '';
         },
         assignDocument(event){
             this.document = event.target.files[0];

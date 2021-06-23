@@ -4,8 +4,22 @@
         <hr>
         <form @submit.prevent="submitForm()" class="row" action="" method="post">
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Lengkap Anak</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Anak</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="form-group">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.type[0]', false)}" v-model="type" class="form-control">
+                        <option value="Baru" selected>Baru</option>
+                        <option value="Rusak">Rusak</option>
+                        <option value="Hilang">Hilang</option>
+                    </select>
+                    <div class="invalid-feedback">{{get(this.errors, 'errors.type[0]', '')}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Nama Lengkap Anak</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Nama Anak</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -20,8 +34,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Kelamin</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Kelamin</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -34,8 +48,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tanggal Lahir</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Tanggal Lahir</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -51,8 +65,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tempat Lahir</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tempat Lahir</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tempat Lahir</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Tempat Lahir</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -68,8 +82,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No KTP Ibu</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No KTP Ibu</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">No KTP Ibu</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">No KTP Ibu</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -84,8 +98,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Ibu</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Ibu</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Nama Ibu</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Nama Ibu</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -100,8 +114,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">No KTP Ayah</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">No KTP Ayah</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">No KTP Ayah</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">No KTP Ayah</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -116,8 +130,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Nama Ayah</label>
-                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none" for="">Nama Ayah</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Nama Ayah</label>
+                <label class="w-100 text-right d-none d-lg-block d-md-block d-sm-none d-xs-none">Nama Ayah</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -132,8 +146,8 @@
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Dokumen Pendukung</label>
-                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Dokumen Pendukung</label>
+                <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Dokumen Pendukung</label>
+                <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Dokumen Pendukung</label>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
@@ -174,7 +188,8 @@ export default {
             father_identity_card_number : '',
             father_name : '',
             disableSubmit : false,
-            document : ''
+            document : '',
+            type : 'Baru'
         }
     },
     computed :{
@@ -187,7 +202,8 @@ export default {
                 mother_identity_card_number : this.mother_identity_card_number,
                 mother_name : this.mother_name,
                 father_identity_card_number : this.father_identity_card_number,
-                father_name : this.father_name
+                father_name : this.father_name,
+                type : this.type
             };
 
             let formData = new FormData;
@@ -237,7 +253,8 @@ export default {
             this.father_name = null;
             this.disableSubmit = false;
             document.getElementById('document').value = ''
-            this.document = ''
+            this.document = '';
+            this.type = '';
         },
         assignDocument(event){
             this.document = event.target.files[0];

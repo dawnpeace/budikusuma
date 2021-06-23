@@ -24,7 +24,7 @@ class FamilyCardSubmission extends Model implements HasMedia
     protected $fillable = [
         "id_number", "householder", "householder_id_card", "rt", "rw",
         "zipcode", "kelurahan", "kabupaten", "provinsi", "address", "kecamatan", "status",
-        "user_id", "reason"
+        "user_id", "reason", "type"
     ];
 
     public function members()

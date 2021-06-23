@@ -110,8 +110,23 @@
                 </div>
 
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Dokumen Pendukung</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Dokumen Pendukung</label>
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Pengajuan</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Pengajuan</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="form-group">
+                        <select :class="{'is-invalid': get(this.errors, 'errors.type[0]', false)}" v-model="type" class="form-control">
+                            <option value="Baru" selected>Baru</option>
+                            <option value="Rusak">Rusak</option>
+                            <option value="Hilang">Hilang</option>
+                        </select>
+                        <div class="invalid-feedback">{{get(this.errors, 'errors.type[0]', '')}}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12">
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Dokumen Pendukung</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Dokumen Pendukung</label>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
@@ -154,12 +169,12 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Jenis Kelamin</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Jenis Kelamin</label>
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Jenis Kelamin</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Jenis Kelamin</label>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
-                        <select :class="{'is-invalid': getDynamicError('gender', index)}" v-model="family.gender" id="" class="form-control">
+                        <select :class="{'is-invalid': getDynamicError('gender', index)}" v-model="family.gender"class="form-control">
                             <option value="laki-laki" selected>Laki - laki</option>
                             <option value="perempuan">Perempuan</option>
                         </select>
@@ -169,8 +184,8 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tanggal Lahir</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Tanggal Lahir</label>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
@@ -196,12 +211,12 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Agama</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Agama</label>
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Agama</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Agama</label>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
-                        <select :class="{'is-invalid': getDynamicError('religion', index)}" v-model="family.religion"  id="" class="form-control">
+                        <select :class="{'is-invalid': getDynamicError('religion', index)}" v-model="family.religion" class="form-control">
                             <option value="islam">Islam</option>
                             <option value="kristen protestan">Kristen Protestan</option>
                             <option value="kristen katolik">Kristen Katolik</option>
@@ -232,8 +247,8 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block" for="">Tanggal Lahir</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none" for="">Tanggal Lahir</label>
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tanggal Lahir</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Tanggal Lahir</label>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
@@ -288,7 +303,8 @@ export default {
             members : [
                  ...this.getDefaultMember()
             ],
-            document: ''
+            document: '',
+            type : 'Baru'
         }
     },
     methods : {
@@ -366,6 +382,7 @@ export default {
             this.hasSubmitted = false;
             this.document = '';
             document.getElementById('document').value = '';
+            this.type = 'Baru';
         },
         getDefaultMember(){
             return [{
@@ -409,7 +426,8 @@ export default {
                 kabupaten : this.kabupaten,
                 kelurahan : this.kelurahan,
                 provinsi : this.provinsi,
-                householder_id_card : this.householder_id_card
+                householder_id_card : this.householder_id_card,
+                type : this.type
             };
             let membersData = this.computedMember;
 
