@@ -21,7 +21,8 @@ class DeathCertificateController extends Controller
             "birthdate" => "date|date_format:d-m-Y",
             "name" => "required",
             "birthplace" => "required",
-            "document" => "required|file|max:5000|mimes:pdf"
+            "document" => "required|file|max:5000|mimes:pdf",
+            "type" => "required"
         ];
 
         $request->validate($rules);

@@ -30,7 +30,8 @@ class BirthCertificateController extends Controller
             "mother_name" => "required",
             "father_identity_card_number" => "required|numeric",
             "father_name" => "required",
-            "document" => "required|file|mimes:pdf"
+            "document" => "required|file|mimes:pdf",
+            "type" => "required"
         ]);
         \DB::transaction(function() use ($request) {
             $request->request->add(["user_id" => Auth::id()]);

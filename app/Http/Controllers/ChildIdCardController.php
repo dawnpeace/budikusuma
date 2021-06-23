@@ -34,6 +34,7 @@ class ChildIdCardController extends Controller
             "rw" => "required|numeric",
             "kecamatan" => "required",
             "kelurahan" => "required",
+            "type" => "required",
             "religion" => [
                 "required",
                 Rule::in(["kristen protestan", "kristen katolik", "islam", "buddha", "konghucu", "hindu"])

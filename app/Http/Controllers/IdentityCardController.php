@@ -43,7 +43,8 @@ class IdentityCardController extends Controller
                 Rule::in(MarriageStatus::ALL)
             ],
             "nationality" => "required",
-            "document" => "required|file|max:5000|mimes:pdf"
+            "document" => "required|file|max:5000|mimes:pdf",
+            "type" => "required"
         ]);
 
         $request->request->add(["user_id" => Auth::id()]);
