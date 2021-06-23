@@ -34,6 +34,7 @@ class FamilyCardController extends Controller
                 "kabupaten" => $request->kabupaten,
                 "provinsi" => $request->provinsi,
                 "address" => $request->address,
+                "type" => $request->type,
                 "user_id" => Auth::id()
             ]);
             $familyCard->members()->createMany($request->members);
@@ -61,6 +62,7 @@ class FamilyCardController extends Controller
             "kabupaten" => "required",
             "provinsi" => "required",
             "document" => "required|file|max:5000:mimes:pdf",
+            "type" => "type",
             "members" => "required|array",
             "members.*.name" => "required",
             "members.*.gender" => [
