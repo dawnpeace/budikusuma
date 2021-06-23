@@ -247,8 +247,8 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Tanggal Lahir</label>
-                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Tanggal Lahir</label>
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Hubungan Keluarga</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Hubungan Keluarga</label>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="form-group">
@@ -394,7 +394,8 @@ export default {
                 religion : 'islam',
                 education : '',
                 profession : '',
-                family_relation : 'Kepala Keluarga'
+                family_relation : 'Kepala Keluarga',
+                type : 'Baru'
             }];
         },
         assignDocument(event){
