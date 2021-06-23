@@ -62,7 +62,7 @@ class FamilyCardController extends Controller
             "kabupaten" => "required",
             "provinsi" => "required",
             "document" => "required|file|max:5000:mimes:pdf",
-            "type" => "type",
+            "type" => "required",
             "members" => "required|array",
             "members.*.name" => "required",
             "members.*.gender" => [
