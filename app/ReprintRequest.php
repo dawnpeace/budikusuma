@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class ReprintRequest extends Model
+class ReprintRequest extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $table = 'reprint_requests';
 
-    protected $fillable = ["id_number", "user_id"];
+    protected $fillable = ["id_number", "user_id", "type"];
 
     public function reprintable()
     {
@@ -19,5 +23,6 @@ class ReprintRequest extends Model
     {
         return !is_null($this->printed_at);
     }
+
 
 }

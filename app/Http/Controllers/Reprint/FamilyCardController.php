@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reprint;
 
 use App\Data\PdfData;
 use App\enums\Document;
+use App\enums\ReprintType;
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -39,8 +40,24 @@ class FamilyCardController extends Controller
             }])
             ->firstOrFail();
 
-        if (!$card->reprints_count) {
-            $reprint = $card->createReprint(Auth::id());
+        if($card->reprints_count == 0) {
+            $reprint = $card->createReprint(Auth::id(), $request->type);
+            if($request->type == ReprintType::LOST) {
+                $reprint->addMediaFromRequest('pengantar')
+                    ->toMediaCollection('pengantar');
+
+                $reprint->addMediaFromRequest('kehilangan')
+                    ->toMediaCollection('kehilangan');
+
+                $reprint->addMediaFromRequest('pendukung')
+                    ->toMediaCollection('pendukung');
+            } else {
+                $reprint->addMediaFromRequest('dokumen_rusak')
+                    ->toMediaCollection('dokumen_rusak');
+
+                $reprint->addMediaFromRequest('pengantar')
+                    ->toMediaCollection('pengantar');
+            }
             return response()->json($reprint, 201);
         }
 

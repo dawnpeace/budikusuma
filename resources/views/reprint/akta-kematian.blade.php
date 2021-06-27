@@ -9,6 +9,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Akta Kematian</li>
             </ol>
         </nav>
+        @include('appliance.info-card')
         <div class="card card-boy">
             <div class="p-4">
                 <h5 class="text-center">Cetak Ulang Akta Kematian</h5>

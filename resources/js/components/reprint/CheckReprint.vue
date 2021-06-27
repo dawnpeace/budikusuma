@@ -22,11 +22,11 @@
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <div class="form-group">
-                            <input 
+                            <input
                                 v-model="card_number"
                                 name="card_number"
-                                placeholder="Nomor Kartu" 
-                                type="text" 
+                                placeholder="Nomor Kartu"
+                                type="text"
                                 :class="{'is-invalid': get(errors, 'errors.card_number[0]')}"
                                 class="form-control"/>
                             <div class="invalid-feedback">{{get(errors, 'errors.card_number[0]')}}</div>
@@ -90,7 +90,7 @@
                         <button @click="cancel()" class="btn btn-sm btn-secondary px-1">Batal</button>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 </template>

@@ -37,6 +37,44 @@
                             {{ printedDate }}
                         </td>
                     </tr>
+                    <tr>
+                        <th class="text-right">Jenis Pengajuan</th>
+                        <td class="text-capitalize">
+                            {{this.document.type}}
+                        </td>
+                    </tr>
+                    <tr v-show="this.document.type === 'hilang'">
+                        <th class="text-right">Dokumen Pengantar</th>
+                        <td class="text-capitalize">
+                            <a :href="`${this.media_url}\\?media_name=pengantar`" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                        </td>
+                    </tr>
+                    <tr v-show="this.document.type === 'hilang'">
+                        <th class="text-right">Dokumen Kehilangan</th>
+                        <td class="text-capitalize">
+                            <a :href="`${this.media_url}\\?media_name=kehilangan`" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                        </td>
+                    </tr>
+                    <tr v-show="this.document.type === 'hilang'">
+                        <th class="text-right">Dokumen Pendukung</th>
+                        <td class="text-capitalize">
+                            <a :href="`${this.media_url}\\?media_name=pendukung`" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                        </td>
+                    </tr>
+
+                    <tr v-show="this.document.type === 'rusak'">
+                        <th class="text-right">Dokumen Pengantar</th>
+                        <td class="text-capitalize">
+                            <a :href="`${this.media_url}\\?media_name=pengantar`" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                        </td>
+                    </tr>
+                    <tr v-show="this.document.type === 'rusak'">
+                        <th class="text-right">Dokumen Rusak</th>
+                        <td class="text-capitalize">
+                            <a :href="`${this.media_url}\\?media_name=dokumen_rusak`" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -47,12 +85,12 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <h5 class="modal-title text-center my-3">Tanggal Cetak</h5>
-                        <datepicker 
+                        <datepicker
                         input-class="form-control"
                         id="birthdate"
                         format="dd-MM-yyyy"
                         v-model="printDate"
-                        placeholder="Tanggal Lahir" 
+                        placeholder="Tanggal Lahir"
                         :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
                     </div>
                     <div class="form-group text-right px-3">
@@ -75,7 +113,7 @@ import {confirmationModal, successModal, errorModal} from '../../../helper'
 import {get} from 'lodash'
 export default {
     props : [
-        "document", "delete_url", "redirect_url", "submit_url"
+        "document", "delete_url", "redirect_url", "submit_url", "media_url"
     ],
     data(){
         return {

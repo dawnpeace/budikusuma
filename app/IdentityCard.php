@@ -37,11 +37,12 @@ class IdentityCard extends Model implements HasMedia
         return $this->morphMany(ReprintRequest::class, 'reprintable');
     }
 
-    public function createReprint($authId)
+    public function createReprint($authId, $type) : ReprintRequest
     {
         return $this->reprints()->create([
             "id_number" => $this->identity_card_number,
-            "user_id" => $authId
+            "user_id" => $authId,
+            "type" => $type
         ]);
     }
 

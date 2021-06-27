@@ -9,7 +9,7 @@ trait Reprintable{
     public function submitReprint($idName = null)
     {
         if(is_null($idName)) {
-           $idName = property_exists($this, 'cardIdName') ? $this->cardIdName : false; 
+           $idName = property_exists($this, 'cardIdName') ? $this->cardIdName : false;
         }
 
         if(!$idName) throw new Exception("Id name Cannot be empty");
@@ -28,5 +28,7 @@ trait Reprintable{
             'id_number' => $this->{$idName}
         ]);
     }
+
+
 
 }

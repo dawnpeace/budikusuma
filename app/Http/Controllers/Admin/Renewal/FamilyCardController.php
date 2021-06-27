@@ -12,7 +12,7 @@ use App\FamilyCardRenewal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
-use Arr;
+use Illuminate\Support\Arr;
 
 class FamilyCardController extends Controller
 {
@@ -48,7 +48,7 @@ class FamilyCardController extends Controller
         $card->load("card.members", "members");
         $validated = $request->validate($this->getRule());
         return DB::transaction(function () use ($card, $validated){
-            $familyCardRequest = Arr::except($validated, ['members', 'reason', 'note']);
+            $familyCardRequest = Arr::except($validated, ['members', 'note']);
             $familyCardMembersRequest = Arr::only($validated, 'members')['members'];
             $card->update($familyCardRequest);
             foreach ($card->members as $member) {

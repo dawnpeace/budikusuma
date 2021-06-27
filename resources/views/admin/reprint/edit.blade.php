@@ -8,9 +8,10 @@
         </ol>
     </nav>
     <div class="card card-body">
-        <reprint-edit 
-            :document="{{ json_encode($document) }}" 
-            delete_url="{{ $deleteUrl }}" 
+        <reprint-edit
+            media_url="{{route('admin.reprint.media', $document->id)}}"
+            :document="{{ json_encode($document) }}"
+            delete_url="{{ $deleteUrl }}"
             redirect_url="{{ $redirectUrl }}"
             submit_url="{{ $submitUrl }}"
             />

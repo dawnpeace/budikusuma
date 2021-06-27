@@ -171,6 +171,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
         Route::get('/edit/{reprint}', 'ReprintController@edit')->name('edit');
         Route::post('/delete/{reprint}', 'ReprintController@destroy')->name('destroy');
         Route::post('/submit/{reprint}', 'ReprintController@markAsPrinted')->name('submit');
+        Route::get('/media/{media}', 'ReprintController@media')->name('media');
     });
 
     Route::group(["prefix" => "persyaratan", "namespace" => "Requirement", "as" => "requirement."], function(){

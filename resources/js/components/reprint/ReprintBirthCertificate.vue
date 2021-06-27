@@ -11,11 +11,11 @@
                 </thead>
                 <tbody>
                     <tr :key="key" v-for="(card, key) in cards">
-                        <td>{{card.identity_card_number}}</td>
+                        <td>{{card.id_card}}</td>
                         <td>{{card.name}}</td>
                         <td>{{dateFormat(card.birthdate)}}</td>
                         <td class="text-center">
-                            <button @click="submitReprint(card.id)" :disabled="canReprint(card)" class="btn mt-1 btn-sm btn-primary">
+                            <button data-toggle="modal" data-target="#reprintModal" @click="updateId(card.id)" :disabled="canReprint(card)" class="btn mt-1 btn-sm btn-primary">
                                 Ajukan Cetak Ulang
                             </button>
                             <a class="btn btn-dark btn-sm mt-1" :href="`${media_url}\\${card.id}`">Download Dokumen Pendukung</a>
@@ -42,6 +42,64 @@
                 </tbody>
             </table>
         </div>
+
+        <div id="reprintModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pengajuan Cetak Ulang</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Jenis Pengajuan</label>
+                            <select class="form-control" v-model="reprintType">
+                                <option value="hilang">Hilang</option>
+                                <option value="rusak">Rusak</option>
+                            </select>
+                        </div>
+                        <form id="hilang" method="post" v-show="reprintType === 'hilang'" :action="submit_url">
+                            <div class="form-group">
+                                <label>Dokumen Pengantar</label>
+                                <input accept="application/pdf" type="file" name="pengantar" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Dokumen Kehilangan</label>
+                                <input accept="application/pdf" type="file" name="kehilangan" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Dokumen Pendukung</label>
+                                <input accept="application/pdf" type="file" class="form-control" name="pendukung" required>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-sm btn-primary" type="button" @click="submitReprint">Submit</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            <input type="hidden" name="type" v-model="reprintType">
+                            <input type="hidden" name="card" v-model="id">
+                        </form>
+                        <form id="rusak" method="post" v-show="reprintType === 'rusak'" :action="submit_url">
+                            <div class="form-group">
+                                <label>Dokumen KK Rusak</label>
+                                <input accept="application/pdf" type="file" name="dokumen_rusak" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Dokumen Pengantar</label>
+                                <input accept="application/pdf" type="file" name="pengantar" class="form-control" required>
+                            </div>
+                            <input type="hidden" name="type" v-model="reprintType">
+                            <input type="hidden" name="card" v-model="id">
+                            <div class="form-group text-right">
+                                <button class="btn btn-sm btn-primary" type="button" @click="submitReprint">Submit</button>
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -50,11 +108,13 @@
 import moment from 'moment';
 import {confirmationModal, successModal, errorModal} from '../../helper'
 import Swal from 'sweetalert2';
+import $ from "jquery";
 export default {
     props : ["cards", "submit_url", "redirect_url", "has_printed", "media_url"],
     data(){
         return {
-
+            reprintType : 'hilang',
+            id : null,
         }
     },
     methods : {
@@ -65,7 +125,17 @@ export default {
             confirmationModal()
                 .then(ok => {
                     if(ok.isConfirmed) {
-                        axios.post(this.submit_url, {card : id})
+                        let formObject = document.getElementById(this.reprintType === 'hilang' ? 'hilang' : 'rusak');
+                        let formData = new FormData(formObject);
+                        axios.post(
+                            this.submit_url,
+                            formData,
+                            {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                }
+                            }
+                        )
                             .then(success => {
                                 successModal({
                                     title : "Permintaan berhasil dibuat.",
@@ -84,10 +154,10 @@ export default {
                 });
         },
         canReprint(card) {
-            if(card.reprints.length != 0) {
-                let createdAt = moment(card.created_at);
-                return createdAt.isBetween(moment().add(-2, 'months'), moment());
-            }
+            return card.reprints.length > 0;
+        },
+        updateId(id) {
+            this.id = id;
         }
 
     },
@@ -112,6 +182,13 @@ export default {
             });
             return flatData;
         }
+    },
+    mounted() {
+        $('#reprintModal').on('hidden.bs.modal', function () {
+            $("input[type=file]").each(function(key, value) {
+                $(value).val("");
+            });
+        });
     }
 }
 </script>

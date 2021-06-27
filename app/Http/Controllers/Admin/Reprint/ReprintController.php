@@ -6,6 +6,7 @@ use App\BirthCertificate;
 use App\ChildIdentityCard;
 use App\DeathCertificate;
 use App\enums\Document;
+use App\enums\ReprintType;
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
 use App\IdentityCard;
@@ -13,6 +14,7 @@ use App\ReprintRequest;
 use Illuminate\Http\Request;
 use App\Element\Button;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Yajra\DataTables\DataTables;
 
 class ReprintController extends Controller
@@ -93,5 +95,14 @@ class ReprintController extends Controller
         return response()->json([
             "message" => "Data telah dicetak"
         ], 400);
+    }
+
+    public function media(ReprintRequest $media, Request $request)
+    {
+        try{
+            return response()->download($media->getFirstMediaPath($request->media_name), null, ['Content-Type' => 'application/pdf']);
+        } catch (FileNotFoundException $e) {
+            return response()->json([],404);
+        }
     }
 }
