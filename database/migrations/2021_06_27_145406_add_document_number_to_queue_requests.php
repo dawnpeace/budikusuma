@@ -26,7 +26,7 @@ class AddDocumentNumberToQueueRequests extends Migration
     public function down()
     {
         Schema::table('queue_requests', function (Blueprint $table) {
-            $table->string('document_number');
+            $table->dropColumn('document_number');
         });
     }
 }
