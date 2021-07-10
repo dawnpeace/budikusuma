@@ -31,12 +31,14 @@
                 <thead>
                     <th>Tanggal Pengajuan</th>
                     <th>Status</th>
+                    <th>Keterangan</th>
                     <th>Dicetak Pada</th>
                 </thead>
                 <tbody>
                     <tr :key="key" v-for="(reprint, key) in flatMap">
                         <td>{{dateFormat(reprint.created_at)}}</td>
                         <td>{{documentStatus(reprint.status)}}</td>
+                        <td>{{reprint.reason}}</td>
                         <td>{{reprint.printed_at ? dateFormat(reprint.printed_at) : ''}}</td>
                     </tr>
                 </tbody>
@@ -174,7 +176,7 @@ export default {
                             'identity_card_number' : element.identity_card_number,
                             'name' : element.name,
                             'status' : child.status,
-                            'created_at' : child.created_at,
+                            'reason' : child.reason,
                             'printed_at' : child.printed_at
                         }
 

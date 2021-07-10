@@ -102,6 +102,10 @@
                                 <option value="04">Selesai</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <input type="text" v-model="reason">
+                        </div>
                         <div v-show="status == '04'" class="form-group">
                             <label>Tanggal Cetak</label>
                             <datepicker
@@ -140,7 +144,8 @@ export default {
             printDate : new Date(),
             submitDisabled : false,
             errors : null,
-            status : '00'
+            status : '00',
+            reason : ''
         }
     },
     methods : {
@@ -200,7 +205,8 @@ export default {
         formData(){
             return {
                 printed_at : this.status == '04' ? moment(this.printDate).format('DD-MM-YYYY') : '',
-                status : this.status
+                status : this.status,
+                reason : this.reason
             }
         },
         documentType(){

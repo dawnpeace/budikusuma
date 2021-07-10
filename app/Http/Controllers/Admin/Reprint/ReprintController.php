@@ -94,6 +94,7 @@ class ReprintController extends Controller
 
         if ( !$reprint->isPrinted() ) {
             $reprint->status = $request->status;
+            $reprint->reason = $request->reason;
             if($request->status == DocumentStatus::DONE) {
                 $reprint->printed_at = Carbon::createFromFormat('d-m-Y', $request->printed_at);
             }
