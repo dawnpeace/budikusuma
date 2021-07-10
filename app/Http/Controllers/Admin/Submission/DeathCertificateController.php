@@ -6,6 +6,8 @@ use App\DeathCertificateSubmission;
 use App\Element\Button;
 use App\enums\DocumentStatus;
 use App\Http\Controllers\Controller;
+use App\Rules\EmptyOrNumericByStatus;
+use App\Rules\OptionalSize;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Validation\Rule;
@@ -56,7 +58,11 @@ class DeathCertificateController extends Controller
             "birthplace" => "required",
             "name" => "required",
             "note" => "required",
-            "card_number" => "required",
+            "card_number" => [
+                "required_if:status,04",
+                new EmptyOrNumericByStatus($request),
+                new OptionalSize(16)
+            ],
             "identity_card" => "required",
             "reason" => Rule::requiredIf($request->status == DocumentStatus::REJECTED)
         ]);

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Submission;
 
 use App\BirthCertificateSubmission;
 use App\Http\Controllers\Controller;
+use App\Rules\EmptyOrNumericByStatus;
+use App\Rules\OptionalSize;
 use Illuminate\Http\Request;
 use App\enums\DocumentStatus;
 use Yajra\DataTables\DataTables;
@@ -48,7 +50,11 @@ class BirthCertificateController extends Controller
     public function update(BirthCertificateSubmission $card, Request $request)
     {
         $request->validate([
-            "id_card" => "required_if:status," . DocumentStatus::DONE,
+            "id_card" => [
+                Rule::requiredIf($request->status == DocumentStatus::DONE),
+                new EmptyOrNumericByStatus($request),
+                new OptionalSize(16)
+            ],
             "name" => "required",
             "gender" => [
                 "required",

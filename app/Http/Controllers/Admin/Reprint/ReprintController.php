@@ -6,6 +6,7 @@ use App\BirthCertificate;
 use App\ChildIdentityCard;
 use App\DeathCertificate;
 use App\enums\Document;
+use App\enums\DocumentStatus;
 use App\enums\ReprintType;
 use App\FamilyCard;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,7 @@ use App\ReprintRequest;
 use Illuminate\Http\Request;
 use App\Element\Button;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Yajra\DataTables\DataTables;
 
@@ -83,11 +85,18 @@ class ReprintController extends Controller
     public function markAsPrinted(ReprintRequest $reprint, Request $request)
     {
         $request->validate([
-            "printed_at" => "required|date|date_format:d-m-Y"
+            "status" => [
+                "required",
+                Rule::in(DocumentStatus::ALL)
+            ],
+            "printed_at" => "required_if:status,04|date|date_format:d-m-Y"
         ]);
 
         if ( !$reprint->isPrinted() ) {
-            $reprint->printed_at = Carbon::createFromFormat('d-m-Y', $request->printed_at);
+            $reprint->status = $request->status;
+            if($request->status == DocumentStatus::DONE) {
+                $reprint->printed_at = Carbon::createFromFormat('d-m-Y', $request->printed_at);
+            }
             $reprint->save();
             return response()->json();
         }

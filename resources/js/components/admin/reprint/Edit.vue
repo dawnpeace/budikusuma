@@ -26,6 +26,14 @@
                         </td>
                     </tr>
                     <tr>
+                        <th width="33%" class="text-right">
+                            Status
+                        </th>
+                        <td>
+                            {{ documentStatus(this.document.status) }}
+                        </td>
+                    </tr>
+                    <tr>
                         <th width="33%" class="text-right">Diajukan Pada</th>
                         <td>
                             {{ createdDate }}
@@ -84,14 +92,26 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body">
-                        <h5 class="modal-title text-center my-3">Tanggal Cetak</h5>
-                        <datepicker
-                        input-class="form-control"
-                        id="birthdate"
-                        format="dd-MM-yyyy"
-                        v-model="printDate"
-                        placeholder="Tanggal Lahir"
-                        :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select v-model="status" name="status" class="form-control">
+                                <option value="00">Tunggu</option>
+                                <option value="01">Dalam Proses</option>
+                                <option value="02">Diterima</option>
+                                <option value="03">Ditolak</option>
+                                <option value="04">Selesai</option>
+                            </select>
+                        </div>
+                        <div v-show="status == '04'" class="form-group">
+                            <label>Tanggal Cetak</label>
+                            <datepicker
+                                input-class="form-control"
+                                id="birthdate"
+                                format="dd-MM-yyyy"
+                                v-model="printDate"
+                                placeholder="Tanggal Lahir"
+                                :class="{'is-invalid': get(this.errors, 'errors.birthdate[0]', false)}"/>
+                        </div>
                     </div>
                     <div class="form-group text-right px-3">
                         <button @click="markAsPrinted()" class="btn btn-sm btn-primary mx-1" type="button">Submit</button>
@@ -102,14 +122,14 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <button :disabled="submitDisabled" data-toggle="modal" data-target="#datePickModal" v-show="!this.document.printed_at" class="btn btn-sm btn-primary mx-1" type="button"><i class="fa fa-check"></i> Telah Dicetak</button>
+            <button :disabled="submitDisabled" data-toggle="modal" data-target="#datePickModal" v-show="!this.document.printed_at" class="btn btn-sm btn-primary mx-1" type="button"> Perbaharui</button>
             <button @click="deleteRecord()" class="btn btn-sm btn-danger mx-1" type="button">Hapus</button>
         </div>
     </div>
 </template>
 <script>
 import moment from 'moment'
-import {confirmationModal, successModal, errorModal} from '../../../helper'
+import {confirmationModal, successModal, errorModal, documentStatus} from '../../../helper'
 import {get} from 'lodash'
 export default {
     props : [
@@ -119,10 +139,12 @@ export default {
         return {
             printDate : new Date(),
             submitDisabled : false,
-            errors : null
+            errors : null,
+            status : '00'
         }
     },
     methods : {
+        documentStatus,
         get,
         deleteRecord(){
             confirmationModal({icon : 'danger'})
@@ -177,7 +199,8 @@ export default {
         },
         formData(){
             return {
-                printed_at : moment(this.printDate).format('DD-MM-YYYY')
+                printed_at : this.status == '04' ? moment(this.printDate).format('DD-MM-YYYY') : '',
+                status : this.status
             }
         },
         documentType(){

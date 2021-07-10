@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Submission;
 
 use App\Http\Controllers\Controller;
+use App\Rules\OptionalSize;
 use Illuminate\Http\Request;
 use App\ChildIdSubmission;
 use App\enums\DocumentStatus;
@@ -65,6 +66,7 @@ class ChildIdCardController extends Controller
             "card_number" => [
                 Rule::requiredIf($request->status == DocumentStatus::DONE),
                 new EmptyOrNumericByStatus($request),
+                new OptionalSize(16)
             ],
             "address" => "required",
             "birthdate" => "required|date_format:d-m-Y",

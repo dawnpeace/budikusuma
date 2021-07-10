@@ -229,21 +229,46 @@
                 </div>
             </div>
 
-            <side-label
-                :error="getDynamicError('education', index)"
-                name="education"
-                title="Pendidikan"
-                v-model="family.education"
-                placeholder="Pendidikan"
-                />
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Pendidikan</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Pendidikan</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="form-group">
+                        <select :class="{'is-invalid': getDynamicError('education', index)}" v-model="family.education" class="form-control">
+                            <option value="Tidak Sekolah">Tidak Sekolah</option>
+                            <option value="SD">SD</option>
+                            <option value="SMP">SMP</option>
+                            <option value="SMA/K">SMA/K</option>
+                            <option value="Strata I">Strata I</option>
+                            <option value="Strata II">Strata II</option>
+                            <option value="Strata III">Strata III</option>
+                        </select>
+                        <div class="invalid-feedback">{{getDynamicError('education', index)}}</div>
+                    </div>
+                </div>
+            </div>
 
-            <side-label
-                :error="getDynamicError('profession', index)"
-                name="profession"
-                title="Pekerjaan"
-                v-model="family.profession"
-                placeholder="Pekerjaan"
-                />
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <label class="w-100 text-left d-md-none d-lg-none d-sm-block d-xs-block">Pekerjaan</label>
+                    <label class="w-100 text-right d-none d-md-block d-lg-block d-sm-none d-xs-none">Pekerjaan</label>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="form-group">
+                        <select :class="{'is-invalid': getDynamicError('profession', index)}" v-model="family.profession"  class="form-control">
+                            <option value="Tidak Bekerja">Tidak Bekerja</option>
+                            <option value="Petani / Berkebun">Petani / Berkebun</option>
+                            <option value="Wiraswasta">Wiraswasta</option>
+                            <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                            <option value="TNI">TNI</option>
+                            <option value="POLRI">POLRI</option>
+                        </select>
+                        <div class="invalid-feedback">{{getDynamicError('profession', index)}}</div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">
@@ -317,8 +342,8 @@ export default {
                 birthdate : new Date('1990-01-01'),
                 birthplace : '',
                 religion : 'islam',
-                education : '',
-                profession : '',
+                education : 'Tidak Sekolah',
+                profession : 'Tidak Bekerja',
                 family_relation : ''
             };
             this.members.push(family);
@@ -392,8 +417,8 @@ export default {
                 birthdate : new Date('1990-01-01'),
                 birthplace : '',
                 religion : 'islam',
-                education : '',
-                profession : '',
+                education : 'Tidak Sekolah',
+                profession : 'Tidak Bekerja',
                 family_relation : 'Kepala Keluarga',
                 type : 'Baru'
             }];

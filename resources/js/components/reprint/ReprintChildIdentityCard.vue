@@ -36,7 +36,7 @@
                 <tbody>
                     <tr :key="key" v-for="(reprint, key) in flatMap">
                         <td>{{dateFormat(reprint.created_at)}}</td>
-                        <td>{{reprint.printed_at == null ? 'Belum Dicetak' : 'Telah Dicetak'}}</td>
+                        <td>{{documentStatus(reprint.status)}}</td>
                         <td>{{reprint.printed_at ? dateFormat(reprint.printed_at) : ''}}</td>
                     </tr>
                 </tbody>
@@ -106,7 +106,7 @@
 <script>
 
 import moment from 'moment';
-import {confirmationModal, successModal, errorModal} from '../../helper'
+import {confirmationModal, successModal, documentStatus} from '../../helper'
 import Swal from 'sweetalert2';
 import $ from "jquery";
 export default {
@@ -118,6 +118,7 @@ export default {
         }
     },
     methods : {
+        documentStatus,
         dateFormat: date => {
             return moment(date).format('DD-MM-YYYY')
         },
@@ -173,6 +174,7 @@ export default {
                             'id_card' : element.card_number,
                             'name' : element.name,
                             'created_at' : child.created_at,
+                            'status' : child.status,
                             'printed_at' : child.printed_at
                         }
 

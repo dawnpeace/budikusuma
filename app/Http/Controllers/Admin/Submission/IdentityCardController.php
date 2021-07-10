@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Submission;
 
 use App\Http\Controllers\Controller;
+use App\Rules\OptionalSize;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Element\Button;
@@ -59,6 +60,7 @@ class IdentityCardController extends Controller
             "id_card" => [
                 Rule::requiredIf($request->status == DocumentStatus::DONE),
                 new EmptyOrNumericByStatus($request),
+                new OptionalSize(16)
             ],
             "name" => "required",
             "gender" => [

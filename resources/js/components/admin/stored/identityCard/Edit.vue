@@ -161,12 +161,14 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
-                    <input
-                    v-model="formData.profession"
-                    placeholder="Pekerjaan"
-                    type="text"
-                    :class="{'is-invalid': get(this.errors, 'errors.profession[0]', false)}"
-                    class="form-control">
+                    <select :class="{'is-invalid': get(this.errors, 'errors.profession[0]', false)}" v-model="formData.profession"  class="form-control">
+                        <option value="Tidak Bekerja">Tidak Bekerja</option>
+                        <option value="Petani / Berkebun">Petani / Berkebun</option>
+                        <option value="Wiraswasta">Wiraswasta</option>
+                        <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                        <option value="TNI">TNI</option>
+                        <option value="POLRI">POLRI</option>
+                    </select>
                     <div class="invalid-feedback">{{get(this.errors, 'errors.profession[0]', '')}}</div>
                 </div>
             </div>

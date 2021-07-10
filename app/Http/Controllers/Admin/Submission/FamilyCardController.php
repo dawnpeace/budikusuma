@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Submission;
 
 use App\Http\Controllers\Controller;
+use App\Rules\OptionalSize;
 use Illuminate\Http\Request;
 use App\FamilyCardSubmission;
 use App\enums\DocumentStatus;
@@ -92,6 +93,7 @@ class FamilyCardController extends Controller
             "id_number" => [
                 "required_if:status,04",
                 new EmptyOrNumericByStatus($request),
+                new OptionalSize(16)
             ],
             "householder" => "required",
             "householder_id_card" => "required|numeric",

@@ -12,7 +12,7 @@ class ReprintRequest extends Model implements HasMedia
 
     protected $table = 'reprint_requests';
 
-    protected $fillable = ["id_number", "user_id", "type"];
+    protected $fillable = ["id_number", "user_id", "type", "status"];
 
     public function reprintable()
     {
